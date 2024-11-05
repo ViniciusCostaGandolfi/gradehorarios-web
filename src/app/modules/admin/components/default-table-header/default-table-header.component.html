@@ -1,0 +1,14 @@
+    <ng-container *ngIf="column.key !== 'id'; else defaultTitle">
+      <form class="pt-5" (ngSubmit)="onSearch(column.key)">
+        <mat-form-field class="!w-full">
+          <mat-label>{{ column.title }}</mat-label>
+          <input matInput *ngIf="form"
+            [formControl]="form" [placeholder]="column.title">
+
+          <button matSuffix mat-icon-button aria-label="Search">
+            <mat-icon>search</mat-icon>
+          </button>
+        </mat-form-field>
+      </form>
+    </ng-container>
+    <ng-template #defaultTitle>{{ column.title }}</ng-template>

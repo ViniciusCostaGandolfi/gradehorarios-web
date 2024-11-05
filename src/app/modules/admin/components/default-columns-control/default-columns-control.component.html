@@ -1,0 +1,13 @@
+<div class="table-controls flex py-2">
+    <div class="column-visibility-controls flex items-center">
+      <ng-container *ngFor="let column of columnsConfig">
+        <mat-checkbox [checked]="column.visible"
+                      (change)="toggleColumnVisibility(column.key)">
+          {{ column.title }}
+        </mat-checkbox>
+      </ng-container>
+    </div>
+    <button class="add-category-button" matSuffix mat-icon-button aria-label="Adicionar Categoria" [routerLink]="path + '/novo'">
+      <mat-icon class="scale-[2]">add_circle</mat-icon>
+    </button>
+</div>

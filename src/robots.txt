@@ -1,0 +1,10 @@
+User-agent: *
+Disallow: /admin/
+
+Allow: /
+Allow: /login/
+Allow: /register/
+Allow: /test/
+Allow: /routing/
+
+Sitemap: https://rotafood.com.br/sitemap.xml

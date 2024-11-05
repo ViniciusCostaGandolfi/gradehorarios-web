@@ -1,0 +1,45 @@
+<div class="flex flex-col items-center w-full">
+    <div class="p-8 sm:w-3/4 bg-white rounded-lg shadow" id="home-about-us-section">
+        <p class="text-3xl font-bold text-center text-gray-800">
+            Sobre Nós!
+        </p>
+        <p class="mb-12 text-xl font-normal text-justify text-gray-500">
+            Somos uma startup de tecnologia dedicada à criação de horários otimizados para instituições de ensino, oferecendo uma solução completa que integra tecnologia avançada com um preço <strong>JUSTO!</strong>
+             
+            Nascemos de uma extensa pesquisa conduzida por nosso time, que desenvolveu uma solução inovadora para o <a class="underline font-bold cursor-pointer" href="https://en.wikipedia.org/wiki/School_timetable" target="_blank">Problema da Programação de Horários</a> e suas variações, adaptando-se a diversas necessidades educacionais.
+            <br/>
+            Se tiver interesse em parcerias, entre em contato com nosso time:
+        </p>
+        <div class="flex flex-col items-center sm:flex-row justify-center">
+           
+            <div class="p-4" *ngFor="let person of homePersons">
+                <div class="mb-4 text-center opacity-90">
+                    <a href="#" class="relative block">
+                        <img alt="perfil" src={{person.image}} class="mx-auto object-cover rounded-full h-40 w-30" />
+                    </a>
+                </div>
+                <div class="text-center">
+                    <p class="text-2xl text-gray-800">
+                        {{person.name}}
+                    </p>
+                    <p class="text-xl font-light text-gray-500">
+                        Pesquisador
+                    </p>
+                    <p class="max-w-xs py-4 font-light text-gray-500 text-md dark:text-gray-400">
+                        {{person.description}}
+                    </p>
+                </div>
+                <div class="flex items-center justify-between pt-8 mx-auto text-gray-500 border-t border-gray-200 w-44">
+                    
+                    <a href={{link.href}} target="_blank" *ngFor="let link of person.links">
+                        <mat-icon>
+                            {{link.icon}}
+                        </mat-icon>
+                    </a>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+</div>

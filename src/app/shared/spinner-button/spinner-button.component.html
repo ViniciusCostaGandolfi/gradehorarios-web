@@ -1,0 +1,10 @@
+<button mat-raised-button color="primary" type="submit" [class]="class" [disabled]="isLoading" (click)="handleClick($event)">
+    <ng-container *ngIf="!isLoading; else loading">
+      <ng-content></ng-content>
+    </ng-container>
+  
+    <ng-template #loading>
+      <mat-spinner diameter="20"></mat-spinner>
+    </ng-template>
+</button>
+  
