@@ -1,0 +1,15 @@
+<mat-expansion-panel class="!bg-[#fdfdfd]" [class.mat-elevation-z0]="true">
+    <mat-expansion-panel-header>
+        <mat-icon>
+            {{adminRoute.icon}}
+        </mat-icon>
+        {{adminRoute.title}}
+    </mat-expansion-panel-header>
+    <mat-nav-list class="!flex !flex-col !justify-start">
+        <button (click)="onClick()" mat-button class="!my-1 !flex !flex-col !w-full !items-start" *ngFor="let item of adminRoute.items" [routerLink]="item.href">
+            <div class="flex flex-row w-full">
+                <mat-icon class="!mx-2">link</mat-icon> {{item.subtitle}}
+            </div>
+        </button>
+    </mat-nav-list>
+</mat-expansion-panel>

@@ -1,0 +1,12 @@
+<div class="!bg-green-200">
+    <h2 mat-dialog-title>SUCESSO!</h2>
+    <mat-dialog-content >
+        {{data.message}}
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <div class="flex flex-row w-full">
+            <button mat-raised-button class="!w-full" color="accent" (click)="onClose()">Fechar</button>
+            <button mat-raised-button class="!w-full !bg-green-900 !text-white" (click)="onClose()" [routerLink]="data.link">Acessar</button>
+        </div>
+    </mat-dialog-actions>
+</div>

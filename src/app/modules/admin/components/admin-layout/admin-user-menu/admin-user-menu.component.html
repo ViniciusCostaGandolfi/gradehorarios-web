@@ -1,0 +1,24 @@
+<button [matMenuTriggerFor]="menu" class="w-full h-full">
+    <mat-icon class="!text-[35px] !h-[35px] !w-[35px]" >account_circle</mat-icon>
+</button>
+
+<mat-menu #menu="matMenu">
+    <div *ngIf="user" class="p-4">
+        <div mat-menu-item>
+            Olá {{user?.name}}
+        </div>
+
+        <div  class="!w-full py-1">
+            <button (click)="myPerfil()" class="!w-full" mat-raised-button color="primary">
+                Meu perfil
+            </button>
+        </div>
+        
+        <div class="!w-full py-1">
+            <button (click)="logout()" class="!w-full" mat-raised-button color="primary">
+                Sair
+            </button>
+        </div>
+</div>
+    
+</mat-menu>
