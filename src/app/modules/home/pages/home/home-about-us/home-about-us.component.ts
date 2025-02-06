@@ -1,6 +1,4 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { MatIconModule } from '@angular/material/icon';
 import { homePersons } from '../../../../../core/mocks/persons';
 
 @Component({

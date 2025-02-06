@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   imports: [
     MatDialogModule,
+    MatButtonModule,
     RouterModule
   ],
   templateUrl: './can-delete-dialog.component.html',

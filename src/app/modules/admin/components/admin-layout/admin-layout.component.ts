@@ -17,7 +17,6 @@ export class AdminLayoutComponent {
     public windowService: WindowWidthService,
     public sideNavService: ShowAdminSideNavService
     ) {
-    this.sideNavService.currentShowNav.subscribe(showNav => this.showNav = showNav);
     this.windowService.isMobile().subscribe(isMobile => this.isMobile = isMobile);
 
   }

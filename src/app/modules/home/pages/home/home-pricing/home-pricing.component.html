@@ -1,31 +1,27 @@
-<div class="mx-auto max-w-3xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8" id="home-pricing-section">
+<div class="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8" id="home-pricing-section">
     <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:items-center md:gap-8">
-      <div class="rounded-2xl border border-gray-200 p-6 shadow-sm sm:px-8 lg:p-12">
+      <div class="rounded-2xl border border-primary-500 p-6 shadow-sm ring-1 ring-primary-500 sm:px-8 lg:p-12">
         <div class="text-center">
           <h2 class="text-lg font-medium text-gray-900">
-            100% Free
+            Compre Créditos
           </h2>
   
           <p class="mt-2 sm:mt-4">
-            <strong class="text-3xl font-bold text-gray-900 sm:text-4xl"> 3 Meses de Graça! </strong>
-  
-          </p>
+            <strong class="text-3xl font-bold text-gray-900 sm:text-4xl"> R$ 5 </strong>
+            <span class="text-sm font-medium text-gray-700">por crédito</span>
         </div>
   
-        <ul class="mt-6 space-y-2" *ngFor="let benefict of treeMonthFree">
+        <ul class="mt-6 space-y-2" *ngFor="let creditInfo of creditDetails">
           <li class="flex items-center gap-1">
-            <mat-icon >check_circle_outline</mat-icon>
-  
-            <span class="text-gray-700"> {{benefict.text}} </span>
+            <mat-icon>check_circle_outline</mat-icon>
+            <span class="text-gray-700"> {{creditInfo.text}} </span>
           </li>
-  
-          
         </ul>
   
         <button
-            routerLink="/register"
-            class="mt-8 block rounded-full border border-primary-600 bg-white px-12 py-3 text-center text-sm font-medium text-primary-600 hover:text-accent-500 hover:border-accent-500"        >
-          90 Dias Free
+          routerLink="/buy-credits"
+          class="mt-8 block rounded-full border bg-primary-600 px-12 py-3 text-center text-sm font-medium text-white hover:bg-accent-700">
+          Comprar Créditos
         </button>
       </div>
       <div
@@ -44,11 +40,11 @@
           </p>
         </div>
   
-        <ul class="mt-6 space-y-2" *ngFor="let rotafoodService of gradeHorariosAvailableServices">
+        <ul class="mt-6 space-y-2" *ngFor="let service of gradeHorariosServices">
           <li class="flex items-center gap-1">
             
   
-            <span class="text-gray-700"> {{rotafoodService.text}}</span>
+            <span class="text-gray-700"> {{service.text}}</span>
           </li>
         </ul>
   

@@ -1,11 +1,7 @@
 import { Component } from '@angular/core';
-import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule } from '@angular/material/menu';
-import { CurrentlyUserService } from '../../../../../core/services/currently-user/currently-user.service';
-import { MerchantUser } from '../../../../../core/interfaces/merchant-user';
-import { MatButtonModule } from '@angular/material/button';
-import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { CurrentlyUserService } from '../../../../../core/services/currently-user/currently-user.service';
+import { UserDto } from '../../../../../core/interfaces/user';
 
 @Component({
   selector: 'app-admin-user-menu',
@@ -14,12 +10,12 @@ import { Router } from '@angular/router';
 })
 export class AdminUserMenuComponent {
 
-  public user: MerchantUser | null = null
+  public user: UserDto | null | undefined = null
   constructor(
-    private currentUser: CurrentlyUserService,
-    private router : Router
+    private readonly currentUser: CurrentlyUserService,
+    private readonly router : Router
     ){
-    this.currentUser.getUser().subscribe(user => this.user = user)
+    this.currentUser.getUser().subscribe(user => this.user = user?.user)
   }
 
   public myPerfil() {

@@ -1,21 +1,16 @@
-import { Merchant } from "./merchant"
 
 export interface AuthToken {
     accessToken: string
   }
-  export interface User {
+export interface UserCreation {
     email: string
     name: string
     phone: string
     password: string 
-    
-}
-export interface MerchantRegistration {
-    merchant: Merchant
-    user: User
+
 }
 
-export interface MerchantUserLogin {
+export interface UserLogin {
     email: string
     password: string
 }

@@ -11,7 +11,7 @@ export const mockDefaultRoutes = [
         scrollTo: "home-services-section"
     },
     {
-        title: "Planos",
+        title: "Créditos",
         href: "/",
         scrollTo: "home-pricing-section"
     },
@@ -27,13 +27,13 @@ export const mockDefaultRoutes = [
 export const mockLoginRegister = [
     {
         title: 'Entrar',
-        href: '/login',
+        href: '/entrar',
         color: 'primary',
         buttonType: 'stroked'
     },
     {
         title: 'Criar Conta',
-        href: '/register',
+        href: '/registrar',
         color: 'primary',
         buttonType: 'raised'
     },

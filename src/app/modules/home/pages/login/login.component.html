@@ -7,27 +7,33 @@
             </div>
             <span class="justify-center text-sm text-center text-gray-500 flex-items-center ">
                 Não tem uma conta ?
-                <a routerLink="/register" class="text-sm text-primary-500 underline hover:text-primary-700">
+                <a routerLink="/registrar" class="text-sm text-primary-500 underline hover:text-primary-700">
                     Regitre-se
+                </a>
+            </span>
+            <span class="mt-3 justify-center text-sm text-center text-gray-500 flex-items-center ">
+                Não lembra a senha ?
+                <a routerLink="/resetar-senha" class="text-sm text-primary-500 underline hover:text-primary-700">
+                    Recuperar-senha
                 </a>
             </span>
         </div>
         <div class="mt-8">
-            <form [formGroup]="loginForm.formGroup" autocomplete="on" (submit)="onSubmit()">
+            <form [formGroup]="form" autocomplete="on" (submit)="onSubmit()">
                 <mat-form-field appearance="fill" class="w-full">
                     <mat-label>E-mail </mat-label>
                     <input class="w-full" matInput  type="email" formControlName="email" >
-                    <mat-error *ngIf="loginForm.formGroup.controls.email.hasError('required')">
+                    <mat-error *ngIf="form.controls.email.hasError('required')">
                         Voce esqueceu de colocar um e-mail
                     </mat-error>
-                    <mat-error *ngIf="loginForm.formGroup.controls.email.hasError('email')">
+                    <mat-error *ngIf="form.controls.email.hasError('email')">
                         Coloque um email como seu_nome&#64;exemplo.com
                     </mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="fill" class="w-full">
                     <mat-label>Senha</mat-label>
                     <input class="w-full" matInput  type="password" formControlName="password" >
-                    <mat-error *ngIf="loginForm.formGroup.controls.password.hasError('required')">
+                    <mat-error *ngIf="form.controls.password.hasError('required')">
                         Voce esqueceu de colocar sua senha!
                     </mat-error>
                 </mat-form-field> 

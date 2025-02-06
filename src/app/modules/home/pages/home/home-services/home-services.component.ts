@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { MatGridListModule } from '@angular/material/grid-list';
 import {MatIconModule} from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
-import { gradeHorariosAvailableServices } from '../../../../../core/mocks/rotafood-services';
+import { gradeHorariosServices } from '../../../../../core/mocks/gradehorarios-services';
 
 @Component({
   selector: 'app-home-services',
@@ -11,6 +11,6 @@ import { gradeHorariosAvailableServices } from '../../../../../core/mocks/rotafo
 })
 export class HomeServicesComponent {
 
-  public gradeHorariosAvailableServices = gradeHorariosAvailableServices
+  public gradeHorariosServices = gradeHorariosServices
 
 }

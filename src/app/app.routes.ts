@@ -9,11 +9,6 @@ export const routes: Routes = [
     },
     
     {
-        path: 'routing',
-        loadChildren: () => import('./modules/vrp-test/vrp-test.module').then(m => m.VrpTestModule),
-
-    },
-    {
         path: 'test',
         redirectTo: 'routing'
     },

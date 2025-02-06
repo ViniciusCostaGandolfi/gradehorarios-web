@@ -20,14 +20,16 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { SpinnerButtonComponent } from '../../shared/spinner-button/spinner-button.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatDialogModule } from '@angular/material/dialog';
-import { RegisterMerchantFormComponent } from './pages/register/forms/register-merchant-form/register-merchant-form.component';
-import { RegisterUserFormComponent } from './pages/register/forms/register-user-form/register-user-form.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { AddressAutocompleteGoogleMapsComponent } from '../../shared/address-autocomplete-google-maps/address-autocomplete-google-maps.component';
 import { MatSelectModule } from '@angular/material/select';
 import { HomeWhayUseComponent } from './pages/home/home-whay-use/home-whay-use.component';
+import { HomeSchoolTimetableComponent } from './pages/home/home-school-timetable/home-school-timetable.component';
+import { HomeGoFurtherComponent } from './pages/home/home-go-further/home-go-further.component';
+import { ForgotPasswordPageComponent } from './pages/forgot-password-page/forgot-password-page.component';
+import { ResetPasswordPageComponent } from './pages/reset-password-page/reset-password-page.component';
 
 
 @NgModule({
@@ -39,9 +41,11 @@ import { HomeWhayUseComponent } from './pages/home/home-whay-use/home-whay-use.c
     HomeAboutUsComponent,
     LoginComponent,
     RegisterComponent,
-    RegisterMerchantFormComponent,
+    HomeGoFurtherComponent,
+    ForgotPasswordPageComponent,
+    ResetPasswordPageComponent,
+    HomeSchoolTimetableComponent,
     HomeWhayUseComponent,
-    RegisterUserFormComponent,
   ],
   imports: [
     CommonModule,

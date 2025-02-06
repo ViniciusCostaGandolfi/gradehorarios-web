@@ -1,12 +1,24 @@
-
 <div class="w-full sticky top-0 z-50">
-    <mat-toolbar class=" !bg-[#fdfdfd] flex !h-auto justify-between mx-1">
-        <button (click)="toggleSideNav()">
-            <mat-icon class="!text-[35px] !h-[35px] !w-[35px]">menu</mat-icon>
+    <mat-toolbar class="!bg-[#fdfdfd] flex !h-auto justify-between mx-1">
+        <button mat-button [matMenuTriggerFor]="adminMenu">
+           Menu <mat-icon class="!text-[35px] !h-[35px] !w-[35px]">menu</mat-icon>
         </button>
-        <img class="w-9/12 sm:w-auto cursor-pointer sm:max-h-[20vh] h-auto lg:max-w-xs lg:h-full" routerLink="/admin" src="assets/images/grade-horarios-logo.png" />
+        <mat-menu #adminMenu="matMenu">
+            <button 
+                *ngFor="let route of adminRoutes" 
+                mat-menu-item 
+                [routerLink]="route.href">
+                <mat-icon>{{ route.icon }}</mat-icon>
+                <span>{{ route.title }}</span>
+            </button>
+        </mat-menu>
+        <img 
+            alt="" 
+            class="w-9/12 sm:w-auto cursor-pointer sm:h-[80px]" 
+            routerLink="/admin" 
+            src="assets/images/grade-horarios-logo.png" 
+        />
+        
         <app-admin-user-menu></app-admin-user-menu>
     </mat-toolbar>
 </div>
-  
-

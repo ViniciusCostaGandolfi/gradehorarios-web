@@ -1,18 +1,10 @@
-import { Component, ViewChild } from '@angular/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatInputModule } from '@angular/material/input';
-import { Router, RouterModule } from '@angular/router';
-import { MatStepperModule } from '@angular/material/stepper';
-import { CommonModule } from '@angular/common';
-import { RegisterMerchantFormComponent } from './forms/register-merchant-form/register-merchant-form.component';
-import { RegisterUserFormComponent } from './forms/register-user-form/register-user-form.component';
-import { HttpClientModule } from '@angular/common/http';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from '../../../../core/services/auth/auth.service';
-import { RegisterUserFormService } from '../../../../core/services/auth/register-forms/register-user-form/register-user-form.service';
-import { RegisterMerchantFormService } from '../../../../core/services/auth/register-forms/register-merchant-form/register-merchant-form.service';
 import { DialogErrorContentComponent } from '../../../../shared/dialog-error-content/dialog-error-content.component';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UserCreation } from '../../../../core/interfaces/auth';
 
 @Component({
   selector: 'app-register',
@@ -28,23 +20,29 @@ export class RegisterComponent  {
   
   public isLoading = false;
 
+  form = new FormGroup({
+    name: new FormControl<string>('', Validators.required),
+    email: new FormControl<string>('', [Validators.required, Validators.email]),
+    phone: new FormControl<string>('', Validators.required),
+    password: new FormControl<string>('', Validators.required),
+  })
+
+
 
   constructor(
     private authService: AuthService,
     private router: Router,
     private dialog: MatDialog,
-    public userForm: RegisterUserFormService,
-    public merchantForm: RegisterMerchantFormService
 
     ) {}
 
   
 
   onSubmit() {
-      if (this.userForm.formGroup.valid && this.merchantForm.formGroup.valid) {
+      if (this.form.valid) {
 
           this.isLoading = true;
-          this.authService.createMerchant(this.merchantForm.getData(), this.userForm.getData()).subscribe({
+          this.authService.createUser(this.form.value as UserCreation).subscribe({
             next: (response) => {
               const tokenResponse = response;
               console.log(tokenResponse)
@@ -60,5 +58,27 @@ export class RegisterComponent  {
             }
           });
       }
+  }
+
+  formatPhone(value: string): void {
+    if (!value) return;
+  
+    const cleaned = value.replace(/\D/g, '');
+  
+    let formattedValue = cleaned;
+  
+    if (cleaned.length > 2) {
+      formattedValue = `(${cleaned.slice(0, 2)}) `;
+  
+      if (cleaned.length > 7) {
+        formattedValue += `${cleaned.slice(2, 7)}-${cleaned.slice(7, 11)}`;
+      } else if (cleaned.length > 2) {
+        formattedValue += cleaned.slice(2);
+      }
+    }
+  
+    if (this.form.controls.phone.value !== formattedValue) {
+      this.form.controls.phone.setValue(formattedValue, { emitEvent: false });
+    }
   }
 }

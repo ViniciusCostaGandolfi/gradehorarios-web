@@ -1,10 +1,6 @@
 import { Component } from '@angular/core';
-import { AdminLayoutComponent } from '../components/admin-layout/admin-layout.component';
-import { MatIconModule } from '@angular/material/icon';
-import { MyRoutesService } from '../../../core/services/my-routes/my-routes.service';
-import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { AdminRoute } from '../../../core/interfaces/admin-route';
+import { adminRoutes } from '../../../core/mocks/admin-routes';
 
 @Component({
   selector: 'app-admin',
@@ -13,14 +9,8 @@ import { AdminRoute } from '../../../core/interfaces/admin-route';
 })
 export class AdminComponent {
 
-  public adminRoutes: AdminRoute[] = []
+  public adminRoutes: AdminRoute[] = adminRoutes
 
-  constructor(
-    private myRoutesService: MyRoutesService,
-  ) {
-    this.myRoutesService.routes$.subscribe(routes => {
-      this.adminRoutes = routes;
-    });
-  }
+
 
 }

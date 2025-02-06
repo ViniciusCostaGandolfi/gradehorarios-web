@@ -1,0 +1,190 @@
+<div class="table-container px-3 sm:px-32 pt-5 max-w-full overflow-auto">
+  <div class="flex justify-between items-center mb-5">
+    <h2 class="font-bold text-4xl text-primary-500">Escolas</h2>
+    <button mat-button color="primary" (click)="updateOrCreateCollege()">
+      Adicionar Escola <mat-icon>add_circle</mat-icon>
+    </button>
+  </div>
+
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+
+  <ng-container *ngIf="!isLoading">
+    <div *ngFor="let college of colleges">
+
+      <mat-expansion-panel class="!mb-10" expanded="true">
+        <mat-expansion-panel-header>
+          <div class="flex justify-between items-center w-full">
+            <mat-panel-title class="text-2xl font-bold">
+              {{ college.name }}
+            </mat-panel-title>
+
+            <mat-panel-description class="!w-full">
+              <div class="w-full flex justify-end items-center">
+                <button (click)="uploadTable($event)" class="!w-full" mat-raised-button color="primary">
+                  <mat-icon>table</mat-icon>
+                  <strong>Adicionar tabela</strong>
+                </button>
+                <button (click)="$event.stopPropagation()" mat-button [matMenuTriggerFor]="collegeMenu">
+                  Opções
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #collegeMenu="matMenu">
+                  <button mat-menu-item (click)="updateOrCreateCollege({ college })">
+                    <mat-icon>edit</mat-icon>
+                    <span>Editar</span>
+                  </button>
+                  <button mat-menu-item (click)="deleteCollege(college.id)">
+                    <mat-icon>delete</mat-icon>
+                    <span>Deletar</span>
+                  </button>
+                </mat-menu>
+              </div>
+            </mat-panel-description>
+          </div>
+        </mat-expansion-panel-header>
+        <mat-expansion-panel class="!mb-5" expanded="false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Disciplinas
+            </mat-panel-title>
+            <mat-panel-description>
+              <div class="w-full flex justify-end">
+                <button mat-icon-button color="primary"
+                  (click)="updateOrCreateDiscipline($event, { collegeId: college.id })">
+                  <mat-icon>add_circle</mat-icon>
+                </button>
+              </div>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <table mat-table [dataSource]="college.disciplines" class="w-full">
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> Nome </th>
+              <td mat-cell *matCellDef="let discipline">{{ discipline.name }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="code">
+              <th mat-header-cell *matHeaderCellDef> Código </th>
+              <td mat-cell *matCellDef="let discipline">{{ discipline.code }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef> Ações </th>
+              <td mat-cell *matCellDef="let discipline">
+                <button mat-icon-button
+                  (click)="updateOrCreateDiscipline($event, { discipline, collegeId: college.id })">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button color="warn" (click)="deleteDiscipline(discipline.id, college.id)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="['name', 'code', 'actions']"></tr>
+            <tr mat-row *matRowDef="let row; columns: ['name', 'code', 'actions']"></tr>
+          </table>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel class="!mb-5" expanded="false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Professores
+            </mat-panel-title>
+            <mat-panel-description>
+              <div class="w-full flex justify-end">
+                <button mat-icon-button color="primary"
+                  (click)="updateOrCreateTeacher($event, { collegeId: college.id })">
+                  <mat-icon>add_circle</mat-icon>
+                </button>
+              </div>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <table mat-table [dataSource]="college.teachers" class="w-full">
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> Nome </th>
+              <td mat-cell *matCellDef="let teacher">{{ teacher.name }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef> Ações </th>
+              <td mat-cell *matCellDef="let teacher">
+                <button mat-icon-button (click)="updateOrCreateTeacher($event, { teacher, collegeId: college.id })">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button color="warn" (click)="deleteTeacher(teacher.id, college.id)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="['name', 'actions']"></tr>
+            <tr mat-row *matRowDef="let row; columns: ['name', 'actions']"></tr>
+          </table>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel class="!mb-5" expanded="false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Turmas
+            </mat-panel-title>
+            <mat-panel-description>
+              <div class="w-full flex justify-end">
+                <button mat-icon-button color="primary"
+                  (click)="updateOrCreateClassroom($event, { collegeId: college.id })">
+                  <mat-icon>add_circle</mat-icon>
+                </button>
+              </div>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <table mat-table [dataSource]="college.classrooms" class="w-full">
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> Nome </th>
+              <td mat-cell *matCellDef="let classroom">{{ classroom.name }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+              <th mat-header-cell *matHeaderCellDef> Ações </th>
+              <td mat-cell *matCellDef="let classroom">
+                <button mat-icon-button (click)="updateOrCreateClassroom($event, { classroom, collegeId: college.id })">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button color="warn" (click)="deleteClassroom(classroom.id, college.id)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="['name', 'actions']"></tr>
+            <tr mat-row *matRowDef="let row; columns: ['name', 'actions']"></tr>
+          </table>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel *ngIf="college.solutions.length > 0" class="!mb-5" expanded="false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <h1 class="text-primary-500 font-bold">GRADES</h1>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div *ngFor="let solution of college.solutions; let i = index">
+            <div class="flex justify-between">
+              <h1 class="text-primary-500 text-2xl font-bold">  
+                Grade {{ i+1 }} - {{ solution.createdAt | date:'dd/MM/yyyy HH:mm' }}
+              </h1>
+              <button mat-icon-button color="warn" (click)="deleteSolution(solution.id, college.id)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+            <app-solution-tables [solution]="solution"></app-solution-tables>
+          </div>
+        </mat-expansion-panel>
+        <div class="w-full m-5">
+          <button (click)="simulateCollege({college})" class="w-full" mat-raised-button color="primary"
+            [disabled]="college.teachers.length < 1 || college.classrooms.length < 1 || college.disciplines.length < 1">GERAR
+            GRADE HORÁRIOS
+          </button>
+        </div>
+      </mat-expansion-panel>
+    </div>
+
+  </ng-container>
+</div>

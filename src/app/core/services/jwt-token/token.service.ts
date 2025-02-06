@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { jwtDecode } from 'jwt-decode';
 
 
-export const KEY = 'ROTAFOOD_TOKEN';
+export const KEY = 'GRADEHORARIOS_TOKEN';
 
 @Injectable({
   providedIn: 'root'

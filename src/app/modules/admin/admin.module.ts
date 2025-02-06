@@ -5,14 +5,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { DefaultFormContainerComponent } from '../../shared/default-form-container/default-form-container.component';
 import { MatButtonModule } from '@angular/material/button';
 import { SpinnerButtonComponent } from '../../shared/spinner-button/spinner-button.component';
-import { HttpClientModule } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
 import { AdminComponent } from './pages/admin.component';
-import { ProductCategoryListComponent } from './pages/product-category/product-category-list/product-category-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import {MatCardModule} from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
-import { ProductCategoryCreateComponent } from './pages/product-category/product-category-create/product-category-create.component';
 import {MatTableModule} from '@angular/material/table';
 import { AdminLayoutComponent } from './components/admin-layout/admin-layout.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -23,56 +21,65 @@ import { AdminHeaderComponent } from './components/admin-layout/admin-header/adm
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { AdminUserMenuComponent } from './components/admin-layout/admin-user-menu/admin-user-menu.component';
-import { adminDrawerListComponent } from './components/admin-layout/admin-drawer/admin-drawer-list/admin-drawer-list.component';
 import { NoDataContentComponent } from '../../shared/no-data-content/no-data-content.component';
 import { LoadingSpinnerComponent } from '../../shared/loading-spinner/loading-spinner.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { LoadingSpinnerDialogComponent } from '../../shared/loading-spinner-dialog/loading-spinner-dialog.component';
-import { ProductCategoryEditComponent } from './pages/product-category/product-category-edit/product-category-edit.component';
 import { CanDeleteDialogComponent } from '../../shared/can-delete-dialog/can-delete-dialog.component';
-import { DefaultTableHeaderComponent } from './components/default-table-header/default-table-header.component';
-import { DefaultTableCellComponent } from './components/default-table-cell/default-table-cell.component';
-import { DefaultColumnsControlComponent } from './components/default-columns-control/default-columns-control.component';
 import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
-import { ProductListComponent } from './pages/product/product-list/product-list.component';
-import { ProductCreateComponent } from './pages/product/product-create/product-create.component';
-import { ProductEditComponent } from './pages/product/product-edit/product-edit.component';
 import { MatSelectModule } from '@angular/material/select';
-import { UploadPhotosComponent } from '../../shared/upload-photos/upload-photos.component';
-import { ProductFormComponent } from './pages/product/product-create/forms/product-form/product-form.component';
 import { MatStepperModule } from '@angular/material/stepper';
-import { ProductOptionGroupFormComponent } from './pages/product/product-create/forms/product-option-group-form/product-option-group-form.component';
 import { CustomPaginator } from './components/custom-paginator/custom-paginator';
+import { AdminDrawerListComponent } from './components/admin-layout/admin-drawer/admin-drawer-list/admin-drawer-list.component';
+import { AdminUserMenuComponent } from './components/admin-layout/admin-user-menu/admin-user-menu.component';
+import { CollegesListPageComponent } from './pages/colleges-list-page/colleges-list-page.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { CreateOrUpdateCollegeDialogComponent } from './components/create-or-update-college-dialog/create-or-update-college-dialog.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { CreateOrUpdateDisciplineDialogComponent } from './components/create-or-update-discipline-dialog/create-or-update-discipline-dialog.component';
+import { CreateOrUpdateTeacherDialogComponent } from './components/create-or-update-teacher-dialog/create-or-update-teacher-dialog.component';
+import { CreateOrUpdateClassroomDialogComponent } from './components/create-or-update-classroom-dialog/create-or-update-classroom-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { SimulateDialogComponent } from './components/simulate-dialog/simulate-dialog.component';
+import { QRCodeModule } from 'angularx-qrcode';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { SolutionTablesComponent } from './pages/colleges-list-page/solution-tables/solution-tables.component';
+import { UploadTableDialogComponent } from './components/upload-table-dialog/upload-table-dialog.component';
+import { SettingsPageComponent } from './pages/settings-page/settings-page.component';
+import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 
 
 @NgModule({
   declarations: [
-    AdminDrawerComponent,
-    adminDrawerListComponent,
     AdminHeaderComponent,
     AdminLayoutComponent,
+    AdminDrawerComponent,
+    AdminHeaderComponent,
     AdminUserMenuComponent,
+    CreateOrUpdateCollegeDialogComponent,
+    CreateOrUpdateDisciplineDialogComponent,
+    CreateOrUpdateTeacherDialogComponent,
+    SettingsPageComponent,
+    ProfilePageComponent,
+    SolutionTablesComponent,
+    CreateOrUpdateClassroomDialogComponent,
+    UploadTableDialogComponent,
+    SimulateDialogComponent,
+    AdminDrawerListComponent,
+    CollegesListPageComponent,
     AdminComponent,
-    ProductCategoryListComponent,
-    ProductCategoryCreateComponent,
-    ProductCategoryEditComponent,
-    ProductListComponent,
-    ProductCreateComponent,
-    ProductFormComponent,
-    ProductOptionGroupFormComponent,
-    ProductEditComponent,
-    DefaultTableHeaderComponent,
-    DefaultTableCellComponent,
-    DefaultColumnsControlComponent
+
 
   ],
   imports: [
     MatFormFieldModule,
     MatButtonModule,
     AdminRoutingModule,
+    MatProgressSpinnerModule,
+    MatCardModule,
     MatToolbarModule,
     MatIconModule,
+    MatSlideToggleModule,
     MatTableModule,
     MatSidenavModule,
     MatNavList,
@@ -81,11 +88,14 @@ import { CustomPaginator } from './components/custom-paginator/custom-paginator'
     MatInputModule, 
     MatCheckboxModule,
     MatExpansionModule,
+    MatTooltipModule,
     MatPaginatorModule,
     MatStepperModule,
     MatSelectModule,
+    MatDialogModule,
     CommonModule,
     RouterModule,
+    QRCodeModule,
     FormsModule,
     ReactiveFormsModule,
     DefaultFormContainerComponent,
@@ -95,7 +105,6 @@ import { CustomPaginator } from './components/custom-paginator/custom-paginator'
     SpinnerButtonComponent,
     FooterComponent,
     NoDataContentComponent,
-    UploadPhotosComponent,
   ],
 
   providers: [
