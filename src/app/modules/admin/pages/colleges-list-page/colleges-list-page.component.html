@@ -9,6 +9,16 @@
   <mat-spinner *ngIf="isLoading"></mat-spinner>
 
   <ng-container *ngIf="!isLoading">
+    <div class="w-full min-h-[50vh] text-gray-500 flex flex-row justify-center h-full items-center" *ngIf="colleges.length === 0">
+      <div class="w-full flex flex-row justify-center">
+        <div>
+            <h1 class="font-bold text-xl  text-center">SEM ESCOLAS</h1>
+            <button class="!text-xl !font-bold"  mat-raised-button color="primary" (click)="updateOrCreateCollege()">
+              Adicionar Escola <mat-icon class="scale-[1.5]">add_circle</mat-icon>
+            </button>
+            </div>
+        </div>
+    </div>
     <div *ngFor="let college of colleges">
 
       <mat-expansion-panel class="!mb-10" expanded="true">
@@ -122,7 +132,7 @@
           </table>
         </mat-expansion-panel>
 
-        <mat-expansion-panel class="!mb-5" expanded="false">
+        <mat-expansion-panel class="!mb-5" expanded="true">
           <mat-expansion-panel-header>
             <mat-panel-title>
               Turmas
@@ -159,7 +169,7 @@
           </table>
         </mat-expansion-panel>
 
-        <mat-expansion-panel *ngIf="college.solutions.length > 0" class="!mb-5" expanded="false">
+        <mat-expansion-panel *ngIf="college.solutions.length > 0" class="!mb-5" expanded="true">
           <mat-expansion-panel-header>
             <mat-panel-title>
               <h1 class="text-primary-500 font-bold">GRADES</h1>

@@ -69,7 +69,7 @@ export class CollegesListPageComponent {
     }).afterClosed().subscribe((value) => this.refreshColleges())
   }
 
-  public updateOrCreateClassroom(event: MouseEvent, data: {classroom?: ClassroomDto, collegeId?: number}) {
+  public updateOrCreateClassroom(event: MouseEvent, data: {classroom?: ClassroomDto, collegeId?: number, notUseIds?: boolean}) {
     event.stopPropagation()
 
     this.dialog.open(CreateOrUpdateClassroomDialogComponent, {
@@ -199,6 +199,10 @@ export class CollegesListPageComponent {
         });
       }
     });
+  }
+
+  duplicateClasroom() {
+
   }
   
   
