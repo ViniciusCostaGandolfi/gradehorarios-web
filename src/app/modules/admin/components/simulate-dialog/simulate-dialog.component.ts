@@ -12,7 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class SimulateDialogComponent implements OnInit {
 
   canSimule: boolean = false;
-  countdown: number = 1;
+  countdown: number = 3;
   pix = '00020126510014br.gov.bcb.pix0111490142028300214Grade Horarios5204000053039865802BR5923VINICIUS COSTA GANDOLFI6007LIMEIRA62290525Ip7kOeR33jC1GpoGbC9rZU6FI63046ACA'
 
   constructor(
