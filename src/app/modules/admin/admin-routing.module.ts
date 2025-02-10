@@ -5,6 +5,7 @@ import { AdminComponent } from './pages/admin.component';
 import { CollegesListPageComponent } from './pages/colleges-list-page/colleges-list-page.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { SettingsPageComponent } from './pages/settings-page/settings-page.component';
+import { CollegeDetailPageComponent } from './pages/college-detail-page/college-detail-page.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,7 @@ const routes: Routes = [
     children: [
       {path: '', component: AdminComponent},
       {path: 'escolas', component: CollegesListPageComponent},
+      {path: 'escolas/:collegeId', component: CollegeDetailPageComponent},
       {path: 'perfil', component: ProfilePageComponent},
       {path: 'configuracoes', component: SettingsPageComponent},
 

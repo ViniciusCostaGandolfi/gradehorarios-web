@@ -1,5 +1,6 @@
 export interface DisciplineDto {
-    id: number;
+    id?: number;
     name: string;
     code: string;
+    collegeId: number;
   }

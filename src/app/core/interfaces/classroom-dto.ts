@@ -2,7 +2,7 @@ import { DisciplineDto } from "./discipline-dto";
 import { TeacherDisciplineClassroomDto } from "./teacher-dto";
 
 export interface FullClassroomDto {
-    id: number;
+    id?: number;
     name: string;
     collegeId?: number;
     classroomDailySchedule: ClassroomDailyScheduleDto;
@@ -10,13 +10,13 @@ export interface FullClassroomDto {
 }
 
 export interface ClassroomDto {
-  id: number;
+  id?: number;
   name: string;
   collegeId?: number;
 }
 
   export interface ClassroomDailyScheduleDto {
-    id: number;
+    id?: number;
     mondayClasses: number;
     tuesdayClasses: number;
     wednesdayClasses: number;

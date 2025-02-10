@@ -33,8 +33,8 @@ export class CollegesService {
    * @param collegeId ID of the college.
    * @returns Observable of CollegeDto.
    */
-  getCollegeById(collegeId: number): Observable<CollegeDto> {
-    return this.http.get<CollegeDto>(`${this.apiUrl}/${collegeId}`);
+  getCollegeById(collegeId: number): Observable<FullCollegeDto> {
+    return this.http.get<FullCollegeDto>(`${this.apiUrl}/${collegeId}`);
   }
 
   /**

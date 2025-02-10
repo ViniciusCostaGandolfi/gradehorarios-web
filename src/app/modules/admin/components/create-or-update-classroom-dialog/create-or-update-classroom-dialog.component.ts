@@ -27,11 +27,11 @@ export class CreateOrUpdateClassroomDialogComponent implements OnInit {
     private classroomsService: ClassroomsService,
     private teachersService: TeachersService,
     public dialogRef: MatDialogRef<CreateOrUpdateClassroomDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { classroom?: FullClassroomDto; collegeId: number, notUseIds?: boolean }
+    @Inject(MAT_DIALOG_DATA) public data: { classroom?: FullClassroomDto; collegeId: number}
   ) {
     this.classroomForm = new FormGroup({
       id: new FormControl(this.data?.classroom?.id),
-      name: new FormControl(this.data?.classroom?.name && !this.data.notUseIds, [Validators.required]),
+      name: new FormControl(this.data?.classroom?.name, [Validators.required]),
       collegeId: new FormControl(this.data.collegeId),
       classroomDailySchedule: new FormGroup({
         id: new FormControl(this.data?.classroom?.classroomDailySchedule?.id),

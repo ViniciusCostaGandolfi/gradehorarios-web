@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { TeacherDto } from '../interfaces/teacher-dto';
+import { FullTeacherDto, TeacherDto } from '../interfaces/teacher-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +19,8 @@ export class TeachersService {
    * @param collegeId ID da faculdade associada.
    * @returns Observable do professor atualizado/criado.
    */
-  createOrUpdate(teacher: TeacherDto, collegeId: number): Observable<TeacherDto> {
-    return this.http.put<TeacherDto>(`${this.apiUrl}/colleges/${collegeId}/teachers`, teacher);
+  createOrUpdate(teacher: FullTeacherDto, collegeId: number): Observable<FullTeacherDto> {
+    return this.http.put<FullTeacherDto>(`${this.apiUrl}/colleges/${collegeId}/teachers`, teacher);
   }
 
   /**

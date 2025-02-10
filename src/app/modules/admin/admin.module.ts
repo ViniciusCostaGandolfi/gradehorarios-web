@@ -43,10 +43,12 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { SimulateDialogComponent } from './components/simulate-dialog/simulate-dialog.component';
 import { QRCodeModule } from 'angularx-qrcode';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { SolutionTablesComponent } from './pages/colleges-list-page/solution-tables/solution-tables.component';
+import { SolutionTablesComponent } from './components/solution-tables/solution-tables.component';
 import { UploadTableDialogComponent } from './components/upload-table-dialog/upload-table-dialog.component';
 import { SettingsPageComponent } from './pages/settings-page/settings-page.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
+import { CollegeDetailPageComponent } from './pages/college-detail-page/college-detail-page.component';
+import { SolutionDetailDialogComponent } from './components/solution-detail-dialog/solution-detail-dialog.component';
 
 
 @NgModule({
@@ -63,8 +65,10 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
     ProfilePageComponent,
     SolutionTablesComponent,
     CreateOrUpdateClassroomDialogComponent,
+    CollegeDetailPageComponent,
     UploadTableDialogComponent,
     SimulateDialogComponent,
+    SolutionDetailDialogComponent,
     AdminDrawerListComponent,
     CollegesListPageComponent,
     AdminComponent,
