@@ -1,4 +1,4 @@
-import { ClassroomDto } from "./classroom-dto";
+import { FullClassroomDto } from "./classroom-dto";
 import { DisciplineDto } from "./discipline-dto";
 import { SolutionDto } from "./solution-dto";
 import { FullTeacherDto, TeacherDto } from "./teacher-dto";
@@ -15,7 +15,7 @@ export interface FullCollegeDto {
   name: string;
   disciplines: DisciplineDto[];
   teachers: FullTeacherDto[];
-  classrooms: ClassroomDto[];
+  classrooms: FullClassroomDto[];
   solutions: SolutionDto[];
 }
 

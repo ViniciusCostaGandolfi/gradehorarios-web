@@ -43,13 +43,16 @@
             </mat-expansion-panel-header>
 
 
-            <mat-expansion-panel *ngIf="!isMobile" class="!mb-5" expanded="true">
+            <mat-expansion-panel class="!mb-5" [expanded]="college?.disciplines?.length === 0">
                 <mat-expansion-panel-header>
                     <mat-panel-title>Disciplinas</mat-panel-title>
                     <mat-panel-description>
-                        <button mat-icon-button color="primary" (click)="addDiscipline($event)">
-                            <mat-icon>add_circle</mat-icon>
-                        </button>
+                        <div class="flex w-full justify-end">
+                            <button mat-button color="primary" (click)="addDiscipline($event)">
+                                Adicionar
+                                <mat-icon>add_circle</mat-icon>
+                            </button>
+                        </div>
                     </mat-panel-description>
                 </mat-expansion-panel-header>
 
@@ -58,7 +61,7 @@
                     <!-- Índice -->
                     <ng-container matColumnDef="index">
                         <th mat-header-cell *matHeaderCellDef>#</th>
-                        <td mat-cell class="!pt-5" *matCellDef="let discipline; let index = index">
+                        <td mat-cell *matCellDef="let discipline; let index = index">
                             {{ index + 1 }}
                         </td>
                     </ng-container>
@@ -89,7 +92,7 @@
                     <!-- Ações -->
                     <ng-container matColumnDef="actions">
                         <th mat-header-cell *matHeaderCellDef>Ações</th>
-                        <td mat-cell class="!pt-5" *matCellDef="let discipline; let index = index">
+                        <td mat-cell *matCellDef="let discipline; let index = index">
                             <button mat-icon-button color="warn" (click)="deleteDiscipline(discipline.id)"
                                 *ngIf="discipline.id">
                                 <mat-icon>delete</mat-icon>
@@ -114,15 +117,16 @@
                 </div>
             </mat-expansion-panel>
 
-            <mat-expansion-panel *ngIf="isMobile" class="!mb-5" expanded="false">
+            <mat-expansion-panel class="!mb-5" [expanded]="college?.teachers?.length === 0">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
                         Professores
                     </mat-panel-title>
                     <mat-panel-description>
                         <div class="w-full flex justify-end">
-                            <button mat-icon-button color="primary"
+                            <button mat-button color="primary"
                                 (click)="updateOrCreateTeacher($event, { collegeId: college.id })">
+                                Adicionar
                                 <mat-icon>add_circle</mat-icon>
                             </button>
                         </div>
@@ -137,11 +141,13 @@
                     <ng-container matColumnDef="actions">
                         <th mat-header-cell *matHeaderCellDef> Ações </th>
                         <td mat-cell *matCellDef="let teacher">
-                            <button mat-icon-button
+                            <button mat-button color="primary"
                                 (click)="updateOrCreateTeacher($event, { teacher, collegeId: college.id })">
+                                editar
                                 <mat-icon>edit</mat-icon>
                             </button>
-                            <button mat-icon-button color="warn" (click)="deleteTeacher(teacher.id)">
+                            <button mat-button color="warn" (click)="deleteTeacher(teacher.id)">
+                                deletar
                                 <mat-icon>delete</mat-icon>
                             </button>
                         </td>
@@ -152,117 +158,6 @@
                 </table>
             </mat-expansion-panel>
 
-            <mat-expansion-panel class="!mb-5 !overflow-auto !w-full" expanded="true">
-                <mat-expansion-panel-header>
-                    <mat-panel-title>Professores</mat-panel-title>
-                    <mat-panel-description>
-                        <button mat-icon-button color="primary" (click)="addTeacher($event)">
-                            <mat-icon>add_circle</mat-icon>
-                        </button>
-                    </mat-panel-description>
-                </mat-expansion-panel-header>
-
-                <table mat-table [dataSource]="editableTeachers" >
-
-                    <!-- Índice -->
-                    <ng-container matColumnDef="index">
-                        <th mat-header-cell *matHeaderCellDef>#</th>
-                        <td mat-cell class="!pt-5" *matCellDef="let teacher; let index = index">
-                            {{ index + 1 }}
-                        </td>
-                    </ng-container>
-
-                    <!-- Nome -->
-                    <ng-container matColumnDef="name">
-                        <th mat-header-cell *matHeaderCellDef>Nome</th>
-                        <td mat-cell class="!pt-5" *matCellDef="let teacher">
-                            <mat-form-field class="!max-w-32" appearance="outline">
-                                <mat-label>Nome</mat-label>
-                                <input class="!min-w-0" matInput [(ngModel)]="teacher.name"
-                                    (change)="markAsTeachersChanged()">
-                            </mat-form-field>
-                        </td>
-                    </ng-container>
-
-                    <!-- Preferências -->
-                    <ng-container matColumnDef="preferFirstClass">
-                        <th mat-header-cell *matHeaderCellDef>Primeira Aula</th>
-                        <td mat-cell class="!pt-5" *matCellDef="let teacher">
-                            <mat-form-field class="!max-w-32" appearance="outline">
-                                <mat-label>Disponível?</mat-label>
-                                <mat-select [(ngModel)]="teacher.preferFirstClass"
-                                    (selectionChange)="markAsTeachersChanged()">
-                                    <mat-option value="UNPREFERABLE">Indisponível</mat-option>
-                                    <mat-option value="IRRELEVANT">Disponível</mat-option>
-                                    <mat-option value="PREFERABLE">Preferível</mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="preferDoubleClass">
-                        <th mat-header-cell *matHeaderCellDef>Aula Dupla</th>
-                        <td mat-cell class="!pt-5" *matCellDef="let teacher">
-                            <mat-form-field class="!max-w-32" appearance="outline">
-                                <mat-label>Disponível?</mat-label>
-                                <mat-select [(ngModel)]="teacher.preferDoubleClass"
-                                    (selectionChange)="markAsTeachersChanged()">
-                                    <mat-option value="UNPREFERABLE">Indisponível</mat-option>
-                                    <mat-option value="IRRELEVANT">Disponível</mat-option>
-                                    <mat-option value="PREFERABLE">Obrigatório</mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </td>
-                    </ng-container>
-
-                    <!-- Disponibilidade semanal -->
-                    <ng-container
-                        *ngFor="let day of ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']"
-                        [matColumnDef]="day">
-                        <th mat-header-cell *matHeaderCellDef>{{ dayTranslations[day] }}</th>
-                        <td mat-cell class="!pt-5" *matCellDef="let teacher">
-                            <mat-form-field class="!max-w-32" appearance="outline">
-                                <mat-label>Disponibilidade</mat-label>
-                                <mat-select [(ngModel)]="teacher.teacherAvailability[day]"
-                                    (selectionChange)="markAsTeachersChanged()">
-                                    <mat-option value="UNPREFERABLE">Indisponível</mat-option>
-                                    <mat-option value="IRRELEVANT">Disponível</mat-option>
-                                    <mat-option value="PREFERABLE">Preferível</mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </td>
-                    </ng-container>
-
-                    <!-- Ações -->
-                    <ng-container matColumnDef="actions">
-                        <th mat-header-cell *matHeaderCellDef>Ações</th>
-                        <td mat-cell *matCellDef="let teacher; let index = index">
-                            <button mat-icon-button color="warn" (click)="deleteTeacher(teacher.id)" *ngIf="teacher.id">
-                                <mat-icon>delete</mat-icon>
-                            </button>
-
-                            <button mat-icon-button color="accent" (click)="removeTeacherFromList(index)"
-                                *ngIf="!teacher.id">
-                                <mat-icon>close</mat-icon>
-                            </button>
-                        </td>
-                    </ng-container>
-
-                    <tr mat-header-row
-                        *matHeaderRowDef="['index', 'name', 'preferFirstClass', 'preferDoubleClass', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday', 'actions']">
-                    </tr>
-                    <tr mat-row
-                        *matRowDef="let row; columns: ['index', 'name', 'preferFirstClass', 'preferDoubleClass', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday', 'actions'];"
-                        class="pt-4"></tr>
-
-                </table>
-
-                <div *ngIf="hasTeachersChanges" class="flex justify-end mt-4">
-                    <button mat-raised-button color="primary" (click)="saveTeachersChanges()">
-                        <mat-icon>save</mat-icon> Salvar mudanças
-                    </button>
-                </div>
-            </mat-expansion-panel>
 
             <mat-expansion-panel class="!mb-5" expanded="true">
                 <mat-expansion-panel-header>
@@ -271,8 +166,9 @@
                     </mat-panel-title>
                     <mat-panel-description>
                         <div class="w-full flex justify-end">
-                            <button mat-icon-button color="primary"
+                            <button mat-button color="primary"
                                 (click)="updateOrCreateClassroom($event, { collegeId: college.id })">
+                                Adicionar
                                 <mat-icon>add_circle</mat-icon>
                             </button>
                         </div>
@@ -287,14 +183,17 @@
                     <ng-container matColumnDef="actions">
                         <th mat-header-cell *matHeaderCellDef>Ações</th>
                         <td mat-cell *matCellDef="let classroom">
-                            <button mat-icon-button
+                            <button mat-button
                                 (click)="updateOrCreateClassroom($event, { classroom, collegeId: college.id })">
+                                Editar 
                                 <mat-icon>edit</mat-icon>
                             </button>
-                            <button mat-icon-button color="warn" (click)="deleteClassroom(classroom.id, college.id)">
+                            <button mat-button color="warn" (click)="deleteClassroom(classroom.id, college.id)">
+                                Deletar
                                 <mat-icon>delete</mat-icon>
                             </button>
-                            <button mat-icon-button color="primary" (click)="duplicateClassroom(classroom)">
+                            <button matTooltipPosition="right" mat-button color="primary" (click)="duplicateClassroom(classroom)">
+                                Copiar turma
                                 <mat-icon>content_copy</mat-icon>
                             </button>
                         </td>
@@ -339,8 +238,8 @@
                                 <button mat-button color="primary" (click)="openSolutionDetails(solution)">
                                     <mat-icon>visibility</mat-icon> Detalhes
                                 </button>
-                                <button mat-icon-button color="warn" (click)="deleteSolution(solution.id, college.id)">
-                                    <mat-icon>delete</mat-icon>
+                                <button mat-button color="warn" (click)="deleteSolution(solution.id, college.id)">
+                                    <mat-icon>delete</mat-icon> Deletar
                                 </button>
                             </div>
                         </td>

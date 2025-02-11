@@ -36,9 +36,9 @@ export class SimulateDialogComponent implements OnInit {
 
     if (this.data.college) {
       this.timetableSolverService.resolve(this.data.college.id).subscribe({
-        next: () => {
+        next: (response) => {
           this.snackbar.open('A escola foi simulada com sucesso!', 'Fechar', { duration: 3000 });
-          this.dialogRef.close();
+          this.dialogRef.close(response);
         },
         error: (error) => {
           this.snackbar.open(`Erro ao simular. ${error}`, 'Fechar', { duration: 3000 });

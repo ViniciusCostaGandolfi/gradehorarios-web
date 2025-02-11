@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ClassroomDto, FullClassroomDto } from '../../../../core/interfaces/classroom-dto';
+import { FullClassroomDto } from '../../../../core/interfaces/classroom-dto';
 import { DisciplineDto } from '../../../../core/interfaces/discipline-dto';
 import { DisciplinesService } from '../../../../core/services/disciplines.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -116,7 +116,7 @@ export class CreateOrUpdateClassroomDialogComponent implements OnInit {
       return;
     }
 
-    const classroom: ClassroomDto = this.classroomForm.value as ClassroomDto;
+    const classroom: FullClassroomDto = this.classroomForm.value as FullClassroomDto;
     this.classroomsService.createOrUpdate(classroom, this.data.collegeId).subscribe({
       next: (updatedClassroom) => {
         this.snackbar.open('A sala de aula foi salva com sucesso!', 'Fechar', { duration: 3000 });

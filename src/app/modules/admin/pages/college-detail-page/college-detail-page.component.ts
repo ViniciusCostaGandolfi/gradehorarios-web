@@ -17,7 +17,6 @@ import { dayTranslations, FullTeacherDto, TeacherDto } from '../../../../core/in
 import { CreateOrUpdateTeacherDialogComponent } from '../../components/create-or-update-teacher-dialog/create-or-update-teacher-dialog.component';
 import { CanDeleteDialogComponent } from '../../../../shared/can-delete-dialog/can-delete-dialog.component';
 import { ActivatedRoute } from '@angular/router';
-import { Preference } from '../../../../core/interfaces/preference';
 import { SolutionDetailDialogComponent } from '../../components/solution-detail-dialog/solution-detail-dialog.component';
 import { WindowWidthService } from '../../../../core/services/window-width/window-width.service';
 
@@ -39,8 +38,6 @@ export class CollegeDetailPageComponent {
   editableTeachers: FullTeacherDto[] = [];
 
   hasDisciplinesChanges = false;
-
-  hasTeachersChanges = false;
 
   dayTranslations = dayTranslations
 
@@ -67,10 +64,6 @@ export class CollegeDetailPageComponent {
 
  markAsDisciplinesChanged(): void {
     this.hasDisciplinesChanges = true;
-  }
-
-  markAsTeachersChanged(): void {
-    this.hasTeachersChanges = true;
   }
  
  
@@ -99,44 +92,8 @@ export class CollegeDetailPageComponent {
     }
   }
 
-  addTeacher(event: MouseEvent): void {
-    event.stopPropagation()
-    if (!this.college) return;
 
-    const newTeacher: FullTeacherDto = {
-      name: '',
-      preferFirstClass: Preference.IRRELEVANT,
-      preferDoubleClass: Preference.IRRELEVANT,
-      preferLastClass: Preference.IRRELEVANT,
-      collegeId: this.college.id,
-      teacherAvailability: {
-        monday: Preference.IRRELEVANT,
-        tuesday: Preference.IRRELEVANT,
-        wednesday: Preference.IRRELEVANT,
-        thursday: Preference.IRRELEVANT,
-        friday: Preference.IRRELEVANT,
-        saturday: Preference.UNPREFERABLE,
-        sunday: Preference.UNPREFERABLE,
-      }
-    };
-
-    this.editableTeachers = [...this.editableTeachers, newTeacher];
-  }
-
-  updateTeacher(teacher: FullTeacherDto): void {
-    if (!this.college) return;
-
-    this.teachersService.createOrUpdate(teacher, this.college.id).subscribe({
-      next: () => {
-        this.snackbar.open('Professor salvo com sucesso!', 'Fechar', { duration: 2000 });
-        this.loadCollege();
-      },
-      error: () => {
-        this.snackbar.open('Erro ao salvar o professor.', 'Fechar', { duration: 3000 });
-      }
-    });
-  }
-
+  
   deleteTeacher(teacherId: number): void {
     if (!this.college) return;
 
@@ -151,10 +108,6 @@ export class CollegeDetailPageComponent {
     });
   }
 
-  removeTeacherFromList(index: number): void {
-    this.editableTeachers = this.editableTeachers.filter((_, i) => i !== index);
-  }
-  
 
   addDiscipline(event: MouseEvent): void {
     event.stopPropagation()
@@ -178,21 +131,6 @@ export class CollegeDetailPageComponent {
     
     this.hasDisciplinesChanges = false;
   }
-
-  saveTeachersChanges(): void {
-    if (!this.college) return;
-
-
-    
-    this.editableTeachers.forEach((teacher, i) => {
-      this.teachersService.createOrUpdate(teacher, this.college!.id).subscribe();
-    });
-    
-    this.snackbar.open('Mudanças salvas com sucesso!', 'Fechar', { duration: 2000 });
-    
-    this.hasTeachersChanges = false;
-  }
-
 
   removeDisciplineFromList(index: number): void {
     this.editableDisciplines = this.editableDisciplines.filter((_, i) => i !== index);
@@ -226,22 +164,36 @@ export class CollegeDetailPageComponent {
       data: data,
       width: '50vw',
       height: '80vh'
-    }).afterClosed().subscribe((value) => this.loadCollege())
+    }).afterClosed().subscribe((value) => {
+      if (value) {
+      }
+    })
   }
 
 
 
 
-  public updateOrCreateClassroom(event: MouseEvent, data: {classroom?: ClassroomDto, collegeId?: number}) {
-    event.stopPropagation()
+  public updateOrCreateClassroom(event: MouseEvent, data: { classroom?: ClassroomDto; collegeId?: number }) {
+    event.stopPropagation();
 
     this.dialog.open(CreateOrUpdateClassroomDialogComponent, {
       data: data,
       width: '70vw',
       height: '80vh'
-    }).afterClosed().subscribe(() => this.loadCollege())
+    }).afterClosed().subscribe((updatedClassroom: FullClassroomDto) => {
+      if (updatedClassroom && this.college && this.college.classrooms) {
+        const index = this.college.classrooms.findIndex(c => c.id === updatedClassroom.id);
+        
+        if (index !== -1) {
+          this.college.classrooms[index] = updatedClassroom;
+        } else {
+          this.college.classrooms = [...this.college.classrooms, updatedClassroom];
+        }
+      }
+    });
   }
 
+  
   public uploadTable(event: MouseEvent) {
     event.stopPropagation()
 
@@ -251,15 +203,25 @@ export class CollegeDetailPageComponent {
     }).afterClosed().subscribe(() => this.loadCollege())
   }
 
-  public updateOrCreateTeacher(event: MouseEvent, data: {teacher?: TeacherDto, collegeId?: number}) {
-    event.stopPropagation()
-
+  public updateOrCreateTeacher(event: MouseEvent, data: { teacher?: TeacherDto; collegeId?: number }) {
+    event.stopPropagation();
+  
     this.dialog.open(CreateOrUpdateTeacherDialogComponent, {
       data: data,
       width: '90vw',
       height: '90vh'
-    }).afterClosed().subscribe(() => this.loadCollege())
+    }).afterClosed().subscribe((updatedTeacher: FullTeacherDto) => {
+      if (updatedTeacher && this.college && this.college.teachers) {
+        const index = this.college?.teachers.findIndex(t => t.id === updatedTeacher.id);
+        if (index !== -1) {
+          this.college.teachers[index] = updatedTeacher; 
+        } else {
+          this.college.teachers = [...this.college?.teachers, updatedTeacher]; 
+        }
+      }
+    });
   }
+  
 
   deleteCollege(collegeId: number): void {
     const dialogRef = this.dialog.open(CanDeleteDialogComponent, {
@@ -313,7 +275,7 @@ export class CollegeDetailPageComponent {
   openSolutionDetails(solution: any): void {
     this.dialog.open(SolutionDetailDialogComponent, {
       data: { solution },
-      width: '80vw',
+      width: '1000px',
       height: '80vh'
     });
   }

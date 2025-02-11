@@ -19,20 +19,19 @@ export class SolutionTablesComponent {
 
   dayTranslations = dayTranslations
 
+  isLoading = false
+
   @ViewChild('pdfClassrooms', { static: false }) pdfClassrooms!: ElementRef;
 
   @ViewChild('pdfTeachers', { static: false }) pdfTeachers!: ElementRef;
 
 
-
   async exportClassroomsToPDF(): Promise<void> {
     if (!this.solution) return;
   
+    this.isLoading = true;
     const content = this.pdfClassrooms.nativeElement;
-    console.log('Exportando PDF...');
-  
-    const canvas = await html2canvas(content, { scale: 2 });
-    const imageData = canvas.toDataURL('image/png');
+    const sections = content.querySelectorAll('#table-content');
   
     const pdf = new jsPDF({
       orientation: 'landscape',
@@ -40,19 +39,47 @@ export class SolutionTablesComponent {
       format: 'a4'
     });
   
-    const imgWidth = 280;
-    const pageHeight = 210; 
-    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+    for (let i = 0; i < sections.length; i++) {
+      const sectionElement = sections[i] as HTMLElement;
+      const titleElement = sectionElement.querySelector('h2') as HTMLElement;
+      const tableElement = sectionElement.querySelector('table') as HTMLElement;
   
-    let position = 10;
-    pdf.addImage(imageData, 'PNG', 10, position, imgWidth, imgHeight);
+      if (!tableElement || !titleElement) continue;
   
-    while (position + imgHeight > pageHeight) {
-      position -= pageHeight;
-      pdf.addPage();
-      pdf.addImage(imageData, 'PNG', 10, position, imgWidth, imgHeight);
+      const titleContainer = document.createElement('div');
+      titleContainer.style.display = 'flex';
+      titleContainer.style.justifyContent = 'center';
+      titleContainer.style.alignItems = 'center';
+      titleContainer.style.padding = '10px';
+      titleContainer.style.backgroundColor = 'white';
+      titleContainer.style.width = '100%';
+      titleContainer.style.fontSize = '20px';
+      titleContainer.style.fontWeight = 'bold';
+      titleContainer.textContent = titleElement.textContent || '';
+  
+      document.body.appendChild(titleContainer);
+  
+      const titleCanvas = await html2canvas(titleContainer, { scale: 3 });
+      const tableCanvas = await html2canvas(tableElement, { scale: 2 });
+  
+      document.body.removeChild(titleContainer);
+  
+      const titleImage = titleCanvas.toDataURL('image/png');
+      const tableImage = tableCanvas.toDataURL('image/png');
+  
+      if (i > 0) {
+        pdf.addPage();
+      }
+  
+      const imgWidth = 280;
+      const titleHeight = 25;
+      const tableHeight = (tableCanvas.height * imgWidth) / tableCanvas.width;
+  
+      pdf.addImage(titleImage, 'PNG', 10, 10, imgWidth - 20, titleHeight);
+      pdf.addImage(tableImage, 'PNG', 10, 40, imgWidth, tableHeight);
     }
   
+    this.isLoading = false;
     pdf.save('turmas.pdf');
   }
   
@@ -60,11 +87,9 @@ export class SolutionTablesComponent {
   async exportTeachersToPDF(): Promise<void> {
     if (!this.solution) return;
   
+    this.isLoading = true;
     const content = this.pdfTeachers.nativeElement;
-    console.log('Exportando PDF...');
-  
-    const canvas = await html2canvas(content, { scale: 2 });
-    const imageData = canvas.toDataURL('image/png');
+    const sections = content.querySelectorAll('#table-content');
   
     const pdf = new jsPDF({
       orientation: 'landscape',
@@ -72,21 +97,49 @@ export class SolutionTablesComponent {
       format: 'a4'
     });
   
-    const imgWidth = 280;
-    const pageHeight = 210; 
-    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+    for (let i = 0; i < sections.length; i++) {
+      const sectionElement = sections[i] as HTMLElement;
+      const titleElement = sectionElement.querySelector('h2') as HTMLElement;
+      const tableElement = sectionElement.querySelector('table') as HTMLElement;
   
-    let position = 10;
-    pdf.addImage(imageData, 'PNG', 10, position, imgWidth, imgHeight);
+      if (!tableElement || !titleElement) continue;
   
-    while (position + imgHeight > pageHeight) {
-      position -= pageHeight;
-      pdf.addPage();
-      pdf.addImage(imageData, 'PNG', 10, position, imgWidth, imgHeight);
+      const titleContainer = document.createElement('div');
+      titleContainer.style.display = 'flex';
+      titleContainer.style.justifyContent = 'center';
+      titleContainer.style.alignItems = 'center';
+      titleContainer.style.padding = '10px';
+      titleContainer.style.backgroundColor = 'white';
+      titleContainer.style.width = '100%';
+      titleContainer.style.fontSize = '20px';
+      titleContainer.style.fontWeight = 'bold';
+      titleContainer.textContent = titleElement.textContent || '';
+  
+      document.body.appendChild(titleContainer);
+  
+      const titleCanvas = await html2canvas(titleContainer, { scale: 3 });
+      const tableCanvas = await html2canvas(tableElement, { scale: 2 });
+  
+      document.body.removeChild(titleContainer);
+  
+      const titleImage = titleCanvas.toDataURL('image/png');
+      const tableImage = tableCanvas.toDataURL('image/png');
+  
+      if (i > 0) {
+        pdf.addPage();
+      }
+  
+      const imgWidth = 280;
+      const titleHeight = 25;
+      const tableHeight = (tableCanvas.height * imgWidth) / tableCanvas.width;
+  
+      pdf.addImage(titleImage, 'PNG', 10, 10, imgWidth - 20, titleHeight);
+      pdf.addImage(tableImage, 'PNG', 10, 40, imgWidth, tableHeight);
     }
   
+    this.isLoading = false;
     pdf.save('professores.pdf');
   }
   
-
+  
 }
