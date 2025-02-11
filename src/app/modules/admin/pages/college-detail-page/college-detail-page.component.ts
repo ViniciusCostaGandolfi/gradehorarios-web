@@ -36,7 +36,11 @@ export class CollegeDetailPageComponent {
 
   editableDisciplines: DisciplineDto[] = [];
 
-  editableTeachers: FullTeacherDto[] = []
+  editableTeachers: FullTeacherDto[] = [];
+
+  hasDisciplinesChanges = false;
+
+  hasTeachersChanges = false;
 
   dayTranslations = dayTranslations
 
@@ -46,7 +50,7 @@ export class CollegeDetailPageComponent {
     private classroomsService: ClassroomsService,
     private windowWidth: WindowWidthService,
     private teachersService: TeachersService,
-    private  snackbar: MatSnackBar,
+    private snackbar: MatSnackBar,
     private route: ActivatedRoute,
 
     private timetableService: TimetableSolverService,
@@ -60,6 +64,15 @@ export class CollegeDetailPageComponent {
        this.isMobile = value;
     });
  }
+
+ markAsDisciplinesChanged(): void {
+    this.hasDisciplinesChanges = true;
+  }
+
+  markAsTeachersChanged(): void {
+    this.hasTeachersChanges = true;
+  }
+ 
  
 
   private loadCollege(): void {
@@ -102,8 +115,8 @@ export class CollegeDetailPageComponent {
         wednesday: Preference.IRRELEVANT,
         thursday: Preference.IRRELEVANT,
         friday: Preference.IRRELEVANT,
-        saturday: Preference.IRRELEVANT,
-        sunday: Preference.IRRELEVANT,
+        saturday: Preference.UNPREFERABLE,
+        sunday: Preference.UNPREFERABLE,
       }
     };
 
@@ -152,19 +165,34 @@ export class CollegeDetailPageComponent {
     this.editableDisciplines = [...this.editableDisciplines, newDiscipline];
   }
 
-  updateDiscipline(discipline: DisciplineDto): void {
+  saveDisciplinesChanges(): void {
     if (!this.college) return;
 
-    this.disciplinesService.createOrUpdate(discipline, this.college.id).subscribe({
-      next: () => {
-        this.snackbar.open('Disciplina salva com sucesso!', 'Fechar', { duration: 2000 });
-        this.loadCollege();
-      },
-      error: () => {
-        this.snackbar.open('Erro ao salvar a disciplina.', 'Fechar', { duration: 3000 });
-      }
+
+    
+    this.editableDisciplines.forEach((discipline, i) => {
+      this.disciplinesService.createOrUpdate(discipline, this.college!.id).subscribe();
     });
+    
+    this.snackbar.open('Mudanças salvas com sucesso!', 'Fechar', { duration: 2000 });
+    
+    this.hasDisciplinesChanges = false;
   }
+
+  saveTeachersChanges(): void {
+    if (!this.college) return;
+
+
+    
+    this.editableTeachers.forEach((teacher, i) => {
+      this.teachersService.createOrUpdate(teacher, this.college!.id).subscribe();
+    });
+    
+    this.snackbar.open('Mudanças salvas com sucesso!', 'Fechar', { duration: 2000 });
+    
+    this.hasTeachersChanges = false;
+  }
+
 
   removeDisciplineFromList(index: number): void {
     this.editableDisciplines = this.editableDisciplines.filter((_, i) => i !== index);

@@ -27,7 +27,7 @@ export class CreateOrUpdateClassroomDialogComponent implements OnInit {
     private classroomsService: ClassroomsService,
     private teachersService: TeachersService,
     public dialogRef: MatDialogRef<CreateOrUpdateClassroomDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { classroom?: FullClassroomDto; collegeId: number}
+    @Inject(MAT_DIALOG_DATA) public data: { classroom?: FullClassroomDto; collegeId: number }
   ) {
     this.classroomForm = new FormGroup({
       id: new FormControl(this.data?.classroom?.id),
@@ -81,7 +81,6 @@ export class CreateOrUpdateClassroomDialogComponent implements OnInit {
   }
 
   addDisciplineClassroom(schedule?: TeacherDisciplineClassroomDto): void {
-    console.log(schedule)
     this.teacherDisciplineClassrooms.push(
       new FormGroup({
         id: new FormControl(schedule?.id),
@@ -101,21 +100,48 @@ export class CreateOrUpdateClassroomDialogComponent implements OnInit {
 
 
   onSubmit() {
-    if (this.classroomForm.valid) {
-      const classroom: ClassroomDto = this.classroomForm.value as ClassroomDto;
-      this.classroomsService.createOrUpdate(classroom, this.data.collegeId).subscribe({
-        next: (updatedClassroom) => {
-          this.snackbar.open('A sala de aula foi salva com sucesso!', 'Fechar', { duration: 3000 });
-          this.dialogRef.close(updatedClassroom);
-        },
-        error: (error) => {
-          this.snackbar.open('Erro ao salvar a sala de aula. Tente novamente.', 'Fechar', { duration: 3000 });
-        }
-      });
-    } else {
+    if (this.classroomForm.invalid) {
       this.snackbar.open('Formulário inválido. Verifique os campos!', 'Fechar', { duration: 3000 });
+      return;
     }
+
+    const totalAvailability = this.getTotalAvailableClasses();
+    const totalClassesPerWeek = this.getTotalScheduledClasses();
+
+    if (totalClassesPerWeek !== totalAvailability) {
+      this.snackbar.open(
+        `O total de aulas (${totalClassesPerWeek}) não corresponde à disponibilidade (${totalAvailability})!`,
+        'Fechar', { duration: 4000 }
+      );
+      return;
+    }
+
+    const classroom: ClassroomDto = this.classroomForm.value as ClassroomDto;
+    this.classroomsService.createOrUpdate(classroom, this.data.collegeId).subscribe({
+      next: (updatedClassroom) => {
+        this.snackbar.open('A sala de aula foi salva com sucesso!', 'Fechar', { duration: 3000 });
+        this.dialogRef.close(updatedClassroom);
+      },
+      error: () => {
+        this.snackbar.open('Erro ao salvar a sala de aula. Tente novamente.', 'Fechar', { duration: 3000 });
+      }
+    });
   }
+
+  getTotalScheduledClasses(): number {
+
+    return this.teacherDisciplineClassrooms.controls.reduce((sum, control) => {
+      return sum + (control.get('totalClasses')?.value || 0);
+    }, 0);
+  }
+
+
+  getTotalAvailableClasses(): number {
+    const schedule = this.classroomForm.get('classroomDailySchedule')?.value as TeacherDisciplineClassroomDto;
+    delete schedule.id;
+    return Object.values(schedule).reduce((sum: number, value: number) => sum + value, 0);
+  }
+
 
 
   onCancel() {

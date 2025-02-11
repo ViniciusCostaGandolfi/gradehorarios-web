@@ -68,8 +68,8 @@
       <span class="text-lg font-bold">Disciplinas e Turmas</span>
       <button mat-button color="primary" (click)="addDisciplineClassroom()">Adicionar</button>
     </div>
-    <div formArrayName="teacherDisciplineClassrooms" class="space-y-4">
-      <div *ngFor="let schedule of teacherDisciplineClassrooms.controls; let i = index" [formGroupName]="i" class="border p-4 rounded">
+    <div formArrayName="teacherDisciplineClassrooms" class="space-y-4 border rounded p-4">
+      <div *ngFor="let schedule of teacherDisciplineClassrooms.controls; let i = index" [formGroupName]="i" class=" p-4">
         <div class="w-full flex flex-col sm:flex-row gap-5">
           <mat-form-field appearance="fill" class="w-full">
               <mat-label>Disciplina</mat-label>

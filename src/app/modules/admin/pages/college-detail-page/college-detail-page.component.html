@@ -69,7 +69,7 @@
                         <td mat-cell class="!pt-5" *matCellDef="let discipline">
                             <mat-form-field appearance="outline">
                                 <mat-label>Nome da disciplina</mat-label>
-                                <input matInput [(ngModel)]="discipline.name" (change)="updateDiscipline(discipline)">
+                                <input matInput [(ngModel)]="discipline.name" (change)="markAsDisciplinesChanged()">
                             </mat-form-field>
                         </td>
                     </ng-container>
@@ -80,7 +80,7 @@
                         <td mat-cell class="!pt-5" *matCellDef="let discipline">
                             <mat-form-field appearance="outline">
                                 <mat-label>Código da disciplina</mat-label>
-                                <input matInput [(ngModel)]="discipline.code" (change)="updateDiscipline(discipline)">
+                                <input matInput [(ngModel)]="discipline.code" (change)="markAsDisciplinesChanged()">
                             </mat-form-field>
                         </td>
                     </ng-container>
@@ -107,6 +107,11 @@
                     <tr mat-row *matRowDef="let row; columns: ['index', 'name', 'code', 'actions']"></tr>
 
                 </table>
+                <div *ngIf="hasDisciplinesChanges" class="flex justify-end mt-4">
+                    <button mat-raised-button color="primary" (click)="saveDisciplinesChanges()">
+                        <mat-icon>save</mat-icon> Salvar mudanças
+                    </button>
+                </div>
             </mat-expansion-panel>
 
             <mat-expansion-panel *ngIf="isMobile" class="!mb-5" expanded="false">
@@ -174,7 +179,7 @@
                             <mat-form-field class="!max-w-32" appearance="outline">
                                 <mat-label>Nome</mat-label>
                                 <input class="!min-w-0" matInput [(ngModel)]="teacher.name"
-                                    (change)="updateTeacher(teacher)">
+                                    (change)="markAsTeachersChanged()">
                             </mat-form-field>
                         </td>
                     </ng-container>
@@ -186,7 +191,7 @@
                             <mat-form-field class="!max-w-32" appearance="outline">
                                 <mat-label>Disponível?</mat-label>
                                 <mat-select [(ngModel)]="teacher.preferFirstClass"
-                                    (selectionChange)="updateTeacher(teacher)">
+                                    (selectionChange)="markAsTeachersChanged()">
                                     <mat-option value="UNPREFERABLE">Indisponível</mat-option>
                                     <mat-option value="IRRELEVANT">Disponível</mat-option>
                                     <mat-option value="PREFERABLE">Preferível</mat-option>
@@ -201,7 +206,7 @@
                             <mat-form-field class="!max-w-32" appearance="outline">
                                 <mat-label>Disponível?</mat-label>
                                 <mat-select [(ngModel)]="teacher.preferDoubleClass"
-                                    (selectionChange)="updateTeacher(teacher)">
+                                    (selectionChange)="markAsTeachersChanged()">
                                     <mat-option value="UNPREFERABLE">Indisponível</mat-option>
                                     <mat-option value="IRRELEVANT">Disponível</mat-option>
                                     <mat-option value="PREFERABLE">Obrigatório</mat-option>
@@ -219,7 +224,7 @@
                             <mat-form-field class="!max-w-32" appearance="outline">
                                 <mat-label>Disponibilidade</mat-label>
                                 <mat-select [(ngModel)]="teacher.teacherAvailability[day]"
-                                    (selectionChange)="updateTeacher(teacher)">
+                                    (selectionChange)="markAsTeachersChanged()">
                                     <mat-option value="UNPREFERABLE">Indisponível</mat-option>
                                     <mat-option value="IRRELEVANT">Disponível</mat-option>
                                     <mat-option value="PREFERABLE">Preferível</mat-option>
@@ -251,6 +256,12 @@
                         class="pt-4"></tr>
 
                 </table>
+
+                <div *ngIf="hasTeachersChanges" class="flex justify-end mt-4">
+                    <button mat-raised-button color="primary" (click)="saveTeachersChanges()">
+                        <mat-icon>save</mat-icon> Salvar mudanças
+                    </button>
+                </div>
             </mat-expansion-panel>
 
             <mat-expansion-panel class="!mb-5" expanded="true">
