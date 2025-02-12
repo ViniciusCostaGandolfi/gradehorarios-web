@@ -14,6 +14,7 @@ import { StateRegistrationService } from '../../../../core/services/state-regist
 export class CreateOrUpdateCollegeDialogComponent {
   dependencyTypes = Object.values(DependencyAdministrationType)
   areaTypes = Object.values(AreaType)
+  isLoading = false
 
   collegeForm = new FormGroup({
     id: new FormControl<number | null>(null),
@@ -45,14 +46,19 @@ export class CreateOrUpdateCollegeDialogComponent {
 
   onSubmit(): void {
     if (this.collegeForm.valid) {
+      this.isLoading = true
       const college: CollegeDto = this.collegeForm.value as CollegeDto;
       this.collegesService.createOrUpdate(college).subscribe({
         next: () => {
           this.snackbar.open('A faculdade foi salva com sucesso!', 'Fechar', { duration: 3000 });
           this.dialogRef.close(college);
+          this.isLoading = false
+
         },
         error: (error) => {
           this.snackbar.open(error.error || 'Erro ao salvar a faculdade', 'Fechar');
+          this.isLoading = false
+
         },
       });
     }

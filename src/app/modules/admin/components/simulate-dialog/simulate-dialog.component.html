@@ -1,79 +1,65 @@
 <div mat-dialog-title>
-    <div class="flex justify-between items-center">
-      <h2 class="text-center text-primary-500 font-bold text-xl sm:text-2xl mb-4">
-        Quer Simular a Escola {{ data.college.name }}?
-      </h2>
-      <button mat-icon-button mat-dialog-close aria-label="Fechar">
-        <mat-icon>close</mat-icon>
-      </button>
-    </div>
+  <div class="flex justify-between items-center">
+    <h2 class="text-center text-primary-500 font-bold text-xl sm:text-2xl mb-4">
+      Quer Simular a Escola {{ data.college.name }}?
+    </h2>
+    <button mat-icon-button mat-dialog-close aria-label="Fechar">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
 </div>
-  
-  <mat-dialog-content class="flex flex-col justify-center items-center p-5 !max-h-[80vh]">
-    <mat-card appearance="outlined" class="!w-full !h-full">
-      <mat-card-header class="!w-full !flex !justify-center">
-        <mat-card-title class="text-center text-xl font-bold text-primary-500">Ajude a Manter o Site no Ar</mat-card-title>
-        <mat-card-subtitle class="text-center font-bold">
-          Contribua para manter o Grade Horários online e sem anúncios!
-        </mat-card-subtitle>
-      </mat-card-header>
-  
-      <div mat-card-image>
-        <div class="w-full flex justify-center">
-          <qrcode
-            #qrcodeMesa
-            [qrdata]="pix"
-            [width]="300"
-            [errorCorrectionLevel]="'M'"
-          ></qrcode>
-        </div>
+
+<mat-dialog-content class="flex flex-col justify-center items-center p-5 !max-h-[80vh]">
+  <mat-card appearance="outlined" class="!w-full !h-full">
+    <mat-card-header class="!w-full !flex !justify-center">
+      <mat-card-title class="text-center text-xl font-bold text-primary-500">Ajude a Manter o Site no
+        Ar</mat-card-title>
+      <mat-card-subtitle class="text-center font-bold">
+        Contribua para manter o Grade Horários online e sem anúncios!
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <div mat-card-image>
+      <div class="w-full flex justify-center">
+        <qrcode #qrcodeMesa [qrdata]="pix" [width]="300" [errorCorrectionLevel]="'M'"></qrcode>
       </div>
-  
-      <mat-card-content class="text-center mt-5">
-        <p>
-          Este site tem um custo de hospedagem alto e, para continuar no ar,
-          vive de doações voluntárias.
-        </p>
-        <p class="font-bold text-blue-600">
-          Chave Pix: {{'490 142 028 30'}}
-        </p>
-        <p *ngIf="!canSimule">
-          Aguarde <span class="font-bold">{{ countdown }}</span> segundos para simular.
-        </p>
-      </mat-card-content>
-  
-      <mat-card-actions class="flex flex-col items-center gap-3 mt-5">
-        <button mat-raised-button color="primary" class="w-full" (click)="copyPixCode()">
-          Doação via Pix
-        </button>        
-  
-        <a
-          mat-raised-button
-          class="w-full"
-          href="https://wa.me/5519981859845"
-          target="_blank"
-        >
-          <button mat-button color="primary" class="w-full">WhatsApp</button>
-        </a>
-  
-        <a
-          mat-raised-button
-          class="w-full"
-          href="mailto:vinicostagandolfi@gmail.com"
-          target="_blank"
-        >
-          <button mat-button color="primary" class="w-full">Email</button>
-        </a>
-      </mat-card-actions>
-    </mat-card>
-  </mat-dialog-content>
-  
-  <mat-dialog-actions>
-    <div class="flex justify-end gap-4 w-full">      
-      <button mat-button mat-dialog-close>Cancelar</button>
-      <button mat-raised-button color="primary" [disabled]="!canSimule || !data" (click)="onSubmit()">
-        Simular {{!canSimule ? 'em ' + countdown + ' segundos...' : ''}}
-      </button>
     </div>
-  </mat-dialog-actions>
-  
+
+    <mat-card-content class="text-center mt-5">
+      <p>
+        Este site tem um custo de hospedagem alto e, para continuar no ar,
+        vive de doações voluntárias.
+      </p>
+      <p class="font-bold text-blue-600">
+        Chave Pix: {{'490 142 028 30'}}
+      </p>
+      <p *ngIf="!canSimule">
+        Aguarde <span class="font-bold">{{ countdown }}</span> segundos para simular.
+      </p>
+    </mat-card-content>
+
+    <mat-card-actions class="flex flex-col items-center gap-3 mt-5">
+      <button mat-raised-button color="primary" class="w-full" (click)="copyPixCode()">
+        Doação via Pix
+      </button>
+
+      <a mat-raised-button class="w-full" href="https://wa.me/5519981859845" target="_blank">
+        <button mat-button color="primary" class="w-full">WhatsApp</button>
+      </a>
+
+      <a mat-raised-button class="w-full" href="mailto:vinicostagandolfi@gmail.com" target="_blank">
+        <button mat-button color="primary" class="w-full">Email</button>
+      </a>
+    </mat-card-actions>
+  </mat-card>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <div class="flex justify-end gap-4 w-full">
+    <button mat-button mat-dialog-close>Cancelar</button>
+
+    <app-spinner-button [disabled]="!canSimule" [isLoading]="isLoading" (click)="onSubmit()">
+      Simular {{!canSimule ? 'em ' + countdown + ' segundos...' : ''}}
+    </app-spinner-button>
+  </div>
+</mat-dialog-actions>

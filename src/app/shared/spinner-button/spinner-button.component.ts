@@ -16,6 +16,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 })
 export class SpinnerButtonComponent {
   @Input() isLoading = false;
+  @Input() disabled = false;
   @Input() type: 'button' | 'submit' | 'reset' = 'button';
   @Input() color: 'primary'|'accent' = 'primary';
   @Input() class: string = ''; 

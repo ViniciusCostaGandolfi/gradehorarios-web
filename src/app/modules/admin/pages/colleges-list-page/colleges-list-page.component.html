@@ -6,7 +6,13 @@
     </button>
   </div>
 
-  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <div *ngIf="isLoading" class="w-full min-h-[50vh] text-gray-500 flex flex-row justify-center h-full items-center">
+      <div class="w-full flex flex-row justify-center">
+          <div>
+              <mat-spinner *ngIf="isLoading"></mat-spinner>
+          </div>
+      </div>
+  </div>
 
   <ng-container *ngIf="!isLoading">
     <div class="w-full min-h-[50vh] text-gray-500 flex flex-row justify-center h-full items-center"

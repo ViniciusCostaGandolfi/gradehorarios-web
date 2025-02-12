@@ -1,12 +1,21 @@
 <div class="table-container px-3 pt-5 max-w-full overflow-auto">
-    <div class="w-full min-h-[50vh] text-gray-500 flex flex-row justify-center h-full items-center" *ngIf="college === null">
+    <div *ngIf="!isLoading && college === null" class="w-full min-h-[50vh] text-gray-500 flex flex-row justify-center h-full items-center">
         <div class="w-full flex flex-row justify-center">
             <div>
-                <mat-spinner *ngIf="isLoading"></mat-spinner>
-                <h1 class="font-bold text-xl  text-center" *ngIf="!isLoading">ESCOLA NÃO ENCONTRADA!</h1>
+                <h1 class="font-bold text-xl  text-center">ESCOLA NÃO ENCONTRADA!</h1>
             </div>
         </div>
     </div>
+
+    <div *ngIf="isLoading" class="w-full min-h-[50vh] text-gray-500 flex flex-row justify-center h-full items-center">
+        <div class="w-full flex flex-row justify-center">
+            <div>
+                <mat-spinner *ngIf="isLoading"></mat-spinner>
+            </div>
+        </div>
+    </div>
+
+
 
     <div *ngIf="college !== null && !isLoading">
         <mat-expansion-panel class="!mb-10" expanded="true">

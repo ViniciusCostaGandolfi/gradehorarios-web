@@ -21,9 +21,9 @@ export class CreateOrUpdateTeacherDialogComponent implements OnInit {
   classrooms: ClassroomDto[] = [];
   preferenceToText = preferenceToText
 
+  isLoading = false
+
   constructor(
-    private disciplinesService: DisciplinesService,
-    private classroomsService: ClassroomsService,
     private teachersService: TeachersService,
     private snackbar: MatSnackBar,
     public dialogRef: MatDialogRef<CreateOrUpdateTeacherDialogComponent>,
@@ -73,14 +73,18 @@ export class CreateOrUpdateTeacherDialogComponent implements OnInit {
   
   onSubmit(): void {
     if (this.teacherForm.valid) {
+      this.isLoading = true
       const teacher: FullTeacherDto = this.teacherForm.value as FullTeacherDto;
       this.teachersService.createOrUpdate(teacher, this.data.collegeId).subscribe({
         next: (updatedTeacher) => {
           this.snackbar.open('Professor salvo com sucesso!', 'Fechar', { duration: 3000 });
+          this.isLoading = false
           this.dialogRef.close(updatedTeacher);
         },
         error: () => {
           this.snackbar.open('Erro ao salvar o professor. Tente novamente.', 'Fechar', { duration: 3000 });
+          this.isLoading = false
+
         }
       });
     } else {

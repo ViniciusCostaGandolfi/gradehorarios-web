@@ -109,8 +109,8 @@
 <mat-dialog-actions>
   <div class="flex justify-end gap-4 w-full">
     <button mat-button mat-dialog-close>Cancelar</button>
-    <button mat-raised-button color="primary" [disabled]="classroomForm.invalid" (click)="onSubmit()">
+    <app-spinner-button [disabled]="classroomForm.invalid" [isLoading]="isLoading" (click)="onSubmit()">
       {{ data?.classroom?.id ? 'Atualizar' : 'Criar' }}
-    </button>
+    </app-spinner-button>
   </div>
 </mat-dialog-actions>

@@ -22,6 +22,8 @@ export class CreateOrUpdateClassroomDialogComponent implements OnInit {
   disciplines: DisciplineDto[] = [];
   teachers: TeacherDto[] = [];
 
+  isLoading = false;
+
   constructor(
     private disciplinesService: DisciplinesService,
     private snackbar: MatSnackBar,
@@ -110,6 +112,7 @@ export class CreateOrUpdateClassroomDialogComponent implements OnInit {
       return;
     }
 
+
     const totalAvailability = this.getTotalAvailableClasses();
     const totalClassesPerWeek = this.getTotalScheduledClasses();
 
@@ -120,15 +123,17 @@ export class CreateOrUpdateClassroomDialogComponent implements OnInit {
       );
       return;
     }
-
+    this.isLoading = true
     const classroom: FullClassroomDto = this.classroomForm.value as FullClassroomDto;
     this.classroomsService.createOrUpdate(classroom, this.data.collegeId).subscribe({
       next: (updatedClassroom) => {
         this.snackbar.open('A sala de aula foi salva com sucesso!', 'Fechar', { duration: 3000 });
         this.dialogRef.close(updatedClassroom);
+        this.isLoading = false
       },
       error: () => {
         this.snackbar.open('Erro ao salvar a sala de aula. Tente novamente.', 'Fechar', { duration: 3000 });
+        this.isLoading = false
       }
     });
   }

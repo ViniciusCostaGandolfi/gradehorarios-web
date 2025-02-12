@@ -12,6 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class SimulateDialogComponent implements OnInit {
 
   canSimule: boolean = false;
+  isLoading = false
   countdown: number = 3;
   pix = '00020126510014br.gov.bcb.pix0111490142028300214Grade Horarios5204000053039865802BR5923VINICIUS COSTA GANDOLFI6007LIMEIRA62290525Ip7kOeR33jC1GpoGbC9rZU6FI63046ACA'
 
@@ -35,13 +36,17 @@ export class SimulateDialogComponent implements OnInit {
   onSubmit(): void {
 
     if (this.data.college) {
+      this.isLoading = true
+
       this.timetableSolverService.resolve(this.data.college.id).subscribe({
         next: (response) => {
           this.snackbar.open('A escola foi simulada com sucesso!', 'Fechar', { duration: 3000 });
+          this.isLoading = false
           this.dialogRef.close(response);
         },
         error: (error) => {
           this.snackbar.open(`Erro ao simular. ${error}`, 'Fechar', { duration: 3000 });
+          this.isLoading = false
         }
       })
     }
