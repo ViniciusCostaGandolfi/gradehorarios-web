@@ -1,10 +1,9 @@
 <div class="table-container px-3 pt-5 max-w-full overflow-auto">
-    <mat-spinner *ngIf="isLoading"></mat-spinner>
-    <div class="w-full min-h-[50vh] text-gray-500 flex flex-row justify-center h-full items-center"
-        *ngIf="college === null && !isLoading">
+    <div class="w-full min-h-[50vh] text-gray-500 flex flex-row justify-center h-full items-center" *ngIf="college === null">
         <div class="w-full flex flex-row justify-center">
             <div>
-                <h1 class="font-bold text-xl  text-center">ESCOLA NÃO ENCONTRADA!</h1>
+                <mat-spinner *ngIf="isLoading"></mat-spinner>
+                <h1 class="font-bold text-xl  text-center" *ngIf="!isLoading">ESCOLA NÃO ENCONTRADA!</h1>
             </div>
         </div>
     </div>
@@ -184,14 +183,15 @@
                         <td mat-cell *matCellDef="let classroom">
                             <button mat-button
                                 (click)="updateOrCreateClassroom($event, { classroom, collegeId: college.id })">
-                                Editar 
+                                Editar
                                 <mat-icon>edit</mat-icon>
                             </button>
                             <button mat-button color="warn" (click)="deleteClassroom(classroom.id, college.id)">
                                 Deletar
                                 <mat-icon>delete</mat-icon>
                             </button>
-                            <button matTooltipPosition="right" mat-button color="primary" (click)="duplicateClassroom(classroom)">
+                            <button matTooltipPosition="right" mat-button color="primary"
+                                (click)="duplicateClassroom(classroom)">
                                 Copiar turma
                                 <mat-icon>content_copy</mat-icon>
                             </button>
