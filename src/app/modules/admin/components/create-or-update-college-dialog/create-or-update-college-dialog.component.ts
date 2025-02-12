@@ -50,13 +50,13 @@ export class CreateOrUpdateCollegeDialogComponent {
       const college: CollegeDto = this.collegeForm.value as CollegeDto;
       this.collegesService.createOrUpdate(college).subscribe({
         next: () => {
-          this.snackbar.open('A faculdade foi salva com sucesso!', 'Fechar', { duration: 3000 });
+          this.snackbar.open('A escola foi salva com sucesso!', 'Fechar', { duration: 3000 });
           this.dialogRef.close(college);
           this.isLoading = false
 
         },
         error: (error) => {
-          this.snackbar.open(error.error || 'Erro ao salvar a faculdade', 'Fechar');
+          this.snackbar.open(error.error || 'Erro ao salvar a escola', 'Fechar');
           this.isLoading = false
 
         },

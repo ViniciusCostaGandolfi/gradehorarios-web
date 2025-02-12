@@ -182,7 +182,7 @@ export class CollegeDetailPageComponent {
       if (confirmed) {
         this.disciplinesService.deleteDiscipline(disciplineId, collegeId).subscribe({
           next: () => {
-            this.snackbar.open('Discipliona deletada com sucesso!', 'Fechar', { duration: 3000 });
+            this.snackbar.open('Disciplina deletada com sucesso!', 'Fechar', { duration: 3000 });
             this.loadCollege();
           },
           error: () => {
