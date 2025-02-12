@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AdminRoute } from '../../../core/interfaces/admin-route';
 import { adminRoutes } from '../../../core/mocks/admin-routes';
 
+
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',

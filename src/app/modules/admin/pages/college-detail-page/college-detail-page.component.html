@@ -89,11 +89,10 @@
                     </ng-container>
 
                     <!-- Ações -->
-                    <!-- Ações -->
                     <ng-container matColumnDef="actions">
                         <th mat-header-cell *matHeaderCellDef>Ações</th>
                         <td mat-cell *matCellDef="let discipline; let index = index">
-                            <button mat-icon-button color="warn" (click)="deleteDiscipline(discipline.id)"
+                            <button mat-icon-button color="warn" (click)="deleteDiscipline(discipline.id, college.id)"
                                 *ngIf="discipline.id">
                                 <mat-icon>delete</mat-icon>
                             </button>
@@ -132,7 +131,7 @@
                         </div>
                     </mat-panel-description>
                 </mat-expansion-panel-header>
-                <table mat-table [dataSource]="college.teachers" class="w-full">
+                <table #teacherTable mat-table [dataSource]="college.teachers" class="w-full">
                     <ng-container matColumnDef="name">
                         <th mat-header-cell *matHeaderCellDef> Nome </th>
                         <td mat-cell *matCellDef="let teacher">{{ teacher.name }}</td>
@@ -146,7 +145,7 @@
                                 editar
                                 <mat-icon>edit</mat-icon>
                             </button>
-                            <button mat-button color="warn" (click)="deleteTeacher(teacher.id)">
+                            <button mat-button color="warn" (click)="deleteTeacher(teacher.id, college.id)">
                                 deletar
                                 <mat-icon>delete</mat-icon>
                             </button>
@@ -174,7 +173,7 @@
                         </div>
                     </mat-panel-description>
                 </mat-expansion-panel-header>
-                <table mat-table [dataSource]="college.classrooms" class="w-full">
+                <table #classroomTable mat-table [dataSource]="college.classrooms" class="w-full">
                     <ng-container matColumnDef="name">
                         <th mat-header-cell *matHeaderCellDef> Nome </th>
                         <td mat-cell *matCellDef="let classroom">{{ classroom.name }}</td>
@@ -212,7 +211,7 @@
                     </mat-panel-title>
                 </mat-expansion-panel-header>
 
-                <table mat-table [dataSource]="college.solutions" class="w-full">
+                <table #solutionTable mat-table [dataSource]="college.solutions" class="w-full">
 
                     <!-- Índice -->
                     <ng-container matColumnDef="index">

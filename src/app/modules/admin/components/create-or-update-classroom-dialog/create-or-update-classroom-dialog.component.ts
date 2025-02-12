@@ -8,6 +8,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ClassroomsService } from '../../../../core/services/classrooms.service';
 import { TeacherDisciplineClassroomDto, TeacherDto } from '../../../../core/interfaces/teacher-dto';
 import { TeachersService } from '../../../../core/services/teachers.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-create-or-update-classroom-dialog',
@@ -35,11 +36,11 @@ export class CreateOrUpdateClassroomDialogComponent implements OnInit {
       collegeId: new FormControl(this.data.collegeId),
       classroomDailySchedule: new FormGroup({
         id: new FormControl(this.data?.classroom?.classroomDailySchedule?.id),
-        mondayClasses: new FormControl(this.data?.classroom?.classroomDailySchedule?.mondayClasses ?? 5),
-        tuesdayClasses: new FormControl(this.data?.classroom?.classroomDailySchedule?.tuesdayClasses ?? 5),
-        wednesdayClasses: new FormControl(this.data?.classroom?.classroomDailySchedule?.wednesdayClasses ?? 5),
-        thursdayClasses: new FormControl(this.data?.classroom?.classroomDailySchedule?.thursdayClasses ?? 5),
-        fridayClasses: new FormControl(this.data?.classroom?.classroomDailySchedule?.fridayClasses ?? 5),
+        mondayClasses: new FormControl(this.data?.classroom?.classroomDailySchedule?.mondayClasses ?? 6),
+        tuesdayClasses: new FormControl(this.data?.classroom?.classroomDailySchedule?.tuesdayClasses ?? 6),
+        wednesdayClasses: new FormControl(this.data?.classroom?.classroomDailySchedule?.wednesdayClasses ?? 6),
+        thursdayClasses: new FormControl(this.data?.classroom?.classroomDailySchedule?.thursdayClasses ?? 6),
+        fridayClasses: new FormControl(this.data?.classroom?.classroomDailySchedule?.fridayClasses ?? 6),
         saturdayClasses: new FormControl(this.data?.classroom?.classroomDailySchedule?.saturdayClasses ?? 0),
         sundayClasses: new FormControl(this.data?.classroom?.classroomDailySchedule?.sundayClasses ?? 0),
       }),
@@ -62,9 +63,13 @@ export class CreateOrUpdateClassroomDialogComponent implements OnInit {
     this.loadTeachers();
   }
 
+  
+
   loadDisciplines(): void {
     this.disciplinesService.getAllByCollegeId(this.data.collegeId).subscribe({
-      next: (disciplines) => (this.disciplines = disciplines),
+      next: (disciplines) => {
+        this.disciplines = disciplines;
+      },
       error: () => this.snackbar.open('Erro ao carregar disciplinas', 'Fechar', { duration: 3000 })
     });
   }

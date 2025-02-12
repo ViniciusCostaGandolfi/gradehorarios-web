@@ -45,24 +45,10 @@ export class SolutionTablesComponent {
       const tableElement = sectionElement.querySelector('table') as HTMLElement;
   
       if (!tableElement || !titleElement) continue;
-  
-      const titleContainer = document.createElement('div');
-      titleContainer.style.display = 'flex';
-      titleContainer.style.justifyContent = 'center';
-      titleContainer.style.alignItems = 'center';
-      titleContainer.style.padding = '10px';
-      titleContainer.style.backgroundColor = 'white';
-      titleContainer.style.width = '100%';
-      titleContainer.style.fontSize = '20px';
-      titleContainer.style.fontWeight = 'bold';
-      titleContainer.textContent = titleElement.textContent || '';
-  
-      document.body.appendChild(titleContainer);
-  
-      const titleCanvas = await html2canvas(titleContainer, { scale: 3 });
+
+    
+      const titleCanvas = await html2canvas(titleElement, { scale: 1 });
       const tableCanvas = await html2canvas(tableElement, { scale: 2 });
-  
-      document.body.removeChild(titleContainer);
   
       const titleImage = titleCanvas.toDataURL('image/png');
       const tableImage = tableCanvas.toDataURL('image/png');
@@ -75,7 +61,7 @@ export class SolutionTablesComponent {
       const titleHeight = 25;
       const tableHeight = (tableCanvas.height * imgWidth) / tableCanvas.width;
   
-      pdf.addImage(titleImage, 'PNG', 10, 10, imgWidth - 20, titleHeight);
+      pdf.addImage(titleImage, 'PNG', 10, 10, imgWidth, titleHeight);
       pdf.addImage(tableImage, 'PNG', 10, 40, imgWidth, tableHeight);
     }
   
@@ -104,24 +90,10 @@ export class SolutionTablesComponent {
   
       if (!tableElement || !titleElement) continue;
   
-      const titleContainer = document.createElement('div');
-      titleContainer.style.display = 'flex';
-      titleContainer.style.justifyContent = 'center';
-      titleContainer.style.alignItems = 'center';
-      titleContainer.style.padding = '10px';
-      titleContainer.style.backgroundColor = 'white';
-      titleContainer.style.width = '100%';
-      titleContainer.style.fontSize = '20px';
-      titleContainer.style.fontWeight = 'bold';
-      titleContainer.textContent = titleElement.textContent || '';
   
-      document.body.appendChild(titleContainer);
-  
-      const titleCanvas = await html2canvas(titleContainer, { scale: 3 });
+      const titleCanvas = await html2canvas(titleElement, { scale: 1 });
       const tableCanvas = await html2canvas(tableElement, { scale: 2 });
-  
-      document.body.removeChild(titleContainer);
-  
+    
       const titleImage = titleCanvas.toDataURL('image/png');
       const tableImage = tableCanvas.toDataURL('image/png');
   
@@ -133,7 +105,7 @@ export class SolutionTablesComponent {
       const titleHeight = 25;
       const tableHeight = (tableCanvas.height * imgWidth) / tableCanvas.width;
   
-      pdf.addImage(titleImage, 'PNG', 10, 10, imgWidth - 20, titleHeight);
+      pdf.addImage(titleImage, 'PNG', 10, 10, imgWidth, titleHeight);
       pdf.addImage(tableImage, 'PNG', 10, 40, imgWidth, tableHeight);
     }
   

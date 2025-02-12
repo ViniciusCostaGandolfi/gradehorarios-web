@@ -49,6 +49,8 @@ import { SettingsPageComponent } from './pages/settings-page/settings-page.compo
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { CollegeDetailPageComponent } from './pages/college-detail-page/college-detail-page.component';
 import { SolutionDetailDialogComponent } from './components/solution-detail-dialog/solution-detail-dialog.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+
 
 
 @NgModule({
@@ -92,6 +94,7 @@ import { SolutionDetailDialogComponent } from './components/solution-detail-dial
     MatInputModule, 
     MatCheckboxModule,
     MatExpansionModule,
+    MatAutocompleteModule,
     MatTooltipModule,
     MatPaginatorModule,
     MatStepperModule,

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { CollegeDto, FullCollegeDto } from '../../../../core/interfaces/college';
 import { CollegesService } from '../../../../core/services/colleges/colleges.service';
 import { DisciplinesService } from '../../../../core/services/disciplines.service';
@@ -19,6 +19,8 @@ import { CanDeleteDialogComponent } from '../../../../shared/can-delete-dialog/c
 import { ActivatedRoute } from '@angular/router';
 import { SolutionDetailDialogComponent } from '../../components/solution-detail-dialog/solution-detail-dialog.component';
 import { WindowWidthService } from '../../../../core/services/window-width/window-width.service';
+import { SolutionDto } from '../../../../core/interfaces/solution-dto';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-college-detail-page',
@@ -36,6 +38,14 @@ export class CollegeDetailPageComponent {
   editableDisciplines: DisciplineDto[] = [];
 
   editableTeachers: FullTeacherDto[] = [];
+
+  editableClassrooms: FullClassroomDto[] = [];
+
+  @ViewChild('classroomTable') classroomTable!: MatTable<FullClassroomDto>;
+  @ViewChild('teacherTable') teacherTable!: MatTable<FullTeacherDto>;
+  @ViewChild('disciplineTable') disciplineTable!: MatTable<DisciplineDto>;
+  @ViewChild('solutionTable') solutionTable!: MatTable<SolutionDto>;
+
 
   hasDisciplinesChanges = false;
 
@@ -58,17 +68,51 @@ export class CollegeDetailPageComponent {
 
   ngOnInit() {
     this.windowWidth.isMobile().subscribe(value => {
-       this.isMobile = value;
+      this.isMobile = value;
     });
- }
-
- markAsDisciplinesChanged(): void {
-    this.hasDisciplinesChanges = true;
   }
- 
- 
+  ngAfterViewInit() {
+    this.rerenderTables();
+  }
 
-  private loadCollege(): void {
+  updateOrCreateTeacher(event: MouseEvent, data: { teacher?: TeacherDto; collegeId?: number }) {
+    event.stopPropagation();
+
+    this.dialog.open(CreateOrUpdateTeacherDialogComponent, {
+      data: data,
+      width: '90vw',
+      height: '90vh'
+    }).afterClosed().subscribe((updatedTeacher: FullTeacherDto) => {
+      if (updatedTeacher && this.college && this.college.teachers) {
+        const index = this.college?.teachers.findIndex(t => t.id === updatedTeacher.id);
+        if (index !== -1) {
+          this.college.teachers[index] = updatedTeacher;
+        } else {
+          this.college.teachers = [...this.college?.teachers, updatedTeacher];
+        }
+        this.college.teachers.sort((a, b) => a.name.localeCompare(b.name));
+
+        this.rerenderTables()
+      }
+    });
+  }
+
+
+  rerenderTables(): void {
+    if (this.classroomTable) {
+      this.classroomTable.renderRows();
+    }
+    if (this.teacherTable) {
+      this.teacherTable.renderRows();
+    }
+    if (this.disciplineTable) {
+      this.disciplineTable.renderRows();
+    }
+  }
+
+
+
+  loadCollege(): void {
     this.isLoading = true;
     const collegeIdStr = this.route.snapshot.paramMap.get('collegeId');
     const collegeId = collegeIdStr ? parseInt(collegeIdStr, 10) : NaN;
@@ -78,7 +122,6 @@ export class CollegeDetailPageComponent {
         next: (college) => {
           this.college = college;
           this.editableDisciplines = [...college.disciplines];
-          this.editableTeachers = [...college.teachers];
           this.isLoading = false;
         },
         error: () => {
@@ -92,66 +135,65 @@ export class CollegeDetailPageComponent {
     }
   }
 
-
-  
-  deleteTeacher(teacherId: number): void {
-    if (!this.college) return;
-
-    this.teachersService.deleteTeacher(teacherId, this.college.id).subscribe({
-      next: () => {
-        this.snackbar.open('Professor excluído com sucesso!', 'Fechar', { duration: 3000 });
-        this.loadCollege();
-      },
-      error: () => {
-        this.snackbar.open('Erro ao excluir o professor.', 'Fechar', { duration: 3000 });
-      }
-    });
+  markAsDisciplinesChanged(): void {
+    this.hasDisciplinesChanges = true;
   }
 
+
+
+  
 
   addDiscipline(event: MouseEvent): void {
     event.stopPropagation()
     if (!this.college) return;
 
     const newDiscipline: DisciplineDto = { name: '', code: '', collegeId: this.college.id };
-    
+
     this.editableDisciplines = [...this.editableDisciplines, newDiscipline];
   }
 
   saveDisciplinesChanges(): void {
     if (!this.college) return;
 
-
-    
     this.editableDisciplines.forEach((discipline, i) => {
       this.disciplinesService.createOrUpdate(discipline, this.college!.id).subscribe();
     });
-    
+
     this.snackbar.open('Mudanças salvas com sucesso!', 'Fechar', { duration: 2000 });
-    
+
     this.hasDisciplinesChanges = false;
+
+    this.disciplineTable.renderRows()
   }
 
   removeDisciplineFromList(index: number): void {
     this.editableDisciplines = this.editableDisciplines.filter((_, i) => i !== index);
   }
-  
 
-  deleteDiscipline(disciplineId: number): void {
+
+  deleteDiscipline(disciplineId: number, collegeId: number): void {
     if (!this.college) return;
 
-    this.disciplinesService.deleteDiscipline(disciplineId, this.college.id).subscribe({
-      next: () => {
-        this.snackbar.open('Disciplina excluída com sucesso!', 'Fechar', { duration: 3000 });
-        this.loadCollege();
-      },
-      error: () => {
-        this.snackbar.open('Erro ao excluir a disciplina.', 'Fechar', { duration: 3000 });
+    const dialogRef = this.dialog.open(CanDeleteDialogComponent, {
+      data: { message: `Tem certeza que deseja deletar a disciplina?` }
+    });
+
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        this.disciplinesService.deleteDiscipline(disciplineId, collegeId).subscribe({
+          next: () => {
+            this.snackbar.open('Discipliona deletada com sucesso!', 'Fechar', { duration: 3000 });
+            this.loadCollege();
+          },
+          error: () => {
+            this.snackbar.open('Erro ao deletar a disciplina. Tente novamente.', 'Fechar', { duration: 3000 });
+          }
+        });
       }
     });
   }
 
-  public updateOrCreateCollege(data?: { college: CollegeDto}) {
+  updateOrCreateCollege(data?: { college: CollegeDto }) {
     this.dialog.open(CreateOrUpdateCollegeDialogComponent, {
       data: data,
       width: '50vw',
@@ -159,13 +201,24 @@ export class CollegeDetailPageComponent {
     }).afterClosed().subscribe((value) => this.loadCollege())
   }
 
-  public simulateCollege(data: { college: CollegeDto}) {
+  simulateCollege(data: { college: CollegeDto }) {
     this.dialog.open(SimulateDialogComponent, {
       data: data,
       width: '50vw',
       height: '80vh'
-    }).afterClosed().subscribe((value) => {
-      if (value) {
+    }).afterClosed().subscribe((solution) => {
+      if (solution  && this.college && this.college.solutions) {
+        const index = this.college.solutions.findIndex(c => c.id === solution.id);
+
+        if (index !== -1) {
+          this.college.solutions[index] = solution;
+        } else {
+          this.college.solutions = [...this.college.solutions, solution];
+        }
+
+        this.college.solutions.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
+        this.solutionTable.renderRows()
+
       }
     })
   }
@@ -173,7 +226,7 @@ export class CollegeDetailPageComponent {
 
 
 
-  public updateOrCreateClassroom(event: MouseEvent, data: { classroom?: ClassroomDto; collegeId?: number }) {
+  updateOrCreateClassroom(event: MouseEvent, data: { classroom?: ClassroomDto; collegeId?: number }) {
     event.stopPropagation();
 
     this.dialog.open(CreateOrUpdateClassroomDialogComponent, {
@@ -183,18 +236,22 @@ export class CollegeDetailPageComponent {
     }).afterClosed().subscribe((updatedClassroom: FullClassroomDto) => {
       if (updatedClassroom && this.college && this.college.classrooms) {
         const index = this.college.classrooms.findIndex(c => c.id === updatedClassroom.id);
-        
+
         if (index !== -1) {
           this.college.classrooms[index] = updatedClassroom;
         } else {
           this.college.classrooms = [...this.college.classrooms, updatedClassroom];
         }
+
+        this.college.classrooms.sort((a, b) => a.name.localeCompare(b.name));
+        this.classroomTable.renderRows()
+
       }
     });
   }
 
-  
-  public uploadTable(event: MouseEvent) {
+
+  uploadTable(event: MouseEvent) {
     event.stopPropagation()
 
     this.dialog.open(UploadTableDialogComponent, {
@@ -203,31 +260,15 @@ export class CollegeDetailPageComponent {
     }).afterClosed().subscribe(() => this.loadCollege())
   }
 
-  public updateOrCreateTeacher(event: MouseEvent, data: { teacher?: TeacherDto; collegeId?: number }) {
-    event.stopPropagation();
-  
-    this.dialog.open(CreateOrUpdateTeacherDialogComponent, {
-      data: data,
-      width: '90vw',
-      height: '90vh'
-    }).afterClosed().subscribe((updatedTeacher: FullTeacherDto) => {
-      if (updatedTeacher && this.college && this.college.teachers) {
-        const index = this.college?.teachers.findIndex(t => t.id === updatedTeacher.id);
-        if (index !== -1) {
-          this.college.teachers[index] = updatedTeacher; 
-        } else {
-          this.college.teachers = [...this.college?.teachers, updatedTeacher]; 
-        }
-      }
-    });
-  }
-  
+
+
+
 
   deleteCollege(collegeId: number): void {
     const dialogRef = this.dialog.open(CanDeleteDialogComponent, {
       data: { message: `Tem certeza que deseja deletar a escola?` }
     });
-  
+
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
         this.collegesService.deleteCollege(collegeId).subscribe({
@@ -243,51 +284,11 @@ export class CollegeDetailPageComponent {
     });
   }
 
-  duplicateClassroom(originalClassroom: FullClassroomDto): void {
-    if (!this.college) return;
-  
-    const duplicatedClassroom: FullClassroomDto = {
-      ...originalClassroom,
-      id: undefined, 
-      name: originalClassroom.name + ' (Cópia)', 
-      classroomDailySchedule: {
-        ...originalClassroom.classroomDailySchedule,
-        id: undefined
-      },
-      teacherDisciplineClassrooms: originalClassroom.teacherDisciplineClassrooms?.map(tdc => ({
-        ...tdc,
-        id: undefined,
-      })) || []
-    };
-  
-    this.college.classrooms = [...this.college.classrooms, duplicatedClassroom];
-
-    this.dialog.open(CreateOrUpdateClassroomDialogComponent, {
-      data: {
-        classroom: duplicatedClassroom, 
-        collegeId: this.college.id
-      },
-      width: '70vw',
-      height: '80vh'
-    }).afterClosed().subscribe(() => this.loadCollege())
-  }
-
-  openSolutionDetails(solution: any): void {
-    this.dialog.open(SolutionDetailDialogComponent, {
-      data: { solution },
-      width: '1000px',
-      height: '80vh'
-    });
-  }
-  
-  
-  
-
   deleteClassroom(classroomId: number, collegeId: number): void {
     const dialogRef = this.dialog.open(CanDeleteDialogComponent, {
       data: { message: 'Tem certeza que deseja excluir esta turma?' },
     });
-  
+
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
         this.classroomsService.deleteClassroom(classroomId, collegeId).subscribe({
@@ -308,7 +309,7 @@ export class CollegeDetailPageComponent {
     const dialogRef = this.dialog.open(CanDeleteDialogComponent, {
       data: { message: 'Tem certeza que deseja excluir esta grade?' },
     });
-  
+
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
         this.timetableService.deleteSolution(solutionId, collegeId).subscribe({
@@ -324,6 +325,69 @@ export class CollegeDetailPageComponent {
     });
   }
 
+  deleteTeacher(teacherId: number, collegeId: number): void {
+    if (!this.college) return;
+    const dialogRef = this.dialog.open(CanDeleteDialogComponent, {
+      data: { message: 'Tem certeza que deseja excluir esta grade?' },
+    });
 
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        this.teachersService.deleteTeacher(teacherId, collegeId).subscribe({
+          next: () => {
+            this.snackbar.open('Professor excluído com sucesso!', 'Fechar', { duration: 3000 });
+            this.loadCollege();
+          },
+          error: () => {
+            this.snackbar.open('Erro ao excluir o professor.', 'Fechar', { duration: 3000 });
+          }
+        });
+      }
+    })
+
+    
+    
+  }
+
+
+  duplicateClassroom(originalClassroom: FullClassroomDto): void {
+    if (!this.college) return;
+
+    const duplicatedClassroom: FullClassroomDto = {
+      ...originalClassroom,
+      id: undefined,
+      name: originalClassroom.name + ' (Cópia)',
+      classroomDailySchedule: {
+        ...originalClassroom.classroomDailySchedule,
+        id: undefined
+      },
+      teacherDisciplineClassrooms: originalClassroom.teacherDisciplineClassrooms?.map(tdc => ({
+        ...tdc,
+        id: undefined,
+      })) || []
+    };
+
+
+    this.dialog.open(CreateOrUpdateClassroomDialogComponent, {
+      data: {
+        classroom: duplicatedClassroom,
+        collegeId: this.college.id
+      },
+      width: '70vw',
+      height: '80vh'
+    }).afterClosed().subscribe((value) => {
+      if (value && this.college && this.college?.classrooms) {
+        this.college.classrooms = [...this.college?.classrooms, value]
+      }
+    })
+  }
+
+  openSolutionDetails(solution: any): void {
+    this.dialog.open(SolutionDetailDialogComponent, {
+      data: { solution },
+      width: '1000px',
+      height: '80vh'
+    });
+  }
 }
 

@@ -1,12 +1,12 @@
 <div mat-dialog-title>
-    <div class="flex justify-between items-center">
-      <span class="text-xl text-primary-500 font-bold">{{ data?.classroom?.id ? 'Editar Turma' : 'Criar Turma' }}</span>
-      <button mat-icon-button mat-dialog-close aria-label="Fechar">
-        <mat-icon>close</mat-icon>
-      </button>
-    </div>
+  <div class="flex justify-between items-center">
+    <span class="text-xl text-primary-500 font-bold">{{ data?.classroom?.id ? 'Editar Turma' : 'Criar Turma' }}</span>
+    <button mat-icon-button mat-dialog-close aria-label="Fechar">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
 </div>
-  
+
 <mat-dialog-content class="!max-h-[80vh]">
   <form [formGroup]="classroomForm" class="flex flex-col gap-4">
     <mat-form-field appearance="fill">
@@ -22,44 +22,44 @@
 
     <div formGroupName="classroomDailySchedule" class="space-y-4 flex flex-col">
       <div class="flex flex-row gap-5">
-          <mat-form-field appearance="outline" >
-            <mat-label>Aulas Segunda - Feira</mat-label>
-            <input matInput type="number" min="0" formControlName="mondayClasses" />
-          </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Aulas Segunda - Feira</mat-label>
+          <input matInput type="number" min="0" formControlName="mondayClasses" />
+        </mat-form-field>
 
-          <mat-form-field appearance="outline" >
-            <mat-label>Aulas Terça - Feira</mat-label>
-            <input matInput type="number" min="0" formControlName="tuesdayClasses" />
-          </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Aulas Terça - Feira</mat-label>
+          <input matInput type="number" min="0" formControlName="tuesdayClasses" />
+        </mat-form-field>
 
-          <mat-form-field appearance="outline" >
-            <mat-label>Aulas Quarta - Feira</mat-label>
-            <input matInput type="number" min="0" formControlName="wednesdayClasses" />
-          </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Aulas Quarta - Feira</mat-label>
+          <input matInput type="number" min="0" formControlName="wednesdayClasses" />
+        </mat-form-field>
       </div>
 
       <div class="flex flex-row gap-5 w-full">
-        <mat-form-field appearance="outline" >
-            <mat-label>Aulas Quinta - Feira</mat-label>
-            <input matInput type="number" min="0" formControlName="thursdayClasses" />
-          </mat-form-field>
-          <mat-form-field appearance="outline">
-            <mat-label>Aulas Sexta - Feira</mat-label>
-            <input matInput type="number" min="0" formControlName="fridayClasses" />
-          </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Aulas Quinta - Feira</mat-label>
+          <input matInput type="number" min="0" formControlName="thursdayClasses" />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Aulas Sexta - Feira</mat-label>
+          <input matInput type="number" min="0" formControlName="fridayClasses" />
+        </mat-form-field>
 
-          <mat-form-field appearance="outline">
-            <mat-label>Aulas Sábado</mat-label>
-            <input matInput type="number" min="0" formControlName="saturdayClasses" />
-          </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Aulas Sábado</mat-label>
+          <input matInput type="number" min="0" formControlName="saturdayClasses" />
+        </mat-form-field>
       </div>
-      
+
 
       <div class="flex flex-row gap-5 w-full">
-          <mat-form-field appearance="outline">
-            <mat-label>Aulas Domingo</mat-label>
-            <input matInput type="number" min="0" formControlName="sundayClasses" />
-          </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Aulas Domingo</mat-label>
+          <input matInput type="number" min="0" formControlName="sundayClasses" />
+        </mat-form-field>
       </div>
     </div>
 
@@ -69,41 +69,44 @@
       <button mat-button color="primary" (click)="addDisciplineClassroom()">Adicionar</button>
     </div>
     <div formArrayName="teacherDisciplineClassrooms" class="space-y-4 border rounded p-4">
-      <div *ngFor="let schedule of teacherDisciplineClassrooms.controls; let i = index" [formGroupName]="i" class=" p-4">
+      <div *ngFor="let schedule of teacherDisciplineClassrooms.controls; let i = index" [formGroupName]="i"
+        class=" p-4">
         <div class="w-full flex flex-col sm:flex-row gap-5">
+          
           <mat-form-field appearance="fill" class="w-full">
-              <mat-label>Disciplina</mat-label>
-              <mat-select formControlName="disciplineId">
-                <mat-option *ngFor="let discipline of disciplines" [value]="discipline.id">
-                  {{ discipline.name }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field appearance="fill" class="w-full">
-              <mat-label>Professor</mat-label>
-              <mat-select formControlName="teacherId">
-                <mat-option *ngFor="let teacher of teachers" [value]="teacher.id">
-                  {{ teacher.name }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field appearance="fill" class="w-full">
-              <mat-label>Quantidade de Aulas</mat-label>
-              <input matInput  type="number" formControlName="totalClasses"/>
-              <mat-error *ngIf="schedule.get('totalClasses')?.invalid">
-                Mínimo de 1 aula por semana
-              </mat-error>
-            </mat-form-field>
-            <button *ngIf="teacherDisciplineClassrooms.length > 1" mat-icon-button color="warn" (click)="removeDisciplineClassroom(i)">
-              <mat-icon>delete</mat-icon>
-            </button>
+            <mat-label>Disciplina</mat-label>
+            <mat-select formControlName="disciplineId">
+              <mat-option *ngFor="let discipline of disciplines" [value]="discipline.id">
+                {{ discipline.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Professor</mat-label>
+            <mat-select formControlName="teacherId">
+              <mat-option *ngFor="let teacher of teachers" [value]="teacher.id">
+                {{ teacher.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Quantidade de Aulas</mat-label>
+            <input matInput type="number" formControlName="totalClasses" />
+            <mat-error *ngIf="schedule.get('totalClasses')?.invalid">
+              Mínimo de 1 aula por semana
+            </mat-error>
+          </mat-form-field>
+          <button *ngIf="teacherDisciplineClassrooms.length > 1" mat-icon-button color="warn"
+            (click)="removeDisciplineClassroom(i)">
+            <mat-icon>delete</mat-icon>
+          </button>
         </div>
       </div>
     </div>
   </form>
 </mat-dialog-content>
 
-<mat-dialog-actions >
+<mat-dialog-actions>
   <div class="flex justify-end gap-4 w-full">
     <button mat-button mat-dialog-close>Cancelar</button>
     <button mat-raised-button color="primary" [disabled]="classroomForm.invalid" (click)="onSubmit()">
@@ -111,4 +114,3 @@
     </button>
   </div>
 </mat-dialog-actions>
-  
