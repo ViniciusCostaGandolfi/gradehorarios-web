@@ -1,28 +1,31 @@
 <div class="container flex flex-col items-start justify-between h-full mx-auto">
-    <div>
-        <h2 class="my-5 text-base font-medium tracking-tight text-start text-primary-500 uppercase">Nosso Sistema Completo</h2>
-        <h3 class="max-w-2xl px-5 mt-2 text-3xl font-black leading-tight text-start text-gray-900 sm:mt-0 sm:px-0 sm:text-6xl">
-        Vá mais longe com o Grade Horários
-        </h3>
-    </div>
+  <div>
+    <h2 class="my-5 text-base font-medium tracking-tight text-start text-primary-500 uppercase">Nosso Sistema Completo
+    </h2>
+    <h3
+      class="max-w-2xl px-5 mt-2 text-3xl font-black leading-tight text-start text-gray-900 sm:mt-0 sm:px-0 sm:text-6xl">
+      Vá mais longe com o Grade Horários
+    </h3>
+  </div>
 
-    
-    <div class="flex flex-col w-full mt-0 lg:flex-row flex-wrap sm:mt-10 lg:mt-20 gap-8">
-      <div
-        *ngFor="let service of gradeHorariosServices"
-        class="w-full max-w-sm p-6 mx-auto bg-white rounded-lg shadow-md"
-      >
-        <div class="flex items-center justify-center w-16 h-16 mx-auto text-white bg-primary-500 rounded-full">
-          <mat-icon>{{ service.icon }}</mat-icon>
-        </div>
-        <h4 class="mt-4 text-lg font-bold text-center text-gray-800">{{ service.text }}</h4>
-        <p class="mt-2 text-base text-center text-gray-600">
-          {{ service.description }}
-        </p>
+  <div class="w-full flex justify-center mt-10">
+    <iframe class="w-full max-w-5xl aspect-video rounded-lg shadow-lg" src="https://www.youtube.com/embed/YIgjPOmVp3g"
+      title="Tutorial Grade Horários" frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+    </iframe>
+  </div>
+
+
+  <div class="flex flex-col w-full mt-0 lg:flex-row flex-wrap sm:mt-10 lg:mt-20 gap-8">
+    <div *ngFor="let service of gradeHorariosServices"
+      class="w-full max-w-sm p-6 mx-auto bg-white rounded-lg shadow-md">
+      <div class="flex items-center justify-center w-16 h-16 mx-auto text-white bg-primary-500 rounded-full">
+        <mat-icon>{{ service.icon }}</mat-icon>
       </div>
+      <h4 class="mt-4 text-lg font-bold text-center text-gray-800">{{ service.text }}</h4>
+      <p class="mt-2 text-base text-center text-gray-600">
+        {{ service.description }}
+      </p>
     </div>
+  </div>
 </div>
-
-
-  
-  

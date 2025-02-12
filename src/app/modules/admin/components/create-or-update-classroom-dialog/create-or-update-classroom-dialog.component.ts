@@ -50,7 +50,6 @@ export class CreateOrUpdateClassroomDialogComponent implements OnInit {
     });
 
     if (this.data?.classroom?.teacherDisciplineClassrooms) {
-      console.log(this.data)
       this.data.classroom.teacherDisciplineClassrooms.forEach(tdc =>
         this.addDisciplineClassroom(tdc)
       );
