@@ -385,8 +385,8 @@ export class CollegeDetailPageComponent {
   openSolutionDetails(solution: any): void {
     this.dialog.open(SolutionDetailDialogComponent, {
       data: { solution },
-      width: '1000px',
-      height: '80vh'
+      width: '50vw',
+      height: '90vh'
     });
   }
 }

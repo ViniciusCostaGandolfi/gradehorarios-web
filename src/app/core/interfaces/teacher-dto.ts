@@ -20,14 +20,15 @@ export interface FullTeacherDto {
 }
 
 export const dayTranslations: Record<string, string> = {
-  monday: 'Segunda',
-  tuesday: 'Terça',
-  wednesday: 'Quarta',
-  thursday: 'Quinta',
-  friday: 'Sexta',
+  monday: 'Segunda-feira',
+  tuesday: 'Terça-feira',
+  wednesday: 'Quarta-feira',
+  thursday: 'Quinta-feira',
+  friday: 'Sexta-feira',
   saturday: 'Sábado',
   sunday: 'Domingo'
 };
+
 
   
 export interface TeacherAvailabilityDto {
