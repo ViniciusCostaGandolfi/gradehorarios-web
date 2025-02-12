@@ -55,64 +55,69 @@
                     </mat-panel-description>
                 </mat-expansion-panel-header>
 
-                <table mat-table [dataSource]="editableDisciplines" class="w-full">
+                <div class="!overflow-x-auto sm:overflow-hidden">
+                    <table mat-table [dataSource]="editableDisciplines" class="w-full">
 
-                    <!-- Índice -->
-                    <ng-container matColumnDef="index">
-                        <th mat-header-cell *matHeaderCellDef>#</th>
-                        <td mat-cell *matCellDef="let discipline; let index = index">
-                            {{ index + 1 }}
-                        </td>
-                    </ng-container>
-
-                    <!-- Nome -->
-                    <ng-container matColumnDef="name">
-                        <th mat-header-cell *matHeaderCellDef>Nome</th>
-                        <td mat-cell class="!pt-5" *matCellDef="let discipline">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Nome da disciplina</mat-label>
-                                <input matInput [(ngModel)]="discipline.name" (change)="markAsDisciplinesChanged()">
-                            </mat-form-field>
-                        </td>
-                    </ng-container>
-
-                    <!-- Código -->
-                    <ng-container matColumnDef="code">
-                        <th mat-header-cell *matHeaderCellDef>Código</th>
-                        <td mat-cell class="!pt-5" *matCellDef="let discipline">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Código da disciplina</mat-label>
-                                <input matInput [(ngModel)]="discipline.code" (change)="markAsDisciplinesChanged()">
-                            </mat-form-field>
-                        </td>
-                    </ng-container>
-
-                    <!-- Ações -->
-                    <ng-container matColumnDef="actions">
-                        <th mat-header-cell *matHeaderCellDef>Ações</th>
-                        <td mat-cell *matCellDef="let discipline; let index = index">
-                            <button mat-icon-button color="warn" (click)="deleteDiscipline(discipline.id, college.id)"
-                                *ngIf="discipline.id">
-                                <mat-icon>delete</mat-icon>
-                            </button>
-
-                            <button mat-icon-button color="accent" (click)="removeDisciplineFromList(index)"
-                                *ngIf="!discipline.id">
-                                <mat-icon>close</mat-icon>
-                            </button>
-                        </td>
-                    </ng-container>
-
-
-                    <tr mat-header-row *matHeaderRowDef="['index', 'name', 'code', 'actions']"></tr>
-                    <tr mat-row *matRowDef="let row; columns: ['index', 'name', 'code', 'actions']"></tr>
-
-                </table>
-                <div *ngIf="hasDisciplinesChanges" class="flex justify-end mt-4">
-                    <button mat-raised-button color="primary" (click)="saveDisciplinesChanges()">
-                        <mat-icon>save</mat-icon> Salvar mudanças
-                    </button>
+                        <!-- Índice -->
+                        <ng-container matColumnDef="index">
+                            <th mat-header-cell *matHeaderCellDef>#</th>
+                            <td mat-cell *matCellDef="let discipline; let index = index">
+                                {{ index + 1 }}
+                            </td>
+                        </ng-container>
+    
+                        <!-- Nome -->
+                        <ng-container matColumnDef="name">
+                            <th mat-header-cell *matHeaderCellDef>Nome</th>
+                            <td mat-cell class="!pt-5" *matCellDef="let discipline">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Nome da disciplina</mat-label>
+                                    <input matInput [(ngModel)]="discipline.name" (change)="markAsDisciplinesChanged()">
+                                </mat-form-field>
+                            </td>
+                        </ng-container>
+    
+                        <!-- Código -->
+                        <ng-container matColumnDef="code">
+                            <th mat-header-cell *matHeaderCellDef>Código</th>
+                            <td mat-cell class="!pt-5" *matCellDef="let discipline">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Código da disciplina</mat-label>
+                                    <input matInput [(ngModel)]="discipline.code" (change)="markAsDisciplinesChanged()">
+                                </mat-form-field>
+                            </td>
+                        </ng-container>
+    
+                        <!-- Ações -->
+                        <ng-container matColumnDef="actions">
+                            <th mat-header-cell *matHeaderCellDef>Ações</th>
+                            <td mat-cell *matCellDef="let discipline; let index = index">
+                                <button mat-icon-button color="warn" (click)="deleteDiscipline(discipline.id, college.id)"
+                                    *ngIf="discipline.id">
+                                    <mat-icon>delete</mat-icon>
+                                </button>
+    
+                                <button mat-icon-button color="accent" (click)="removeDisciplineFromList(index)"
+                                    *ngIf="!discipline.id">
+                                    <mat-icon>close</mat-icon>
+                                </button>
+                            </td>
+                        </ng-container>
+    
+    
+                        <tr mat-header-row *matHeaderRowDef="['index', 'name', 'code', 'actions']"></tr>
+                        <tr mat-row *matRowDef="let row; columns: ['index', 'name', 'code', 'actions']"></tr>
+    
+                    </table>
+                    <div *ngIf="hasDisciplinesChanges" class="flex justify-end mt-4">
+                        <button mat-raised-button color="primary" (click)="saveDisciplinesChanges()">
+                            <mat-icon>save</mat-icon> Salvar mudanças
+                        </button>
+                    </div>
                 </div>
+
+             
+               
             </mat-expansion-panel>
 
             <mat-expansion-panel class="!mb-5" [expanded]="college?.teachers?.length === 0">
