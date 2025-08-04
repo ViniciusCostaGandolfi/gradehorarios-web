@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { AdminRoute } from '../../../core/interfaces/admin-route';
-import { adminRoutes } from '../../../core/mocks/admin-routes';
 
 
 @Component({
@@ -9,9 +7,4 @@ import { adminRoutes } from '../../../core/mocks/admin-routes';
   styleUrl: './admin.component.scss'
 })
 export class AdminComponent {
-
-  public adminRoutes: AdminRoute[] = adminRoutes
-
-
-
 }

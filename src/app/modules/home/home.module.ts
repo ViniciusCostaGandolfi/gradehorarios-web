@@ -23,7 +23,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
-import { AddressAutocompleteGoogleMapsComponent } from '../../shared/address-autocomplete-google-maps/address-autocomplete-google-maps.component';
 import { MatSelectModule } from '@angular/material/select';
 import { HomeWhayUseComponent } from './pages/home/home-whay-use/home-whay-use.component';
 import { HomeSchoolTimetableComponent } from './pages/home/home-school-timetable/home-school-timetable.component';
@@ -66,7 +65,6 @@ import { ResetPasswordPageComponent } from './pages/reset-password-page/reset-pa
     MatDialogModule,
     HttpClientModule,
     SpinnerButtonComponent,
-    AddressAutocompleteGoogleMapsComponent
   ]
 })
 export class HomeModule { }

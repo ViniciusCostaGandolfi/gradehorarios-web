@@ -1,0 +1,45 @@
+<mat-toolbar color="primary">
+    <span class="text-xl">{{ dialogTitle }}</span>
+</mat-toolbar>
+
+
+<div *ngIf="isLoading" class="absolute inset-0 flex justify-center items-center bg-white/75 z-10 rounded-b-lg">
+    <mat-progress-spinner mode="indeterminate" diameter="50"></mat-progress-spinner>
+</div>
+
+<mat-dialog-content class="p-6 !max-h-[80vh] h-full">
+        <form [formGroup]="form"  class="relative">
+        <div class="flex flex-col gap-4">
+            
+            <mat-form-field appearance="outline" class="w-full">
+                <mat-label>Nome da Instituição</mat-label>
+                <input matInput formControlName="nome" placeholder="Ex: Universidade Central" required>
+                <mat-error *ngIf="form.get('nome')?.hasError('required')">
+                    O nome é obrigatório.
+                </mat-error>
+                <mat-error *ngIf="form.get('nome')?.hasError('minlength')">
+                    O nome deve ter no mínimo 3 caracteres.
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="w-full">
+                <mat-label>Código</mat-label>
+                <input type="number" matInput formControlName="codigo" placeholder="Ex: 123" required>
+                <mat-error *ngIf="form.get('codigo')?.hasError('required')">
+                    O código é obrigatório.
+                </mat-error>
+            </mat-form-field>
+            
+        </div>
+    </form>
+    </mat-dialog-content>
+
+    
+
+
+<mat-dialog-actions class="flex justify-end gap-2 p-4 border-t">
+        <button mat-stroked-button type="button" (click)="onCancel()" [disabled]="isLoading">Cancelar</button>
+        <button mat-raised-button color="primary" (click)="onSave()" [disabled]="isLoading">
+            Salvar
+        </button>
+</mat-dialog-actions>

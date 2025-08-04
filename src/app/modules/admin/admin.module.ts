@@ -16,7 +16,6 @@ import { AdminLayoutComponent } from './components/admin-layout/admin-layout.com
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatNavList } from '@angular/material/list';
 import { FooterComponent } from '../../shared/footer/footer.component';
-import { AdminDrawerComponent } from './components/admin-layout/admin-drawer/admin-drawer.component';
 import { AdminHeaderComponent } from './components/admin-layout/admin-header/admin-header.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
@@ -30,26 +29,20 @@ import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginato
 import { MatSelectModule } from '@angular/material/select';
 import { MatStepperModule } from '@angular/material/stepper';
 import { CustomPaginator } from './components/custom-paginator/custom-paginator';
-import { AdminDrawerListComponent } from './components/admin-layout/admin-drawer/admin-drawer-list/admin-drawer-list.component';
 import { AdminUserMenuComponent } from './components/admin-layout/admin-user-menu/admin-user-menu.component';
-import { CollegesListPageComponent } from './pages/colleges-list-page/colleges-list-page.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { CreateOrUpdateCollegeDialogComponent } from './components/create-or-update-college-dialog/create-or-update-college-dialog.component';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import { CreateOrUpdateDisciplineDialogComponent } from './components/create-or-update-discipline-dialog/create-or-update-discipline-dialog.component';
-import { CreateOrUpdateTeacherDialogComponent } from './components/create-or-update-teacher-dialog/create-or-update-teacher-dialog.component';
-import { CreateOrUpdateClassroomDialogComponent } from './components/create-or-update-classroom-dialog/create-or-update-classroom-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { SimulateDialogComponent } from './components/simulate-dialog/simulate-dialog.component';
 import { QRCodeModule } from 'angularx-qrcode';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { SolutionTablesComponent } from './components/solution-tables/solution-tables.component';
-import { UploadTableDialogComponent } from './components/upload-table-dialog/upload-table-dialog.component';
-import { SettingsPageComponent } from './pages/settings-page/settings-page.component';
-import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
-import { CollegeDetailPageComponent } from './pages/college-detail-page/college-detail-page.component';
-import { SolutionDetailDialogComponent } from './components/solution-detail-dialog/solution-detail-dialog.component';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { InstituicoesPageComponent } from './pages/instituicoes-page/instituicoes-page.component';
+import { InstituicaoPageComponent } from './pages/instituicao-page/instituicao-page.component';
+import { CreateOrUpdateInstituicaoDialogComponent } from './components/create-or-update-instituicao-dialog/create-or-update-instituicao-dialog.component';
+import { NovaSolucaoPageComponent } from './pages/nova-solucao-page/nova-solucao-page.component';
+import { ExcelInputViewerComponent } from './components/excel-input-viewer/excel-input-viewer.component';
+import { MatTabsModule } from '@angular/material/tabs'; // Importar MatTabsModule
+import { NgxDatatableModule } from '@swimlane/ngx-datatable'; // Importar NgxDatatableModule
 
 
 
@@ -57,25 +50,14 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
   declarations: [
     AdminHeaderComponent,
     AdminLayoutComponent,
-    AdminDrawerComponent,
     AdminHeaderComponent,
     AdminUserMenuComponent,
-    CreateOrUpdateCollegeDialogComponent,
-    CreateOrUpdateDisciplineDialogComponent,
-    CreateOrUpdateTeacherDialogComponent,
-    SettingsPageComponent,
-    ProfilePageComponent,
-    SolutionTablesComponent,
-    CreateOrUpdateClassroomDialogComponent,
-    CollegeDetailPageComponent,
-    UploadTableDialogComponent,
-    SimulateDialogComponent,
-    SolutionDetailDialogComponent,
-    AdminDrawerListComponent,
-    CollegesListPageComponent,
+    InstituicoesPageComponent,
+    InstituicaoPageComponent,
+    CreateOrUpdateInstituicaoDialogComponent,
     AdminComponent,
-
-
+    ExcelInputViewerComponent,
+    NovaSolucaoPageComponent
   ],
   imports: [
     MatFormFieldModule,
@@ -90,8 +72,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatSidenavModule,
     MatNavList,
     MatMenuModule,
-    MatFormFieldModule, 
-    MatInputModule, 
+    MatFormFieldModule,
+    MatInputModule,
     MatCheckboxModule,
     MatExpansionModule,
     MatAutocompleteModule,
@@ -112,6 +94,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     SpinnerButtonComponent,
     FooterComponent,
     NoDataContentComponent,
+    MatTabsModule,
+    NgxDatatableModule
   ],
 
   providers: [

@@ -14,16 +14,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have the 'rotafood-web' title`, () => {
+  it(`should have the 'gradehorarios-web' title`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('rotafood-web');
+    expect(app.title).toEqual('gradehorarios-web');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, rotafood-web');
+    expect(compiled.querySelector('h1')?.textContent).toContain('Hello, gradehorarios-web');
   });
 });

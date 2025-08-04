@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "rotafood-web": {
+    "gradehorarios-web": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/rotafood-web",
+            "outputPath": "dist/gradehorarios-web",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -32,7 +32,9 @@
             ],
             "styles": [
               "src/styles.scss",
-              "./node_modules/maplibre-gl/dist/maplibre-gl.css"
+              "./node_modules/@swimlane/ngx-datatable/themes/material.scss",
+              "./node_modules/@swimlane/ngx-datatable/index.css",
+              "./node_modules/@swimlane/ngx-datatable/assets/icons.css"
             ],
             "scripts": []
           },
@@ -70,10 +72,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "rotafood-web:build:production"
+              "buildTarget": "gradehorarios-web:build:production"
             },
             "development": {
-              "buildTarget": "rotafood-web:build:development"
+              "buildTarget": "gradehorarios-web:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -81,7 +83,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "rotafood-web:build"
+            "buildTarget": "gradehorarios-web:build"
           }
         },
         "test": {
@@ -100,7 +102,9 @@
             ],
             "styles": [
               "src/styles.scss",
-              "./node_modules/maplibre-gl/dist/maplibre-gl.css"
+              "./node_modules/@swimlane/ngx-datatable/themes/material.scss",
+              "./node_modules/@swimlane/ngx-datatable/index.css",
+              "./node_modules/@swimlane/ngx-datatable/assets/icons.css"
             ],
             "scripts": []
           }

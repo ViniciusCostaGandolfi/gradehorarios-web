@@ -1,23 +1,24 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AdminLayoutComponent } from './components/admin-layout/admin-layout.component';
 import { AdminComponent } from './pages/admin.component';
-import { CollegesListPageComponent } from './pages/colleges-list-page/colleges-list-page.component';
-import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
-import { SettingsPageComponent } from './pages/settings-page/settings-page.component';
-import { CollegeDetailPageComponent } from './pages/college-detail-page/college-detail-page.component';
+import { AdminLayoutComponent } from './components/admin-layout/admin-layout.component';
+import { InstituicoesPageComponent } from './pages/instituicoes-page/instituicoes-page.component';
+import { InstituicaoPageComponent } from './pages/instituicao-page/instituicao-page.component';
+import { NovaSolucaoPageComponent } from './pages/nova-solucao-page/nova-solucao-page.component';
 
 const routes: Routes = [
   {
-    path: '', 
+    path: '',
     component: AdminLayoutComponent,
     children: [
       {path: '', component: AdminComponent},
-      {path: 'escolas', component: CollegesListPageComponent},
-      {path: 'escolas/:collegeId', component: CollegeDetailPageComponent},
-      {path: 'perfil', component: ProfilePageComponent},
-      {path: 'configuracoes', component: SettingsPageComponent},
-
+      {path: 'instituicoes', component: InstituicoesPageComponent},
+      {path: 'instituicoes/:instituicaoId', component: InstituicaoPageComponent},
+      {path: 'instituicoes/:instituicaoId/solucoes/nova', component: NovaSolucaoPageComponent},
+      {path: 'instituicoes/:instituicaoId/solucoes/:solucaoId', component: InstituicaoPageComponent},
+      {path: 'usuarios', component: AdminComponent},
+      {path: 'perfil', component: AdminComponent},
+      {path: 'configuracoes', component: AdminComponent},
     ]
   }
 ];
@@ -27,4 +28,4 @@ const routes: Routes = [
 })
 export class AdminRoutingModule {
 
- }
+}

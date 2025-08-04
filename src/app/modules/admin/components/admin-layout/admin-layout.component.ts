@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { WindowWidthService } from '../../../../core/services/window-width/window-width.service';
-import { ShowAdminSideNavService } from '../../../../core/services/show-admin-side-nav/show-admin-side-nav.service';
+import { AdminRoute } from '../../../../core/interfaces/admin-route';
+import { CurrentlyUserService } from '../../../../core/services/currently-user/currently-user.service';
+import { getRoutes } from '../../../../core/mocks/admin-routes';
 
 
 @Component({
@@ -10,14 +12,21 @@ import { ShowAdminSideNavService } from '../../../../core/services/show-admin-si
 })
 export class AdminLayoutComponent {
 
-  public showNav = false;
   public isMobile = false;
+  public adminRoutes: AdminRoute[] = []
 
   constructor(
-    public windowService: WindowWidthService,
-    public sideNavService: ShowAdminSideNavService
+    private windowService: WindowWidthService,
+    private currentUserService: CurrentlyUserService
+
     ) {
     this.windowService.isMobile().subscribe(isMobile => this.isMobile = isMobile);
-
+    this.currentUserService.getUser().subscribe(tokenUsuario => {
+        if (tokenUsuario) {
+          this.adminRoutes = getRoutes(tokenUsuario.usuario)
+        }
+    })
   }
+
+
 }

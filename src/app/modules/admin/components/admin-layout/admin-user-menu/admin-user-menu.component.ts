@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CurrentlyUserService } from '../../../../../core/services/currently-user/currently-user.service';
-import { UserDto } from '../../../../../core/interfaces/user';
+import { UsuarioDto } from '../../../../../core/interfaces/usuario';
 
 @Component({
   selector: 'app-admin-user-menu',
@@ -10,12 +10,12 @@ import { UserDto } from '../../../../../core/interfaces/user';
 })
 export class AdminUserMenuComponent {
 
-  public user: UserDto | null | undefined = null
+  public user: UsuarioDto | null | undefined = null
   constructor(
     private readonly currentUser: CurrentlyUserService,
     private readonly router : Router
     ){
-    this.currentUser.getUser().subscribe(user => this.user = user?.user)
+    this.currentUser.getUser().subscribe(user => this.user = user?.usuario)
   }
 
   public myPerfil() {

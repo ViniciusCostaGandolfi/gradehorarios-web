@@ -1,0 +1,23 @@
+<div class="bg-white rounded-lg shadow-md">
+    <h2 class="text-xl font-semibold text-gray-700 p-6 border-b border-gray-200">2. Visualização dos Dados</h2>
+
+    <!-- Indicador de Carregamento -->
+    <div *ngIf="isProcessing" class="flex justify-center items-center py-12">
+        <mat-spinner diameter="40"></mat-spinner>
+        <span class="ml-4 text-gray-600">Processando o arquivo...</span>
+    </div>
+
+    <!-- Abas com as Tabelas -->
+    <div *ngIf="!isProcessing && sheets.length > 0">
+        <mat-tab-group animationDuration="0ms">
+            <mat-tab *ngFor="let sheet of sheets" [label]="sheet.name">
+                <div class="p-2">
+                    <ngx-datatable class="material" [rows]="sheet.rows" [columns]="sheet.columns"
+                        [columnMode]="ColumnMode.force" [headerHeight]="50" [footerHeight]="50" rowHeight="auto"
+                        [scrollbarH]="true" [selectionType]="SelectionType.checkbox" [limit]="10">
+                    </ngx-datatable>
+                </div>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+</div>
