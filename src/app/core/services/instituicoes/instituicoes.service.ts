@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class InstituicoesService {
 
-  private apiUrl: string = `${environment.GRADEHORARIOS_API}/v1/instituicoes`;
+  private apiUrl: string = `${environment.GRADEHORARIOS_API}/api/institutions`;
 
   constructor(private http: HttpClient) {}
 

@@ -23,7 +23,6 @@ export class RegisterComponent  {
   form = new FormGroup({
     name: new FormControl<string>('', Validators.required),
     email: new FormControl<string>('', [Validators.required, Validators.email]),
-    phone: new FormControl<string>('', Validators.required),
     password: new FormControl<string>('', Validators.required),
   })
 
@@ -75,10 +74,6 @@ export class RegisterComponent  {
       } else if (cleaned.length > 2) {
         formattedValue += cleaned.slice(2);
       }
-    }
-  
-    if (this.form.controls.phone.value !== formattedValue) {
-      this.form.controls.phone.setValue(formattedValue, { emitEvent: false });
     }
   }
 }

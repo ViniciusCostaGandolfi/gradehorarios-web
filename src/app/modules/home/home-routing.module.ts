@@ -25,13 +25,13 @@ const routes: Routes = [
   },
 
   {
-    path: 'recuperar-senha/:resetPasswordToken',
+    path: 'recuperar-password/:resetPasswordToken',
     component: ResetPasswordPageComponent,
     canActivate: [hasTokenGuard]
   },
 
   {
-    path: 'resetar-senha',
+    path: 'resetar-password',
     component: ForgotPasswordPageComponent,
     canActivate: [hasTokenGuard]
   }

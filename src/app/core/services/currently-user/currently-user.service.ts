@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { TokenService } from '../jwt-token/token.service';
 import { BehaviorSubject } from 'rxjs';
 import { jwtDecode } from "jwt-decode";
-import { TokenUsuarioDto } from '../../interfaces/auth';
+import { TokenUserDto } from '../../interfaces/auth';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class CurrentlyUserService {
-  private userSubject = new BehaviorSubject<TokenUsuarioDto | null>(null);
+  private userSubject = new BehaviorSubject<TokenUserDto | null>(null);
 
   constructor(private tokenService: TokenService) {
     if(this.tokenService.hasToken()) {
@@ -19,7 +19,7 @@ export class CurrentlyUserService {
 
   private decodeJWT() {
     const token = this.tokenService.getToken();
-    const user = jwtDecode(token) as TokenUsuarioDto;
+    const user = jwtDecode(token) as TokenUserDto;
     this.userSubject.next(user);
   }
 

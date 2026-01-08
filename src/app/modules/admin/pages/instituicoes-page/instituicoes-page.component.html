@@ -17,8 +17,8 @@
         <div *ngIf="instituicoes.length <= 3" class="grid grid-cols-1 gap-6">
             <mat-card *ngFor="let instituicao of instituicoes">
                 <mat-card-header>
-                    <mat-card-title>{{ instituicao.nome }}</mat-card-title>
-                    <mat-card-subtitle>Código: {{ instituicao.codigo }}</mat-card-subtitle>
+                    <mat-card-title>{{ instituicao.name }}</mat-card-title>
+                    <mat-card-subtitle>Código: {{ instituicao.code }}</mat-card-subtitle>
                 </mat-card-header>
                 <mat-card-actions align="end">
                     <button mat-icon-button (click)="openDialog(instituicao)" aria-label="Editar instituição">

@@ -23,7 +23,7 @@ export class AdminLayoutComponent {
     this.windowService.isMobile().subscribe(isMobile => this.isMobile = isMobile);
     this.currentUserService.getUser().subscribe(tokenUsuario => {
         if (tokenUsuario) {
-          this.adminRoutes = getRoutes(tokenUsuario.usuario)
+          this.adminRoutes = getRoutes(tokenUsuario.user)
         }
     })
   }

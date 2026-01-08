@@ -1,14 +1,14 @@
 
-export type TipoUsuario = 'CONSULTOR' | 'NORMAL';
+export type RoleUser = 'ROLE_USER' | 'ROLE_ADMIN';
 
-export interface UsuarioBaseDto {
-    nome: string;
+
+
+export interface UserBaseDto {
+    name: string;
     email: string;
-    telefone: string;
-    documento: string;
-    tipo: TipoUsuario;
+    role: RoleUser;
 }
 
-export interface UsuarioDto extends UsuarioBaseDto {
+export interface UserDto extends UserBaseDto {
     id: number;
 }

@@ -1,45 +1,65 @@
 <section class="bg-gray-50 my-2 sm:my-20">
-  <div class="mx-auto px-4 py-3 lg:flex lg:items-center">
-    <div class="mx-auto max-w-xl text-center">
-      <h2 class="text-3xl font-extrabold sm:text-5xl">
-        Bem Vindo ao
-        <strong class="font-extrabold text-primary-700 sm:block"> Grade Horários </strong>
+  <div class="mx-auto px-4 py-10 lg:flex lg:h-auto lg:items-center">
+    <div class="mx-auto max-w-6xl text-center">
+      
+      <h2 class="text-3xl font-extrabold sm:text-5xl text-gray-900">
+        Bem-vindo ao
+        <strong class="font-extrabold text-primary-700 block sm:inline">Grade Horários</strong>
       </h2>
 
-      <div class="mt-8 flex flex-col flex-wrap justify-center">
-        <h2 class="text-4xl font-extrabold text-primary-700 sm:block">Como Funciona</h2>
-        <div class="mt-8 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-          <div class="text-black hover:text-accent-500 hover:cursor-pointer" routerLink="/admin/escolas">
-            <mat-icon>school</mat-icon>
-            <h2 class="text-lg font-bold">1. Cadastrar Escola</h2>
-            <p class="text-sm">Cadastre as informações básicas e a estrutura da escola.</p>
-          </div>
-          <div class="text-black hover:text-accent-500 hover:cursor-pointer" routerLink="/admin/escolas">
-            <mat-icon>book</mat-icon>
-            <h2 class="text-lg font-bold">2. Cadastrar Disciplinas</h2>
-            <p class="text-sm">Defina as disciplinas com carga horária e outras especificações.</p>
-          </div>
-          <div class="text-black hover:text-accent-500 hover:cursor-pointer" routerLink="/admin/escolas">
-            <mat-icon>person</mat-icon>
-            <h2 class="text-lg font-bold">3. Cadastrar Professores</h2>
-            <p class="text-sm">Adicione os professores com horários e disciplinas atribuídas.</p>
-          </div>
-          <div class="text-black hover:text-accent-500 hover:cursor-pointer" routerLink="/admin/escolas">
-            <mat-icon>group</mat-icon>
-            <h2 class="text-lg font-bold">4. Cadastrar Turmas</h2>
-            <p class="text-sm">Organize as turmas com base nos anos escolares e turnos.</p>
-          </div>
-          <div class="text-black hover:text-accent-500 hover:cursor-pointer" routerLink="/admin/escolas">
-            <mat-icon>play_arrow</mat-icon>
-            <h2 class="text-lg font-bold">5. Simular</h2>
-            <p class="text-sm">Execute a simulação para gerar a grade de horários ideal.</p>
+      <div class="mt-12 flex flex-col justify-center">
+        <h3 class="text-3xl font-extrabold text-primary-700 mb-8">Como Funciona</h3>
+        
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+          
+          <div class="group p-4 rounded-lg hover:bg-white hover:shadow-lg transition-all duration-300 cursor-pointer text-gray-800 hover:text-accent-800" routerLink="/admin/instituicoes">
+            <div class="mb-3 mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary-100 text-primary-700 group-hover:bg-accent-100 group-hover:text-accent-800">
+              <mat-icon class="scale-125">school</mat-icon>
+            </div>
+            <h4 class="text-lg font-bold">1. Cadastrar Escola</h4>
+            <p class="text-sm text-gray-600">Cadastre as informações básicas da sua instituição de ensino.</p>
           </div>
 
-          <div  href="https://youtu.be/YIgjPOmVp3g" target="_blank" class="text-black hover:text-primary-500 hover:cursor-pointer">
-            <mat-icon>play_circle</mat-icon>
-            <h2 class="text-lg font-bold">. Tutotial</h2>
-            <p class="text-sm">Assista um tutorial!.</p>
+          <div class="group p-4 rounded-lg hover:bg-white hover:shadow-lg transition-all duration-300 cursor-pointer text-gray-800 hover:text-accent-800" routerLink="/admin/instituicoes">
+            <div class="mb-3 mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary-100 text-primary-700 group-hover:bg-accent-100 group-hover:text-accent-800">
+              <mat-icon class="scale-125">file_download</mat-icon>
+            </div>
+            <h4 class="text-lg font-bold">2. Baixe o Modelo</h4>
+            <p class="text-sm text-gray-600">Faça o download da nossa planilha Excel padrão para preenchimento.</p>
           </div>
+
+          <div class="group p-4 rounded-lg hover:bg-white hover:shadow-lg transition-all duration-300 cursor-pointer text-gray-800 hover:text-accent-800" routerLink="/admin/instituicoes">
+            <div class="mb-3 mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary-100 text-primary-700 group-hover:bg-accent-100 group-hover:text-accent-800">
+              <mat-icon class="scale-125">edit_note</mat-icon>
+            </div>
+            <h4 class="text-lg font-bold">3. Preencha os Dados</h4>
+            <p class="text-sm text-gray-600">Adicione suas Disciplinas, Turmas, Professores e Restrições no Excel.</p>
+          </div>
+
+          <div class="group p-4 rounded-lg hover:bg-white hover:shadow-lg transition-all duration-300 cursor-pointer text-gray-800 hover:text-accent-800" routerLink="/admin/instituicoes">
+            <div class="mb-3 mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary-100 text-primary-700 group-hover:bg-accent-100 group-hover:text-accent-800">
+              <mat-icon class="scale-125">play_arrow</mat-icon>
+            </div>
+            <h4 class="text-lg font-bold">4. Gerar Grade</h4>
+            <p class="text-sm text-gray-600">O sistema processará os dados e enviará a solução completa em PDF por e-mail.</p>
+          </div>
+
+          <a href="https://youtu.be/YIgjPOmVp3g" target="_blank" class="group p-4 rounded-lg hover:bg-white hover:shadow-lg transition-all duration-300 cursor-pointer text-gray-800 hover:text-red-600">
+            <div class="mb-3 mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-red-100 text-red-600">
+              <mat-icon class="scale-125">play_circle</mat-icon>
+            </div>
+            <h4 class="text-lg font-bold">5. Tutorial em Vídeo</h4>
+            <p class="text-sm text-gray-600">Tem dúvidas? Assista nosso passo a passo detalhado no YouTube.</p>
+          </a>
+
+          <a href="https://wa.me/5519981859845?text=Olá,%20gostaria%20de%20tirar%20dúvidas%20sobre%20o%20Grade%20Horários" target="_blank" class="group p-4 rounded-lg hover:bg-white hover:shadow-lg transition-all duration-300 cursor-pointer text-gray-800 hover:text-green-600">
+            <div class="mb-3 mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100 text-green-600">
+              <mat-icon class="scale-125">chat</mat-icon> 
+            </div>
+            <h4 class="text-lg font-bold">6. Suporte WhatsApp</h4>
+            <p class="text-sm text-gray-600">Precisa de ajuda? Clique aqui e fale conosco diretamente.</p>
+          </a>
+
         </div>
       </div>
     </div>

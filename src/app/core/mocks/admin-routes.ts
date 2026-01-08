@@ -1,5 +1,5 @@
 import { AdminRoute } from "../interfaces/admin-route";
-import { UsuarioDto } from "../interfaces/usuario";
+import { UserDto } from "../interfaces/usuario";
 
 
 
@@ -51,8 +51,8 @@ const adminRoutes: AdminRoute[] = [
 
 ]
 
-export function getRoutes(usuario: UsuarioDto) {
-  if (usuario.tipo === 'CONSULTOR') {
+export function getRoutes(usuario: UserDto) {
+  if (usuario.role === 'ROLE_USER') {
     return adminRoutes;
   } else {
     return usuarioRoutes;

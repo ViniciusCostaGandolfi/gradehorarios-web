@@ -1,0 +1,203 @@
+<div class="flex flex-col min-h-screen bg-gray-50">
+    
+    <header class="bg-white shadow-sm border-b border-gray-200 px-6 py-5 sticky top-0 z-20">
+        
+        <div class="flex items-center gap-4 mb-4">
+            <button mat-icon-button (click)="goBack()" matTooltip="Voltar para Instituição">
+                <mat-icon>arrow_back</mat-icon>
+            </button>
+            <div>
+                <h1 class="text-2xl font-bold text-gray-800">Detalhes da Grade</h1>
+                <p class="text-sm text-gray-500 font-mono" *ngIf="solutionData">
+                    ID: #{{solutionData.id}} • {{solutionData.modelName}}
+                </p>
+            </div>
+        </div>
+
+        <div class="bg-gray-50 rounded-lg p-4 border border-gray-200" *ngIf="solutionData">
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                
+                <div class="flex flex-wrap gap-x-8 gap-y-4 items-center">
+                    
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-semibold text-gray-500 uppercase tracking-wider">Status</span>
+                        <span class="px-3 py-1 rounded-full text-xs font-bold border"
+                              [ngClass]="getStatusBadgeClass(solutionData.solverStatus)">
+                            {{ getStatusLabel(solutionData.solverStatus) }}
+                        </span>
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                        <mat-icon class="text-gray-400 text-lg">timer</mat-icon>
+                        <div class="flex flex-col">
+                            <span class="text-xs font-semibold text-gray-500">Duração</span>
+                            <span class="text-sm font-medium text-gray-800">
+                                {{ formatDuration(solutionData.durationMillis) }}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                        <mat-icon class="text-gray-400 text-lg">calendar_today</mat-icon>
+                        <div class="flex flex-col">
+                            <span class="text-xs font-semibold text-gray-500">Criado em</span>
+                            <span class="text-sm font-medium text-gray-800">
+                                {{ solutionData.createdAt | date:'dd/MM/yyyy HH:mm' }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap gap-2">
+                    
+                    <a mat-stroked-button color="primary" 
+                       *ngIf="solutionData.inputPath"
+                       [href]="solutionData.inputPath" 
+                       target="_blank" 
+                       matTooltip="Baixar Arquivo de Entrada (Excel)">
+                        <mat-icon>file_download</mat-icon>
+                        Input
+                    </a>
+
+                    <span class="border-l border-gray-300 mx-1 h-8 hidden sm:block"></span>
+
+                    <a mat-flat-button color="primary" 
+                       *ngIf="solutionData.teacherOutputPath"
+                       [href]="solutionData.teacherOutputPath" 
+                       target="_blank">
+                        <mat-icon>picture_as_pdf</mat-icon>
+                        Professores
+                    </a>
+
+                    <a mat-flat-button color="accent" 
+                       *ngIf="solutionData.classroomOutputPath"
+                       [href]="solutionData.classroomOutputPath" 
+                       target="_blank">
+                        <mat-icon>picture_as_pdf</mat-icon>
+                        Turmas
+                    </a>
+                </div>
+            </div>
+
+            <div *ngIf="solutionData.errorMessage" class="mt-4 p-3 bg-red-50 border border-red-200 rounded text-sm text-red-800 flex items-start gap-2">
+                <mat-icon class="text-red-600 text-base mt-0.5">error</mat-icon>
+                <span><strong>Erro:</strong> {{ solutionData.errorMessage }}</span>
+            </div>
+
+            <div *ngIf="solutionData.warningMessage" class="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded text-sm text-yellow-800 flex items-start gap-2">
+                <mat-icon class="text-yellow-600 text-base mt-0.5">warning</mat-icon>
+                <span><strong>Aviso:</strong> {{ solutionData.warningMessage }}</span>
+            </div>
+        </div>
+    </header>
+
+    <div *ngIf="isLoading" class="flex-1 flex flex-col justify-center items-center h-[50vh]">
+        <mat-spinner diameter="40"></mat-spinner>
+        <p class="mt-4 text-gray-500 font-medium">Carregando visualização...</p>
+    </div>
+
+    <div *ngIf="hasError && !isLoading" class="flex-1 flex flex-col items-center justify-center h-[50vh] text-red-500">
+        <mat-icon class="text-6xl mb-4">cloud_off</mat-icon>
+        <p class="text-lg font-semibold">Falha ao carregar os dados.</p>
+        <button mat-stroked-button color="primary" class="mt-4" (click)="goBack()">Voltar</button>
+    </div>
+
+    <main *ngIf="!isLoading && !hasError && solutionData?.outputPath" class="flex-1 p-4 sm:p-6 overflow-hidden flex flex-col">
+        
+        <div class="bg-white rounded-lg shadow-md flex-1 flex flex-col overflow-hidden h-full border border-gray-200">
+            <mat-tab-group animationDuration="300ms" class="flex-1 h-full" mat-stretch-tabs="false" mat-align-tabs="start">
+                
+                <mat-tab>
+                    <ng-template mat-tab-label>
+                        <mat-icon class="mr-2">person</mat-icon> Professores
+                    </ng-template>
+                    
+                    <div class="p-4 h-full flex flex-col">
+                        <mat-form-field appearance="outline" class="w-full sm:w-1/3 bg-white density-compact">
+                            <mat-label>Filtrar Professor</mat-label>
+                            <input matInput (keyup)="applyFilter($event, dataSourceTeachers)" placeholder="Ex: João...">
+                            <mat-icon matSuffix>search</mat-icon>
+                        </mat-form-field>
+
+                        <div class="flex-1 overflow-auto border border-gray-200 rounded-lg relative">
+                            <table mat-table [dataSource]="dataSourceTeachers" matSort class="w-full">
+                                <ng-container matColumnDef="name" sticky>
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="bg-gray-100 min-w-[150px] z-10 border-r"> Professor </th>
+                                    <td mat-cell *matCellDef="let row" class="font-bold text-gray-800 border-r bg-gray-50"> 
+                                        {{row.name}}
+                                    </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="monday"><th mat-header-cell *matHeaderCellDef>Segunda</th><td mat-cell *matCellDef="let row"><div class="flex flex-col gap-1"><div *ngFor="let aula of row.monday; let i = index" [class.hidden]="!aula" class="text-xs p-1 rounded bg-indigo-50 border border-indigo-100 text-indigo-900"><span class="font-bold text-indigo-500 mr-1">{{i+1}}º</span>{{aula}}</div></div></td></ng-container>
+                                <ng-container matColumnDef="tuesday"><th mat-header-cell *matHeaderCellDef>Terça</th><td mat-cell *matCellDef="let row"><div class="flex flex-col gap-1"><div *ngFor="let aula of row.tuesday; let i = index" [class.hidden]="!aula" class="text-xs p-1 rounded bg-blue-50 border border-blue-100 text-blue-900"><span class="font-bold text-blue-500 mr-1">{{i+1}}º</span>{{aula}}</div></div></td></ng-container>
+                                <ng-container matColumnDef="wednesday"><th mat-header-cell *matHeaderCellDef>Quarta</th><td mat-cell *matCellDef="let row"><div class="flex flex-col gap-1"><div *ngFor="let aula of row.wednesday; let i = index" [class.hidden]="!aula" class="text-xs p-1 rounded bg-cyan-50 border border-cyan-100 text-cyan-900"><span class="font-bold text-cyan-600 mr-1">{{i+1}}º</span>{{aula}}</div></div></td></ng-container>
+                                <ng-container matColumnDef="thursday"><th mat-header-cell *matHeaderCellDef>Quinta</th><td mat-cell *matCellDef="let row"><div class="flex flex-col gap-1"><div *ngFor="let aula of row.thursday; let i = index" [class.hidden]="!aula" class="text-xs p-1 rounded bg-teal-50 border border-teal-100 text-teal-900"><span class="font-bold text-teal-600 mr-1">{{i+1}}º</span>{{aula}}</div></div></td></ng-container>
+                                <ng-container matColumnDef="friday"><th mat-header-cell *matHeaderCellDef>Sexta</th><td mat-cell *matCellDef="let row"><div class="flex flex-col gap-1"><div *ngFor="let aula of row.friday; let i = index" [class.hidden]="!aula" class="text-xs p-1 rounded bg-green-50 border border-green-100 text-green-900"><span class="font-bold text-green-600 mr-1">{{i+1}}º</span>{{aula}}</div></div></td></ng-container>
+
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="hover:bg-gray-50 transition-colors"></tr>
+                                <tr class="mat-row" *matNoDataRow>
+                                    <td class="mat-cell p-8 text-center text-gray-500" [attr.colspan]="displayedColumns.length">
+                                        Nenhum registro encontrado.
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <mat-paginator #paginatorTeachers [pageSizeOptions]="[10, 20, 50]" showFirstLastButtons class="border-t"></mat-paginator>
+                    </div>
+                </mat-tab>
+
+                <mat-tab>
+                    <ng-template mat-tab-label>
+                        <mat-icon class="mr-2">school</mat-icon> Turmas
+                    </ng-template>
+                    <div class="p-4 h-full flex flex-col">
+                         <mat-form-field appearance="outline" class="w-full sm:w-1/3 bg-white density-compact">
+                            <mat-label>Filtrar Turma</mat-label>
+                            <input matInput (keyup)="applyFilter($event, dataSourceClassrooms)" placeholder="Ex: 1º Ano...">
+                            <mat-icon matSuffix>search</mat-icon>
+                        </mat-form-field>
+
+                        <div class="flex-1 overflow-auto border border-gray-200 rounded-lg relative">
+                            <table mat-table [dataSource]="dataSourceClassrooms" matSort class="w-full">
+                                <ng-container matColumnDef="name" sticky>
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="bg-gray-100 min-w-[150px] z-10 border-r"> Turma </th>
+                                    <td mat-cell *matCellDef="let row" class="font-bold text-teal-800 border-r bg-gray-50"> 
+                                        {{row.name}} 
+                                    </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="monday"><th mat-header-cell *matHeaderCellDef>Segunda</th><td mat-cell *matCellDef="let row"><div class="flex flex-col gap-1"><div *ngFor="let aula of row.monday; let i = index" [class.hidden]="!aula" class="text-xs p-1 rounded bg-gray-100 text-gray-800"><span class="font-bold text-gray-500 mr-1">{{i+1}}º</span>{{aula}}</div></div></td></ng-container>
+                                <ng-container matColumnDef="tuesday"><th mat-header-cell *matHeaderCellDef>Terça</th><td mat-cell *matCellDef="let row"><div class="flex flex-col gap-1"><div *ngFor="let aula of row.tuesday; let i = index" [class.hidden]="!aula" class="text-xs p-1 rounded bg-gray-100 text-gray-800"><span class="font-bold text-gray-500 mr-1">{{i+1}}º</span>{{aula}}</div></div></td></ng-container>
+                                <ng-container matColumnDef="wednesday"><th mat-header-cell *matHeaderCellDef>Quarta</th><td mat-cell *matCellDef="let row"><div class="flex flex-col gap-1"><div *ngFor="let aula of row.wednesday; let i = index" [class.hidden]="!aula" class="text-xs p-1 rounded bg-gray-100 text-gray-800"><span class="font-bold text-gray-500 mr-1">{{i+1}}º</span>{{aula}}</div></div></td></ng-container>
+                                <ng-container matColumnDef="thursday"><th mat-header-cell *matHeaderCellDef>Quinta</th><td mat-cell *matCellDef="let row"><div class="flex flex-col gap-1"><div *ngFor="let aula of row.thursday; let i = index" [class.hidden]="!aula" class="text-xs p-1 rounded bg-gray-100 text-gray-800"><span class="font-bold text-gray-500 mr-1">{{i+1}}º</span>{{aula}}</div></div></td></ng-container>
+                                <ng-container matColumnDef="friday"><th mat-header-cell *matHeaderCellDef>Sexta</th><td mat-cell *matCellDef="let row"><div class="flex flex-col gap-1"><div *ngFor="let aula of row.friday; let i = index" [class.hidden]="!aula" class="text-xs p-1 rounded bg-gray-100 text-gray-800"><span class="font-bold text-gray-500 mr-1">{{i+1}}º</span>{{aula}}</div></div></td></ng-container>
+
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="hover:bg-gray-50 transition-colors"></tr>
+                                <tr class="mat-row" *matNoDataRow>
+                                    <td class="mat-cell p-8 text-center text-gray-500" [attr.colspan]="displayedColumns.length">
+                                        Nenhum registro encontrado.
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <mat-paginator #paginatorClassrooms [pageSizeOptions]="[10, 20, 50]" showFirstLastButtons class="border-t"></mat-paginator>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+    </main>
+
+    <div *ngIf="!isLoading && !hasError && solutionData && !solutionData.outputPath" class="flex-1 flex flex-col items-center justify-center p-8 text-center">
+        <mat-icon class="text-6xl mb-4 text-orange-300">warning_amber</mat-icon>
+        <h2 class="text-xl font-bold text-gray-700">Não há grade para visualizar</h2>
+        <p class="text-gray-500 mt-2 max-w-md">
+            O status desta solução é <span class="font-bold">{{ getStatusLabel(solutionData.solverStatus) }}</span>. 
+            Isso geralmente significa que não foi possível gerar uma grade válida ou ocorreu um erro.
+        </p>
+        <div class="mt-4" *ngIf="solutionData.errorMessage">
+             <p class="text-red-600 bg-red-50 p-2 rounded text-sm">{{solutionData.errorMessage}}</p>
+        </div>
+    </div>
+</div>

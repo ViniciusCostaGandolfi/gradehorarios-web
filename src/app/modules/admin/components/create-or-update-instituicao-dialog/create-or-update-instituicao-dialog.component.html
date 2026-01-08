@@ -13,19 +13,19 @@
             
             <mat-form-field appearance="outline" class="w-full">
                 <mat-label>Nome da Instituição</mat-label>
-                <input matInput formControlName="nome" placeholder="Ex: Universidade Central" required>
-                <mat-error *ngIf="form.get('nome')?.hasError('required')">
+                <input matInput formControlName="name" placeholder="Ex: Universidade Central" required>
+                <mat-error *ngIf="form.get('name')?.hasError('required')">
                     O nome é obrigatório.
                 </mat-error>
-                <mat-error *ngIf="form.get('nome')?.hasError('minlength')">
+                <mat-error *ngIf="form.get('name')?.hasError('minlength')">
                     O nome deve ter no mínimo 3 caracteres.
                 </mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="w-full">
                 <mat-label>Código</mat-label>
-                <input type="number" matInput formControlName="codigo" placeholder="Ex: 123" required>
-                <mat-error *ngIf="form.get('codigo')?.hasError('required')">
+                <input matInput formControlName="code" placeholder="Ex: 123" required>
+                <mat-error *ngIf="form.get('code')?.hasError('required')">
                     O código é obrigatório.
                 </mat-error>
             </mat-form-field>

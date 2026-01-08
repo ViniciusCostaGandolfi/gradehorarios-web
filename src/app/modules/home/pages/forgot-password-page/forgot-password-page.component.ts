@@ -39,12 +39,12 @@ export class ForgotPasswordPageComponent {
 
     this.authService.requestPasswordReset(email).subscribe({
       next: () => {
-        this.snackbar.open('Enviamos um e-mail com um link para redefinição de senha.', 'Fechar', { duration: 4000 });
+        this.snackbar.open('Enviamos um e-mail com um link para redefinição de password.', 'Fechar', { duration: 4000 });
         this.router.navigate(['/entrar']);
         this.isLoading = false;
       },
       error: (error) => {
-        console.error('Erro ao solicitar redefinição de senha:', error);
+        console.error('Erro ao solicitar redefinição de password:', error);
         this.snackbar.open('Erro ao enviar e-mail. Verifique se o e-mail está correto.', 'Fechar', { duration: 3000 });
         this.isLoading = false;
       }

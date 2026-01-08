@@ -12,9 +12,9 @@
                 </a>
             </span>
             <span class="mt-3 justify-center text-sm text-center text-gray-500 flex-items-center ">
-                Não lembra a senha ?
-                <a routerLink="/resetar-senha" class="text-sm text-primary-500 underline hover:text-primary-700">
-                    Recuperar-senha
+                Não lembra a password ?
+                <a routerLink="/resetar-password" class="text-sm text-primary-500 underline hover:text-primary-700">
+                    Recuperar-password
                 </a>
             </span>
         </div>
@@ -32,9 +32,9 @@
                 </mat-form-field>
                 <mat-form-field appearance="fill" class="w-full">
                     <mat-label>Senha</mat-label>
-                    <input class="w-full" matInput  type="senha" formControlName="senha" >
-                    <mat-error *ngIf="form.controls.senha.hasError('required')">
-                        Voce esqueceu de colocar sua senha!
+                    <input class="w-full" matInput  type="password" formControlName="password" >
+                    <mat-error *ngIf="form.controls.password.hasError('required')">
+                        Voce esqueceu de colocar sua password!
                     </mat-error>
                 </mat-form-field> 
                 <div class="flex flex-col items-center justify-center mt-6">

@@ -1,3 +1,3 @@
 export const environment = {
-    'GRADEHORARIOS_API':'http://localhost:8000',
+    'GRADEHORARIOS_API':'http://localhost:8080',
 };

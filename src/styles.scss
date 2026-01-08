@@ -52,3 +52,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   }
 }
 
+
+
+
+body .mat-mdc-form-field .mdc-notched-outline__notch {
+  border-right-style: hidden;
+}

@@ -1,0 +1,239 @@
+<div class="flex flex-col h-full max-h-[90vh]">
+    <mat-toolbar color="primary" class="flex-none flex justify-between items-center z-10 shadow-md">
+        <span class="text-xl truncate">Solução</span>
+        <button mat-icon-button (click)="onClose()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </mat-toolbar>
+
+    <div *ngIf="isLoading" class="flex-1 flex flex-col justify-center items-center bg-white">
+        <mat-progress-spinner mode="indeterminate" diameter="50"></mat-progress-spinner>
+        <p class="mt-4 text-gray-500 font-medium">Processando e montando grade...</p>
+    </div>
+
+    <div *ngIf="hasError && !isLoading" class="flex-1 flex flex-col items-center justify-center text-red-500">
+        <mat-icon class="text-6xl mb-4">cloud_off</mat-icon>
+        <p class="text-lg font-semibold">Falha ao carregar o arquivo JSON.</p>
+        <button mat-stroked-button color="warn" class="mt-4" (click)="onClose()">Fechar</button>
+    </div>
+
+    <div *ngIf="!isLoading && !hasError" class="flex-1 overflow-hidden bg-gray-50 flex flex-col">
+        
+        <mat-tab-group animationDuration="0ms" class="flex-1 h-full" mat-stretch-tabs="false" mat-align-tabs="start">
+            
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon class="mr-2">person</mat-icon> Professores
+                    <a *ngIf="data.teacherOutputPath" mat-stroked-button color="primary"
+                        [href]="data.teacherOutputPath" target="_blank" matTooltip="Baixar PDF Professores">
+                        <mat-icon>picture_as_pdf</mat-icon>
+                        Prof.
+                    </a>
+
+                </ng-template>
+                <div class="p-4 h-full flex flex-col">
+                    
+                    <mat-form-field appearance="outline" class="w-full sm:w-1/2 bg-white">
+                        <mat-label>Buscar Professor ou Turma/Matéria</mat-label>
+                        <input matInput (keyup)="applyFilter($event, dataSourceTeachers)" placeholder="Ex: João...">
+                        <mat-icon matSuffix>search</mat-icon>
+                    </mat-form-field>
+
+                    <div class="flex-1 overflow-auto shadow-sm border border-gray-200 rounded-lg bg-white relative">
+                        <table mat-table [dataSource]="dataSourceTeachers" matSort class="w-full">
+
+                            <ng-container matColumnDef="name" sticky>
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header class="bg-gray-100 min-w-[150px] z-10"> Professor </th>
+                                <td mat-cell *matCellDef="let row" class="font-bold text-gray-800 border-r bg-gray-50"> 
+                                    {{row.name}}
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="monday">
+                                <th mat-header-cell *matHeaderCellDef class="min-w-[180px]"> Segunda </th>
+                                <td mat-cell *matCellDef="let row" class="align-top py-2">
+                                    <div class="flex flex-col gap-1">
+                                        <ng-container *ngFor="let aula of row.monday; let i = index">
+                                            <div *ngIf="aula" class="text-xs p-1 rounded bg-indigo-50 border border-indigo-100 text-indigo-900">
+                                                <span class="font-bold text-indigo-500 mr-1">{{i + 1}}º</span> {{aula}}
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="tuesday">
+                                <th mat-header-cell *matHeaderCellDef class="min-w-[180px]"> Terça </th>
+                                <td mat-cell *matCellDef="let row" class="align-top py-2">
+                                    <div class="flex flex-col gap-1">
+                                        <ng-container *ngFor="let aula of row.tuesday; let i = index">
+                                            <div *ngIf="aula" class="text-xs p-1 rounded bg-blue-50 border border-blue-100 text-blue-900">
+                                                <span class="font-bold text-blue-500 mr-1">{{i + 1}}º</span> {{aula}}
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="wednesday">
+                                <th mat-header-cell *matHeaderCellDef class="min-w-[180px]"> Quarta </th>
+                                <td mat-cell *matCellDef="let row" class="align-top py-2">
+                                    <div class="flex flex-col gap-1">
+                                        <ng-container *ngFor="let aula of row.wednesday; let i = index">
+                                            <div *ngIf="aula" class="text-xs p-1 rounded bg-cyan-50 border border-cyan-100 text-cyan-900">
+                                                <span class="font-bold text-cyan-600 mr-1">{{i + 1}}º</span> {{aula}}
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="thursday">
+                                <th mat-header-cell *matHeaderCellDef class="min-w-[180px]"> Quinta </th>
+                                <td mat-cell *matCellDef="let row" class="align-top py-2">
+                                    <div class="flex flex-col gap-1">
+                                        <ng-container *ngFor="let aula of row.thursday; let i = index">
+                                            <div *ngIf="aula" class="text-xs p-1 rounded bg-teal-50 border border-teal-100 text-teal-900">
+                                                <span class="font-bold text-teal-600 mr-1">{{i + 1}}º</span> {{aula}}
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="friday">
+                                <th mat-header-cell *matHeaderCellDef class="min-w-[180px]"> Sexta </th>
+                                <td mat-cell *matCellDef="let row" class="align-top py-2">
+                                    <div class="flex flex-col gap-1">
+                                        <ng-container *ngFor="let aula of row.friday; let i = index">
+                                            <div *ngIf="aula" class="text-xs p-1 rounded bg-green-50 border border-green-100 text-green-900">
+                                                <span class="font-bold text-green-600 mr-1">{{i + 1}}º</span> {{aula}}
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="hover:bg-gray-50 transition-colors"></tr>
+
+                            <tr class="mat-row" *matNoDataRow>
+                                <td class="mat-cell p-8 text-center text-gray-500" [attr.colspan]="displayedColumns.length">
+                                    Nenhum professor encontrado.
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <mat-paginator #paginatorTeachers [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons class="border-t"></mat-paginator>
+                </div>
+            </mat-tab>
+
+            <mat-tab>
+                <ng-template mat-tab-label>
+                    <mat-icon class="mr-2">school</mat-icon> Turmas
+                    <a *ngIf="data.classroomOutputPath" mat-stroked-button color="primary"
+                        [href]="data.classroomOutputPath" target="_blank" matTooltip="Baixar PDF Professores">
+                        <mat-icon>picture_as_pdf</mat-icon>
+                        Turmas.
+                    </a>
+                </ng-template>
+                <div class="p-4 h-full flex flex-col">
+                    
+                    <mat-form-field appearance="outline" class="w-full sm:w-1/2 bg-white">
+                        <mat-label>Buscar Turma ou Professor</mat-label>
+                        <input matInput (keyup)="applyFilter($event, dataSourceClassrooms)" placeholder="Ex: 1º Ano...">
+                        <mat-icon matSuffix>search</mat-icon>
+                    </mat-form-field>
+
+                    <div class="flex-1 overflow-auto shadow-sm border border-gray-200 rounded-lg bg-white relative">
+                        <table mat-table [dataSource]="dataSourceClassrooms" matSort class="w-full">
+
+                            <ng-container matColumnDef="name" sticky>
+                                <th mat-header-cell *matHeaderCellDef mat-sort-header class="bg-gray-100 min-w-[150px] z-10"> Turma </th>
+                                <td mat-cell *matCellDef="let row" class="font-bold text-teal-800 border-r bg-gray-50"> 
+                                    {{row.name}} 
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="monday">
+                                <th mat-header-cell *matHeaderCellDef class="min-w-[180px]"> Segunda </th>
+                                <td mat-cell *matCellDef="let row" class="align-top py-2">
+                                    <div class="flex flex-col gap-1">
+                                        <ng-container *ngFor="let aula of row.monday; let i = index">
+                                            <div *ngIf="aula" class="text-xs p-1 rounded bg-gray-100 text-gray-800">
+                                                <span class="font-bold text-gray-500 mr-1">{{i + 1}}º</span> {{aula}}
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="tuesday">
+                                <th mat-header-cell *matHeaderCellDef class="min-w-[180px]"> Terça </th>
+                                <td mat-cell *matCellDef="let row" class="align-top py-2">
+                                    <div class="flex flex-col gap-1">
+                                        <ng-container *ngFor="let aula of row.tuesday; let i = index">
+                                            <div *ngIf="aula" class="text-xs p-1 rounded bg-gray-100 text-gray-800">
+                                                <span class="font-bold text-gray-500 mr-1">{{i + 1}}º</span> {{aula}}
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="wednesday">
+                                <th mat-header-cell *matHeaderCellDef class="min-w-[180px]"> Quarta </th>
+                                <td mat-cell *matCellDef="let row" class="align-top py-2">
+                                    <div class="flex flex-col gap-1">
+                                        <ng-container *ngFor="let aula of row.wednesday; let i = index">
+                                            <div *ngIf="aula" class="text-xs p-1 rounded bg-gray-100 text-gray-800">
+                                                <span class="font-bold text-gray-500 mr-1">{{i + 1}}º</span> {{aula}}
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="thursday">
+                                <th mat-header-cell *matHeaderCellDef class="min-w-[180px]"> Quinta </th>
+                                <td mat-cell *matCellDef="let row" class="align-top py-2">
+                                    <div class="flex flex-col gap-1">
+                                        <ng-container *ngFor="let aula of row.thursday; let i = index">
+                                            <div *ngIf="aula" class="text-xs p-1 rounded bg-gray-100 text-gray-800">
+                                                <span class="font-bold text-gray-500 mr-1">{{i + 1}}º</span> {{aula}}
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </td>
+                            </ng-container>
+
+                            <ng-container matColumnDef="friday">
+                                <th mat-header-cell *matHeaderCellDef class="min-w-[180px]"> Sexta </th>
+                                <td mat-cell *matCellDef="let row" class="align-top py-2">
+                                    <div class="flex flex-col gap-1">
+                                        <ng-container *ngFor="let aula of row.friday; let i = index">
+                                            <div *ngIf="aula" class="text-xs p-1 rounded bg-gray-100 text-gray-800">
+                                                <span class="font-bold text-gray-500 mr-1">{{i + 1}}º</span> {{aula}}
+                                            </div>
+                                        </ng-container>
+                                    </div>
+                                </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="hover:bg-gray-50 transition-colors"></tr>
+
+                            <tr class="mat-row" *matNoDataRow>
+                                <td class="mat-cell p-8 text-center text-gray-500" [attr.colspan]="displayedColumns.length">
+                                    Nenhuma turma encontrada.
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <mat-paginator #paginatorClassrooms [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons class="border-t"></mat-paginator>
+                </div>
+            </mat-tab>
+
+        </mat-tab-group>
+    </div>
+</div>

@@ -14,8 +14,8 @@ export class CreateOrUpdateInstituicaoDialogComponent implements OnInit {
 
   public form = new FormGroup({
     id: new FormControl<number | null>(null),
-    nome: new FormControl<string>("", [Validators.required, Validators.minLength(3)]),
-    codigo: new FormControl<number | null>(null)
+    name: new FormControl<string>("", [Validators.required, Validators.minLength(3)]),
+    code: new FormControl<string | null>("")
   });
   public isEditMode: boolean = false;
   public isLoading: boolean = false;
@@ -32,12 +32,12 @@ export class CreateOrUpdateInstituicaoDialogComponent implements OnInit {
   ngOnInit(): void {
     this.isEditMode = !!this.data;
     this.dialogTitle = this.isEditMode ? 'Editar Instituição' : 'Nova Instituição';
-    
+    console.log(this.data.code)
     if (this.isEditMode) {
       this.form.patchValue({
         id: this.data.id,
-        nome: this.data.nome,
-        codigo: this.data.codigo
+        name: this.data.name,
+        code: this.data.code
       });
     }
   }
@@ -58,7 +58,7 @@ export class CreateOrUpdateInstituicaoDialogComponent implements OnInit {
     saveObservable.subscribe({
       next: (instituicaoSalva) => {
         this.isLoading = false;
-        this.snackBar.open(`Instituição "${instituicaoSalva.nome}" salva com sucesso!`, 'Fechar', { duration: 3000 });
+        this.snackBar.open(`Instituição "${instituicaoSalva.name}" salva com sucesso!`, 'Fechar', { duration: 3000 });
         this.dialogRef.close(instituicaoSalva);
       },
       error: (err) => {

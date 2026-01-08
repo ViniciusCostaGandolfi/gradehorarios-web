@@ -130,11 +130,11 @@ export class NovaSolucaoPageComponent implements OnInit {
     this.solucoesService.create(instituicaoId, this.uploadedFile).subscribe({
       next: (response) => {
         this.isProcessingFile = false;
-        this.snackBar.open("Arquivo validado e solução criada com sucesso! ✅", "Fechar", {
+        this.snackBar.open("Arquivo validado e solução criada com sucesso, em alguns minutos vocẽ receberá um email com a grade✅", "Fechar", {
           duration: 5000,
           panelClass: ['snackbar-success']
         });
-        this.router.navigate(['/solucoes', response.id]);
+        this.router.navigate(['/admin/instituicoes/' + response.institutionId]);
       },
       error: (err) => {
         this.isProcessingFile = false;

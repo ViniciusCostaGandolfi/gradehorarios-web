@@ -1,8 +1,8 @@
-import { SolucaoDto } from "./solucao";
+import { SolutionDto } from "./solucao";
 
 export interface InstituicaoBaseDto {
-  codigo: number;
-  nome: string;
+  code: string;
+  name: string;
 }
 
 export interface InstituicaoCreateDto extends InstituicaoBaseDto {}
@@ -13,9 +13,10 @@ export interface InstituicaoUpdateDto extends InstituicaoBaseDto {
 
 export interface InstituicaoDto extends InstituicaoBaseDto {
   id: number;
-  usuarioId: number;
+  user: number;
 }
 
 export interface InstituicaoFullDto extends InstituicaoDto {
-  solucoes: SolucaoDto[]
+  solutions: SolutionDto[];
+  active: boolean;
 }

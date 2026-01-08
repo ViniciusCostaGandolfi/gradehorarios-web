@@ -1,20 +1,18 @@
-import { UsuarioBaseDto, UsuarioDto } from "./usuario"
+import { UserBaseDto, UserDto } from "./usuario"
 
 export interface AuthToken {
-    accessToken: string
+    token: string
 }
-export interface UserCreation extends UsuarioBaseDto {
-    senha: string
-    
-
+export interface UserCreation extends UserBaseDto {
+    password: string
 }
 
 export interface UserLogin {
     email: string
-    senha: string
+    password: string
 }
 
-export interface TokenUsuarioDto {
-    usuario: UsuarioDto
+export interface TokenUserDto {
+    user: UserDto
     exp: number
 }

@@ -16,7 +16,7 @@ export class LoginComponent {
     isLoading: boolean = false;
     form = new FormGroup({
       email: new FormControl<string>('', [Validators.email, Validators.required]),
-      senha: new FormControl<string>('', [Validators.required])
+      password: new FormControl<string>('', [Validators.required])
 
     })
     

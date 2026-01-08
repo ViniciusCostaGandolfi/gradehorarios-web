@@ -43,6 +43,8 @@ import { NovaSolucaoPageComponent } from './pages/nova-solucao-page/nova-solucao
 import { ExcelInputViewerComponent } from './components/excel-input-viewer/excel-input-viewer.component';
 import { MatTabsModule } from '@angular/material/tabs'; // Importar MatTabsModule
 import { NgxDatatableModule } from '@swimlane/ngx-datatable'; // Importar NgxDatatableModule
+import { SolutionResultDialogComponent } from './components/solution-result-dialog/solution-result-dialog.component';
+import { SolucaoPageComponent } from './pages/solucao-page/solucao-page.component';
 
 
 
@@ -57,7 +59,9 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable'; // Importar NgxDat
     CreateOrUpdateInstituicaoDialogComponent,
     AdminComponent,
     ExcelInputViewerComponent,
-    NovaSolucaoPageComponent
+    NovaSolucaoPageComponent,
+    SolutionResultDialogComponent,
+    SolucaoPageComponent
   ],
   imports: [
     MatFormFieldModule,

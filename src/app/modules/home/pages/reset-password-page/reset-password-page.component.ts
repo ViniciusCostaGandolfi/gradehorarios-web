@@ -38,7 +38,7 @@ export class ResetPasswordPageComponent implements OnInit {
     }
 
     if (this.form.value.password !== this.form.value.confirmPassword) {
-      this.snackbar.open('As senhas não coincidem!', 'Fechar', { duration: 3000 });
+      this.snackbar.open('As passwords não coincidem!', 'Fechar', { duration: 3000 });
       return;
     }
 
@@ -56,8 +56,8 @@ export class ResetPasswordPageComponent implements OnInit {
         this.isLoading = false;
       },
       error: (error) => {
-        console.error('Erro ao redefinir senha:', error);
-        this.snackbar.open('Erro ao redefinir senha. Tente novamente.', 'Fechar', { duration: 3000 });
+        console.error('Erro ao redefinir password:', error);
+        this.snackbar.open('Erro ao redefinir password. Tente novamente.', 'Fechar', { duration: 3000 });
         this.isLoading = false;
       }
     });
