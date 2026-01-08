@@ -1,60 +1,95 @@
-<div class="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8" id="home-pricing-section">
-    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:items-center md:gap-8">
-      <div class="rounded-2xl border border-primary-500 p-6 shadow-sm ring-1 ring-primary-500 sm:px-8 lg:p-12">
-        <div class="text-center">
-          <h2 class="text-lg font-medium text-gray-900">
-            Compre Créditos
-          </h2>
-  
-          <p class="mt-2 sm:mt-4">
-            <strong class="text-3xl font-bold text-gray-900 sm:text-4xl"> R$ 5 </strong>
-            <span class="text-sm font-medium text-gray-700">por crédito</span>
+<section class="py-24 bg-white font-sans" id="home-pricing-section">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <div class="text-center max-w-4xl mx-auto mb-20">
+      <h2 class="text-secondary-600 font-bold uppercase tracking-widest text-sm mb-3">Orçamento sob Medida</h2>
+      <h1 class="text-4xl md:text-6xl font-extrabold text-slate-900 mb-6 tracking-tight">
+        Sua escola tem problemas complexos? <span class="text-primary-600">Nós temos a solução.</span>
+      </h1>
+      <p class="text-xl text-slate-600 leading-relaxed">
+        Não vendemos pacotes fechados. Criamos planos personalizados que resolvem 100% das suas restrições, 
+        pelo <strong>melhor preço do mercado brasileiro.</strong>
+      </p>
+
+      <div class="mt-10 inline-flex flex-col md:flex-row items-center gap-6 bg-slate-50 p-6 rounded-3xl border-2 border-dashed border-primary-200">
+        <div class="flex items-center gap-3">
+          <div class="bg-primary-600 text-white p-2 rounded-full">
+            <mat-icon>payments</mat-icon>
+          </div>
+          <span class="text-lg font-bold text-slate-800 tracking-tight">COBRIMOS QUALQUER ORÇAMENTO DA CONCORRÊNCIA</span>
         </div>
-  
-        <ul class="mt-6 space-y-2" *ngFor="let creditInfo of creditDetails">
-          <li class="flex items-center gap-1">
-            <mat-icon>check_circle_outline</mat-icon>
-            <span class="text-gray-700"> {{creditInfo.text}} </span>
-          </li>
-        </ul>
-  
-        <button
-          routerLink="/buy-credits"
-          class="mt-8 block rounded-full border bg-primary-600 px-12 py-3 text-center text-sm font-medium text-white hover:bg-accent-700">
-          Comprar Créditos
-        </button>
+        <div class="hidden md:block w-px h-8 bg-slate-300"></div>
+        <p class="text-slate-500 text-sm font-medium uppercase tracking-wide">Traga sua proposta atual e nós superamos.</p>
       </div>
-      <div
-        class="rounded-2xl border border-primary-500 p-6 shadow-sm ring-1 ring-primary-500 sm:order-last sm:px-8 lg:p-12"
-      >
-        <div class="text-center">
-          <h2 class="text-lg font-medium text-gray-900">
-            Completo
-            <span class="sr-only">Plan</span>
-          </h2>
-  
-          <p class="mt-2 sm:mt-4">
-            <strong class="text-3xl font-bold text-gray-900 sm:text-4xl"> R$ XX </strong>
-  
-            <span class="text-sm font-medium text-gray-700">/mês</span>
-          </p>
-        </div>
-  
-        <ul class="mt-6 space-y-2" *ngFor="let service of gradeHorariosServices">
-          <li class="flex items-center gap-1">
-            
-  
-            <span class="text-gray-700"> {{service.text}}</span>
-          </li>
-        </ul>
-  
-        <button
-            routerLink="/register"
-            class="mt-8 block rounded-full border bg-primary-600 px-12 py-3 text-center text-sm font-medium text-white hover:bg-accent-700 " >           
-            Teste de Graça
-        </button>
-      </div>
-  
-     
     </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
+      
+      <mat-card class="!p-8 !rounded-2xl border-none shadow-sm bg-slate-50">
+        <mat-icon class="text-primary-600 !mb-4">gavel</mat-icon>
+        <h3 class="text-xl font-bold text-slate-900 mb-3">Leis Trabalhistas & CLT</h3>
+        <p class="text-slate-600">Configuramos intervalos obrigatórios, descanso semanal e limites de jornada para evitar multas e processos.</p>
+      </mat-card>
+
+      <mat-card class="!p-8 !rounded-2xl border-none shadow-sm bg-slate-50">
+        <mat-icon class="text-primary-600 !mb-4">person_off</mat-icon>
+        <h3 class="text-xl font-bold text-slate-900 mb-3">Eliminação de Janelas</h3>
+        <p class="text-slate-600">Reduzimos ao máximo os tempos vagos dos professores, otimizando o custo da hora-aula e a satisfação do docente.</p>
+      </mat-card>
+
+      <mat-card class="!p-8 !rounded-2xl border-none shadow-sm bg-slate-50">
+        <mat-icon class="text-primary-600 !mb-4">room_preferences</mat-icon>
+        <h3 class="text-xl font-bold text-slate-900 mb-3">Conflitos de Espaço</h3>
+        <p class="text-slate-600">Gestão inteligente de laboratórios, quadras e salas compartilhadas. Nunca dois grupos no mesmo lugar.</p>
+      </mat-card>
+
+      <mat-card class="!p-8 !rounded-2xl border-none shadow-sm bg-slate-50">
+        <mat-icon class="text-primary-600 !mb-4">auto_awesome_motion</mat-icon>
+        <h3 class="text-xl font-bold text-slate-900 mb-3">Aulas Duplas/Geminadas</h3>
+        <p class="text-slate-600">Regras rígidas ou flexíveis para disciplinas que precisam de tempos sequenciais ou espaçamento pedagógico.</p>
+      </mat-card>
+
+      <mat-card class="!p-8 !rounded-2xl border-none shadow-sm bg-slate-50">
+        <mat-icon class="text-primary-600 !mb-4">account_tree</mat-icon>
+        <h3 class="text-xl font-bold text-slate-900 mb-3">Instituições Multunidades</h3>
+        <p class="text-slate-600">Resolvemos o deslocamento de professores que atendem diferentes unidades no mesmo dia.</p>
+      </mat-card>
+
+      <mat-card class="!p-8 !rounded-2xl border-none shadow-sm bg-slate-50">
+        <mat-icon class="text-primary-600 !mb-4">volunteer_activism</mat-icon>
+        <h3 class="text-xl font-bold text-slate-900 mb-3">Fator Humano</h3>
+        <p class="text-slate-600">O algoritmo prioriza as preferências dos professores veteranos ou necessidades especiais da equipe.</p>
+      </mat-card>
+    </div>
+
+    <div class="relative overflow-hidden bg-primary-900 rounded-[3rem] p-10 md:p-20 text-center text-white shadow-2xl">
+      <div class="relative z-10 max-w-3xl mx-auto">
+        <h2 class="text-3xl md:text-5xl font-bold mb-8 italic">"O impossível é apenas um horário que ainda não processamos."</h2>
+        <p class="text-primary-100 text-lg md:text-xl mb-12">
+          Nossos consultores estão prontos para analisar sua matriz curricular e oferecer um orçamento que respeita sua realidade financeira.
+        </p>
+        
+        <div class="flex flex-col md:flex-row justify-center items-center gap-6">
+          <button mat-flat-button class="!bg-secondary-500 !text-primary-500 !h-16 !px-12 !rounded-2xl !text-xl !font-bold hover:scale-105 transition-transform">
+            SOLICITAR CONSULTORIA & PREÇO
+          </button>
+          
+          <div class="text-left">
+            <p class="text-sm font-semibold text-primary-300 uppercase">Atendimento humanizado</p>
+            <p class="text-lg font-bold">Resposta em até 24h</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+        <svg width="100%" height="100%" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <pattern id="pattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+            <path d="M0 40L40 0M-10 10L10 -10M30 50L50 30" stroke="white" stroke-width="1"/>
+          </pattern>
+          <rect width="100%" height="100%" fill="url(#pattern)"/>
+        </svg>
+      </div>
+    </div>
+
   </div>
+</section>

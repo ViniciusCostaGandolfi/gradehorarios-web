@@ -1,45 +1,73 @@
-<div class="flex flex-col items-center w-full">
-    <div class="p-8 sm:w-3/4 bg-white rounded-lg shadow" id="home-about-us-section">
-        <p class="text-3xl font-bold text-center text-gray-800">
-            Sobre Nós!
-        </p>
-        <p class="mb-12 text-xl font-normal text-justify text-gray-500">
-            Somos uma startup de tecnologia dedicada à criação de horários otimizados para instituições de ensino, oferecendo uma solução completa que integra tecnologia avançada com um preço <strong>JUSTO!</strong>
-             
-            Nascemos de uma extensa pesquisa conduzida por nosso time, que desenvolveu uma solução inovadora para o <a class="underline font-bold cursor-pointer" href="https://en.wikipedia.org/wiki/School_timetable" target="_blank">Problema da Programação de Horários</a> e suas variações, adaptando-se a diversas necessidades educacionais.
-            <br/>
-            Se tiver interesse em parcerias, entre em contato com nosso time:
-        </p>
-        <div class="flex flex-col items-center sm:flex-row justify-center">
-           
-            <div class="p-4" *ngFor="let person of homePersons">
-                <div class="mb-4 text-center opacity-90">
-                    <a href="#" class="relative block">
-                        <img alt="perfil" src={{person.image}} class="mx-auto object-cover rounded-full h-40 w-30" />
-                    </a>
-                </div>
-                <div class="text-center">
-                    <p class="text-2xl text-gray-800">
-                        {{person.name}}
-                    </p>
-                    <p class="text-xl font-light text-gray-500">
-                        Pesquisador
-                    </p>
-                    <p class="max-w-xs py-4 font-light text-gray-500 text-md dark:text-gray-400">
-                        {{person.description}}
-                    </p>
-                </div>
-                <div class="flex items-center justify-between pt-8 mx-auto text-gray-500 border-t border-gray-200 w-44">
-                    
-                    <a href={{link.href}} target="_blank" *ngFor="let link of person.links">
-                        <mat-icon>
-                            {{link.icon}}
-                        </mat-icon>
-                    </a>
-                </div>
-            </div>
-            
-        </div>
-    </div>
+<section class="py-20 bg-white font-sans">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     
-</div>
+    <div class="text-center max-w-3xl mx-auto mb-20">
+      <h2 class="text-primary-600 font-bold tracking-widest uppercase text-sm mb-4">Nossa Essência</h2>
+      <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-8">
+        Ciência a serviço da <span class="text-primary-600">Educação.</span>
+      </h1>
+      
+      <div class="relative">
+        <mat-icon class="absolute -top-6 -left-8 text-slate-100 !text-6xl -z-10 select-none">format_quote</mat-icon>
+        <p class="text-xl text-slate-600 leading-relaxed italic">
+          Nascemos da interseção entre a alta tecnologia e a necessidade real das escolas. Nossa missão é resolver o complexo 
+          <a class="text-primary-600 font-bold hover:underline decoration-2 underline-offset-4 transition-all" 
+             href="https://en.wikipedia.org/wiki/School_timetable" target="_blank">
+            Problema de Programação de Horários
+          </a> 
+          através de algoritmos proprietários, entregando eficiência máxima com um investimento 
+          <span class="bg-secondary-100 text-secondary-800 px-2 py-0.5 rounded font-bold uppercase text-base">Justo</span>.
+        </p>
+      </div>
+    </div>
+
+    <div class="space-y-12">
+      <div class="flex items-center justify-between border-b border-slate-200 pb-4">
+        <h3 class="text-2xl font-bold text-slate-800">Mentes Especialistas</h3>
+        <p class="text-slate-500 font-medium">Conecte-se com nosso time</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+        <mat-card class="!rounded-2xl !bg-slate-50 border-none shadow-none hover:shadow-xl hover:!bg-white transition-all duration-300 group" *ngFor="let person of homePersons">
+          <div class="p-8 text-center">
+            <div class="relative w-32 h-32 mx-auto mb-6">
+              <div class="absolute inset-0 bg-primary-500 rounded-full scale-105 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <img [src]="person.image" 
+                   class="relative w-full h-full object-cover rounded-full border-4 border-white shadow-lg z-10" 
+                   [alt]="person.name">
+            </div>
+
+            <h4 class="text-2xl font-bold text-slate-900 mb-1">{{person.name}}</h4>
+            <span class="inline-block text-secondary-600 font-semibold uppercase tracking-wider text-xs mb-4">
+              Pesquisador & Especialista
+            </span>
+            
+            <p class="text-slate-600 leading-relaxed mb-8 min-h-[80px]">
+              {{person.description}}
+            </p>
+
+            <div class="flex items-center justify-center gap-4 border-t border-slate-200 pt-6">
+              <a *ngFor="let link of person.links" 
+                 [href]="link.href" 
+                 target="_blank"
+                 class="w-10 h-10 flex items-center justify-center rounded-full bg-white text-slate-400 hover:text-primary-600 hover:shadow-md transition-all">
+                <mat-icon class="!text-xl">{{link.icon}}</mat-icon>
+              </a>
+            </div>
+          </div>
+        </mat-card>
+      </div>
+    </div>
+
+    <div class="mt-20 p-8 bg-primary-600 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl shadow-primary-200">
+      <div class="text-center md:text-left">
+        <h4 class="text-white text-2xl font-bold">Interessado em parcerias ou projetos especiais?</h4>
+        <p class="text-primary-100">Fale diretamente com nosso time de especialistas.</p>
+      </div>
+      <button mat-flat-button class="!bg-secondary-500 !text-primary-500 !px-8 !py-6 !rounded-xl !font-bold !text-lg hover:scale-105 transition-transform">
+        Entrar em Contato
+      </button>
+    </div>
+
+  </div>
+</section>

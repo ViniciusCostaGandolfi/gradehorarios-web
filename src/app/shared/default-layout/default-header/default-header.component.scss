@@ -41,3 +41,31 @@
         
     }
 }
+
+
+// Animação de flutuação suave para o card
+@keyframes float {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(0.5deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+// Fade in para os elementos de texto
+.animate-fade-in {
+  animation: fadeIn 1s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+// Ajuste fino para os botões do Angular Material para ficarem no estilo Abacate
+.mat-mdc-flat-button {
+    --mdc-filled-button-container-shape: 9999px;
+    letter-spacing: -0.01em;
+}

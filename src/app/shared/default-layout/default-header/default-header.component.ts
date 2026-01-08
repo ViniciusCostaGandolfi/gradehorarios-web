@@ -9,6 +9,7 @@ import { ScrollService } from '../../../core/services/scroll-to/scroll.service';
 import { map } from 'rxjs';
 import { ScrollYService } from '../../../core/services/scroll-y/scroll-y.service';
 import { mockDefaultRoutes, mockLoginRegister } from '../../../core/mocks/default-routes';
+import { MatDivider } from "@angular/material/divider";
 
 
 
@@ -16,15 +17,14 @@ import { mockDefaultRoutes, mockLoginRegister } from '../../../core/mocks/defaul
   selector: 'app-default-header',
   standalone: true,
   imports: [
-    
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
     MatMenuModule,
     RouterModule,
-    CommonModule
-
-  ],
+    CommonModule,
+    MatDivider
+],
   templateUrl: './default-header.component.html',
   styleUrl: './default-header.component.scss'
 })

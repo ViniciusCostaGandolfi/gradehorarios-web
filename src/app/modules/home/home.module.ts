@@ -29,6 +29,7 @@ import { HomeSchoolTimetableComponent } from './pages/home/home-school-timetable
 import { HomeGoFurtherComponent } from './pages/home/home-go-further/home-go-further.component';
 import { ForgotPasswordPageComponent } from './pages/forgot-password-page/forgot-password-page.component';
 import { ResetPasswordPageComponent } from './pages/reset-password-page/reset-password-page.component';
+import { MatCard } from "@angular/material/card";
 
 
 @NgModule({
@@ -65,6 +66,7 @@ import { ResetPasswordPageComponent } from './pages/reset-password-page/reset-pa
     MatDialogModule,
     HttpClientModule,
     SpinnerButtonComponent,
-  ]
+    MatCard
+]
 })
 export class HomeModule { }

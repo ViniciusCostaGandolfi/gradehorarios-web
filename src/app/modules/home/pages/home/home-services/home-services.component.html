@@ -1,28 +1,148 @@
-<div class="relative max-w-screen-xl p-4 px-4 mx-auto bg-white sm:px-6 lg:px-8 py-26 lg:mt-20" id="home-services-section">
-    <div class="relative">
-        <div class="">
-            <div class="ml-auto ">
-                <p class="text-base font-semibold leading-6 text-accent-500 uppercase">
-                    Serviços
-                </p>
-                <h4 class="mt-2 text-2xl font-extrabold leading-8 text-gray-900  sm:text-3xl sm:leading-9">
-                    Nosso Sistema de Grade de Horários oferece Soluções Completas
-                </h4>
-                <p class="mt-4 text-lg leading-6 text-gray-500 ">
-                    Facilitamos a gestão acadêmica com uma plataforma que atende escolas e universidades, oferecendo serviços como automação de horários, integração de preferências de professores, gestão de recursos e muito mais.
-                </p>
-                <ul class="gap-6 mt-8 md:grid md:grid-cols-2">
-                    
-                    <div class="mt-6 lg:mt-0" *ngFor="let scheduleService of gradeHorariosServices">
-                        <div class="flex">
-        
-                            <mat-icon class="text-blue-800 bg-blue-100 rounded-full" >check_circle_outline</mat-icon>
-                            <p class="ml-4 text-base font-medium leading-6 text-gray-500">{{scheduleService.text}}</p>
-                        </div>
-                    </div>
-                </ul>
-            </div>
-            
-        </div>
+<div class="w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
+  <div class="grid grid-cols-1 gap-y-8 lg:grid-cols-2 lg:items-center lg:gap-x-16">
+    <div class="mx-auto max-w-lg text-center lg:mx-0 ltr:lg:text-left rtl:lg:text-right">
+      <h2 class="text-3xl font-bold sm:text-4xl">Simplifique a Criação de Horários</h2>
+
+      <p class="mt-4 text-gray-600">
+        Nosso algoritmo inteligente considera preferências dos professores, aulas duplas, disponibilidade semanal e muito mais, garantindo uma grade de horários otimizada e funcional para sua instituição.
+      </p>
+
+      <a href="#"
+        class="mt-8 inline-block rounded bg-primary-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-primary-700 focus:outline-none focus:ring focus:ring-yellow-400">
+        Comece Agora
+      </a>
     </div>
+
+    <div class="grid grid-cols-2 gap-4 sm:grid-cols-3">
+      <a class="block rounded-xl border border-gray-100 p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring"
+        href="#">
+        <span class="inline-block rounded-lg bg-gray-50 p-3">
+          <mat-icon>settings</mat-icon>
+        </span>
+
+        <h2 class="mt-2 font-bold">Otimização Avançada</h2>
+
+        <p class="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
+          Utilizamos modelos matemáticos para criar a grade de horários perfeita.
+        </p>
+      </a>
+
+      <a class="block rounded-xl border border-gray-100 p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring"
+        href="#">
+        <span class="inline-block rounded-lg bg-gray-50 p-3">
+          <mat-icon>favorite</mat-icon>
+        </span>
+
+        <h2 class="mt-2 font-bold">Considera Preferências</h2>
+
+        <p class="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
+          Respeitamos as preferências de aulas dos professores em todos os aspectos.
+        </p>
+      </a>
+
+      <a class="block rounded-xl border border-gray-100 p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring"
+        href="#">
+        <span class="inline-block rounded-lg bg-gray-50 p-3">
+          <mat-icon>sync_alt</mat-icon>
+        </span>
+
+        <h2 class="mt-2 font-bold">Flexibilidade Total</h2>
+
+        <p class="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
+          Ajuste horários conforme a disponibilidade e carga horária de cada professor.
+        </p>
+      </a>
+
+      <a class="block rounded-xl border border-gray-100 p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring"
+        href="#">
+        <span class="inline-block rounded-lg bg-gray-50 p-3">
+          <mat-icon>speed</mat-icon>
+        </span>
+
+        <h2 class="mt-2 font-bold">Eficiência Garantida</h2>
+
+        <p class="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
+          Economize tempo e recursos com nossa solução automatizada.
+        </p>
+      </a>
+
+      <a class="block rounded-xl border border-gray-100 p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring"
+        href="#">
+        <span class="inline-block rounded-lg bg-gray-50 p-3">
+          <mat-icon>support_agent</mat-icon>
+        </span>
+
+        <h2 class="mt-2 font-bold">Suporte Personalizado</h2>
+
+        <p class="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
+          Nossa equipe está pronta para auxiliar na implementação e uso da ferramenta.
+        </p>
+      </a>
+
+      <a class="block rounded-xl border border-gray-100 p-4 shadow-sm hover:border-gray-200 hover:ring-1 hover:ring-gray-200 focus:outline-none focus:ring"
+        href="#">
+        <span class="inline-block rounded-lg bg-gray-50 p-3">
+          <mat-icon>check_circle</mat-icon>
+        </span>
+
+        <h2 class="mt-2 font-bold">Resultados Confiáveis</h2>
+
+        <p class="hidden sm:mt-1 sm:block sm:text-sm sm:text-gray-600">
+          Geração de horários factíveis que atendem às necessidades de todos.
+        </p>
+      </a>
+    </div>
+  </div>
+
+  <div>
+    <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-4 md:items-center md:gap-8">
+
+  
+        <div class="md:col-span-1">
+          <div class="max-w-lg md:max-w-none">
+            <h2 class="text-2xl font-semibold text-gray-900 sm:text-3xl">
+              Grade por Turma
+            </h2>
+  
+            <p class="mt-4 text-gray-700">
+              Clique em simular depois exporte sua grade de horários escolares como PDF em segundos!
+            </p>
+          </div>
+        </div>
+        <div class="md:col-span-3">
+          <img
+            src="assets/images/results-classroom.png"
+            class="rounded"
+            alt=""
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-4 md:items-center md:gap-8">
+        <div class="md:col-span-1">
+          <div class="max-w-lg md:max-w-none">
+            <h2 class="text-2xl font-semibold text-gray-900 sm:text-3xl">
+              Grade por Professor
+            </h2>
+  
+            <p class="mt-4 text-gray-700">
+              Clique em simular depois exporte sua grade de horários escolares como PDF em segundos!
+            </p>
+          </div>
+        </div>
+        <div class="md:col-span-3">
+          <img
+            src="assets/images/results-teacher.png"
+            class="rounded"
+            alt=""
+          />
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

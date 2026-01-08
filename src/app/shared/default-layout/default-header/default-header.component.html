@@ -1,48 +1,71 @@
-<div class="w-full z-50 fixed">
-  <mat-toolbar [ngClass]="{'!bg-white': hasScrolled}"
-    class="block !bg-transparent lg:hidden justify-between w-full !h-[100px]">
-    <img class="w-10/12 sm:w-auto cursor-pointer sm:max-h-[100px] h-auto  lg:h-full" routerLink="/"
-      src="assets/images/grade-horarios-logo.png" />
+<header 
+  [ngClass]="{
+    'h-24 bg-transparent shadow-none': !hasScrolled,
+    'h-16 bg-white/80 backdrop-blur-md shadow-lg': hasScrolled
+  }"
+  class="fixed top-0 w-full z-50 transition-all duration-500 ease-in-out flex items-center"
+>
+  <div class="container mx-auto px-6 h-full flex items-center justify-between">
+    
+    <div class="flex-shrink-0 transition-all duration-500 cursor-pointer"
+         [ngClass]="hasScrolled ? 'scale-90' : 'scale-110'"
+         routerLink="/">
+      <img class="h-10 w-auto sm:h-20" 
+           src="assets/images/grade-horarios-logo.png" 
+           alt="Logo" />
+    </div>
 
-    <div class="flex w-full justify-end">
-      <mat-menu #menu="matMenu" class="!px-3 !flex !items-center">
-        <ng-container *ngFor="let route of mockDefaultRoutes">
-          <button mat-menu-item [routerLink]="route.href" (click)="scrollToId(route.scrollTo)">
-            <span>{{ route.title }}</span>
-          </button>
-        </ng-container>
-        <ng-container *ngFor="let item of mockLoginRegister">
-          <div [routerLink]="item.href" class="!w-full pb-1">
-            <button mat-raised-button class="!w-full" [color]="item.color">
-              {{ item.title }}
-            </button>
-          </div>
-        </ng-container>
-      </mat-menu>
-
-      <ul class="flex justify-center items-center">
-        <li class="!hidden lg:!flex !text-center" *ngFor="let route of mockDefaultRoutes" [routerLink]="route.href"
-          (click)="scrollToId(route.scrollTo)">
-          <div mat-menu-item>
-            {{ route.title }}
-          </div>
-        </li>
-
-        <li class="!hidden sm:!flex px-4" *ngFor="let item of mockLoginRegister" [routerLink]="item.href">
-          <button *ngIf="item.buttonType === 'raised'" mat-raised-button [color]="item.color">
-            {{ item.title }}
-          </button>
-          <button *ngIf="item.buttonType !== 'raised'" mat-stroked-button [color]="item.color">
-            {{ item.title }}
-          </button>
-        </li>
+    <nav class="hidden lg:flex items-center gap-8">
+      <ul class="flex items-center gap-8">
+        @for (route of mockDefaultRoutes; track route.title) {
+          <li>
+            <a (click)="scrollToId(route.scrollTo)"
+               [ngClass]="hasScrolled ? 'text-slate-700' : 'text-slate-800'"
+               class="text-sm font-bold hover:text-primary-500 transition-colors cursor-pointer uppercase tracking-wider">
+              {{ route.title }}
+            </a>
+          </li>
+        }
       </ul>
 
-      <button [matMenuTriggerFor]="menu">
-        <mat-icon class="lg:!hidden mx-2 !text-[35px] !h-[35px] !w-[35px]">menu</mat-icon>
+      <div class="flex items-center gap-4 border-l pl-8 border-slate-300/50">
+        @for (item of mockLoginRegister; track item.title) {
+          <button 
+            mat-button 
+            [routerLink]="item.href"
+            [ngClass]="{
+              '!bg-primary-600 !text-white !rounded-full !px-8 shadow-lg': item.buttonType === 'raised',
+              '!text-slate-800': item.buttonType !== 'raised' && !hasScrolled,
+              '!text-primary-600': item.buttonType !== 'raised' && hasScrolled
+            }"
+            class="!font-black !transition-all hover:!scale-105">
+            {{ item.title }}
+          </button>
+        }
+      </div>
+    </nav>
+
+    <div class="lg:hidden">
+      <button mat-icon-button [matMenuTriggerFor]="menu" class="!text-slate-800">
+        <mat-icon>menu</mat-icon>
       </button>
     </div>
-  </mat-toolbar>
-</div>
 
-<div class="h-[100px]"></div>
+    <mat-menu #menu="matMenu" class="custom-menu-panel">
+      @for (route of mockDefaultRoutes; track route.title) {
+        <button mat-menu-item (click)="scrollToId(route.scrollTo)">
+          <mat-icon color="primary">chevron_right</mat-icon>
+          <span class="font-bold text-slate-700">{{ route.title }}</span>
+        </button>
+      }
+      <mat-divider></mat-divider>
+      <div class="p-4 flex flex-col gap-2">
+        @for (item of mockLoginRegister; track item.title) {
+          <button mat-flat-button [color]="item.color" [routerLink]="item.href" class="!rounded-xl !py-6">
+            {{ item.title }}
+          </button>
+        }
+      </div>
+    </mat-menu>
+  </div>
+</header>

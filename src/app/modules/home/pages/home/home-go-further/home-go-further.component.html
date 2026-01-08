@@ -1,31 +1,119 @@
-<div class="container flex flex-col items-start justify-between h-full mx-auto">
-  <div>
-    <h2 class="my-5 text-base font-medium tracking-tight text-start text-primary-500 uppercase">Nosso Sistema Completo
-    </h2>
-    <h3
-      class="max-w-2xl px-5 mt-2 text-3xl font-black leading-tight text-start text-gray-900 sm:mt-0 sm:px-0 sm:text-6xl">
-      Vá mais longe com o Grade Horários
-    </h3>
+<section class="bg-slate-50 py-16 font-sans">
+  <div class="max-w-7xl mx-auto px-4 mb-16 text-center">
+    <h2 class="text-primary-600 font-bold uppercase tracking-widest text-sm mb-3">Tecnologia em Gestão Escolar</h2>
+    <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6">
+      O que nossa inteligência <span class="text-primary-600">resolve para você?</span>
+    </h1>
+    <p class="max-w-3xl mx-auto text-lg text-slate-600">
+      Mais que um gerador de tabelas, somos um algoritmo de alta performance que equilibra as necessidades pedagógicas com a qualidade de vida do seu corpo docente.
+    </p>
   </div>
 
-  <!-- <div class="w-full flex justify-center mt-10">
-    <iframe class="w-full max-w-5xl aspect-video rounded-lg shadow-lg" src="https://youtu.be/dxlDW3MjZqY"
-      title="Tutorial Grade Horários" frameborder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-    </iframe>
-  </div> -->
-
-
-  <div class="flex flex-col w-full mt-0 lg:flex-row flex-wrap sm:mt-10 lg:mt-20 gap-8">
-    <div *ngFor="let service of gradeHorariosServices"
-      class="w-full max-w-sm p-6 mx-auto bg-white rounded-lg shadow-md">
-      <div class="flex items-center justify-center w-16 h-16 mx-auto text-white bg-primary-500 rounded-full">
-        <mat-icon>{{ service.icon }}</mat-icon>
+  <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24">
+    
+    <mat-card class="p-6 border-t-4 border-primary-500 shadow-xl hover:-translate-y-2 transition-transform duration-300">
+      <div class="flex items-center gap-4 mb-4">
+        <div class="p-3 rounded-lg bg-primary-50 text-primary-600">
+          <mat-icon>psychology</mat-icon>
+        </div>
+        <h3 class="text-xl font-bold text-slate-800">Algoritmo de Conflito Zero</h3>
       </div>
-      <h4 class="mt-4 text-lg font-bold text-center text-gray-800">{{ service.text }}</h4>
-      <p class="mt-2 text-base text-center text-gray-600">
-        {{ service.description }}
+      <p class="text-slate-600 leading-relaxed">
+        Nosso motor processa milhares de variáveis simultâneas para garantir que <strong>nunca</strong> haja choque de horários entre professores, salas ou laboratórios.
       </p>
+    </mat-card>
+
+    <mat-card class="p-6 border-t-4 border-secondary-500 shadow-xl hover:-translate-y-2 transition-transform duration-300">
+      <div class="flex items-center gap-4 mb-4">
+        <div class="p-3 rounded-lg bg-secondary-50 text-secondary-600">
+          <mat-icon>event_available</mat-icon>
+        </div>
+        <h3 class="text-xl font-bold text-slate-800">Gestão de Disponibilidade</h3>
+      </div>
+      <p class="text-slate-600 leading-relaxed">
+        Respeita folgas, dias específicos de entrada/saída e limita o número de "janelas" vago na grade de cada docente automaticamente.
+      </p>
+    </mat-card>
+
+    <mat-card class="p-6 border-t-4 border-primary-500 shadow-xl hover:-translate-y-2 transition-transform duration-300">
+      <div class="flex items-center gap-4 mb-4">
+        <div class="p-3 rounded-lg bg-primary-50 text-primary-600">
+          <mat-icon>Layers</mat-icon>
+        </div>
+        <h3 class="text-xl font-bold text-slate-800">Aulas Duplas e Geminadas</h3>
+      </div>
+      <p class="text-slate-600 leading-relaxed">
+        Configure regras para disciplinas que exigem tempos dobrados ou distribuição equilibrada de aulas ao longo da semana escolar.
+      </p>
+    </mat-card>
+
+    <mat-card class="p-6 border-t-4 border-secondary-500 shadow-xl hover:-translate-y-2 transition-transform duration-300">
+      <div class="flex items-center gap-4 mb-4">
+        <div class="p-3 rounded-lg bg-secondary-50 text-secondary-600">
+          <mat-icon>picture_as_pdf</mat-icon>
+        </div>
+        <h3 class="text-xl font-bold text-slate-800">Exportação Inteligente</h3>
+      </div>
+      <p class="text-slate-600 leading-relaxed">
+        Gere PDFs profissionais customizados com a logo da sua escola. Grades por turma, por professor ou visão geral da instituição em um clique.
+      </p>
+    </mat-card>
+
+    <mat-card class="p-6 border-t-4 border-primary-500 shadow-xl hover:-translate-y-2 transition-transform duration-300">
+      <div class="flex items-center gap-4 mb-4">
+        <div class="p-3 rounded-lg bg-primary-50 text-primary-600">
+          <mat-icon>history_edu</mat-icon>
+        </div>
+        <h3 class="text-xl font-bold text-slate-800">Carga Horária Precisa</h3>
+      </div>
+      <p class="text-slate-600 leading-relaxed">
+        Controle total sobre o cumprimento da matriz curricular. O software avisa se faltarem ou sobrarem tempos para qualquer disciplina.
+      </p>
+    </mat-card>
+
+    <mat-card class="p-6 border-t-4 border-secondary-500 shadow-xl hover:-translate-y-2 transition-transform duration-300">
+      <div class="flex items-center gap-4 mb-4">
+        <div class="p-3 rounded-lg bg-secondary-50 text-secondary-600">
+          <mat-icon>groups</mat-icon>
+        </div>
+        <h3 class="text-xl font-bold text-slate-800">Suporte Especializado</h3>
+      </div>
+      <p class="text-slate-600 leading-relaxed">
+        Acompanhamento direto na primeira implementação. Nossa equipe entende a complexidade do dia a dia escolar.
+      </p>
+    </mat-card>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 space-y-32">
+    
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <div class="lg:col-span-5 space-y-6">
+        <h2 class="text-3xl font-bold text-slate-900">Visão Estratégica <span class="text-primary-600">por Turma</span></h2>
+        <p class="text-lg text-slate-600 leading-relaxed">
+          Ofereça aos seus alunos uma jornada de aprendizado organizada. Nossa grade visual facilita a identificação de disciplinas e evita a sobrecarga de conteúdos densos em um único dia.
+        </p>
+        <button mat-flat-button color="primary" class="!px-8 !py-6 !rounded-xl !text-lg shadow-lg">
+          Simular Grade Agora
+        </button>
+      </div>
+      <div class="lg:col-span-7 bg-white p-4 rounded-3xl shadow-2xl border border-slate-100 group">
+        <img src="assets/images/results-classroom.png" class="rounded-2xl w-full transition-transform duration-500 group-hover:scale-[1.02]" alt="Interface Grade Turma">
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <div class="lg:col-span-7 order-2 lg:order-1 bg-white p-4 rounded-3xl shadow-2xl border border-slate-100 group">
+        <img src="assets/images/results-teacher.png" class="rounded-2xl w-full transition-transform duration-500 group-hover:scale-[1.02]" alt="Interface Grade Professor">
+      </div>
+      <div class="lg:col-span-5 order-1 lg:order-2 space-y-6">
+        <h2 class="text-3xl font-bold text-slate-900">Agenda Individual <span class="text-secondary-600">do Professor</span></h2>
+        <p class="text-lg text-slate-600 leading-relaxed">
+          Valorize sua equipe entregando horários que respeitam seu tempo de deslocamento e planejamento. Cada docente acessa seu cronograma limpo, sem ambiguidades.
+        </p>
+        <button mat-stroked-button color="accent" class="!border-secondary-500 !text-secondary-700 !px-8 !py-6 !rounded-xl !text-lg">
+          Explorar Relatórios
+        </button>
+      </div>
     </div>
   </div>
-</div>
+</section>
