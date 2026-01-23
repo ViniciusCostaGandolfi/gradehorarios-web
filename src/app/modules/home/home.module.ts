@@ -9,7 +9,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { RouterModule } from '@angular/router';
 import { HomeBannerComponent } from './pages/home/home-banner/home-banner.component';
-import { HomeServicesComponent } from './pages/home/home-services/home-services.component';
 import { HomePricingComponent } from './pages/home/home-pricing/home-pricing.component';
 import { HomeAboutUsComponent } from './pages/home/home-about-us/home-about-us.component';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -24,8 +23,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { MatSelectModule } from '@angular/material/select';
-import { HomeWhayUseComponent } from './pages/home/home-whay-use/home-whay-use.component';
-import { HomeSchoolTimetableComponent } from './pages/home/home-school-timetable/home-school-timetable.component';
 import { HomeGoFurtherComponent } from './pages/home/home-go-further/home-go-further.component';
 import { ForgotPasswordPageComponent } from './pages/forgot-password-page/forgot-password-page.component';
 import { ResetPasswordPageComponent } from './pages/reset-password-page/reset-password-page.component';
@@ -36,7 +33,6 @@ import { MatCard } from "@angular/material/card";
   declarations: [
     HomeComponent,
     HomeBannerComponent,
-    HomeServicesComponent,
     HomePricingComponent,
     HomeAboutUsComponent,
     LoginComponent,
@@ -44,8 +40,6 @@ import { MatCard } from "@angular/material/card";
     HomeGoFurtherComponent,
     ForgotPasswordPageComponent,
     ResetPasswordPageComponent,
-    HomeSchoolTimetableComponent,
-    HomeWhayUseComponent,
   ],
   imports: [
     CommonModule,

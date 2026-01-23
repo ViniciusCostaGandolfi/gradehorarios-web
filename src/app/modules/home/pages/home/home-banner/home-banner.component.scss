@@ -1,0 +1,15 @@
+/* Animação curta de entrada para os cards */
+@keyframes bounceShort {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-3px); }
+}
+
+.animate-bounce-short {
+    animation: bounceShort 0.5s ease-in-out;
+}
+
+/* Transições suaves para a grade */
+.grid > div {
+    /* Garante que o layout não quebre durante a animação */
+    backface-visibility: hidden; 
+}

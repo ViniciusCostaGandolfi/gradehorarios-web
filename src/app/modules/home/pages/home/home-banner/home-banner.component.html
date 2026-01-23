@@ -1,56 +1,119 @@
-<section class="relative isolate min-h-[90vh] flex items-center justify-center overflow-hidden bg-white px-6 py-24 sm:py-32 lg:px-8">
-  
-  <div class="absolute inset-0 -z-10 overflow-hidden">
-    <div class="absolute -top-[10%] -left-[10%] w-[50%] h-[50%] bg-primary-200/30 blur-[120px] rounded-full animate-blob"></div>
-    <div class="absolute top-[20%] -right-[10%] w-[40%] h-[60%] bg-blue-200/30 blur-[120px] rounded-full animate-blob animation-delay-2000"></div>
-    <div class="absolute -bottom-[10%] left-[20%] w-[50%] h-[40%] bg-indigo-100/40 blur-[120px] rounded-full animate-blob animation-delay-4000"></div>
-  </div>
+<section class="relative bg-white pt-24 pb-32 overflow-hidden">
+  <div class="container mx-auto px-6 md:px-12 xl:px-24 max-w-7xl">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
 
-  <div class="mx-auto max-w-5xl text-center">
-    
-    <div class="mb-8 flex justify-center animate-fade-in-down">
-      <div class="relative rounded-full px-4 py-1.5 text-sm leading-6 text-primary-700 ring-1 ring-primary-900/10 hover:ring-primary-900/20 bg-white/60 backdrop-blur-md transition-all shadow-sm">
-        <span class="flex items-center gap-2 font-semibold">
-          <span class="flex h-2 w-2 rounded-full bg-primary-500 animate-pulse"></span>
-          Novo: Algoritmo de IA para 2026
-        </span>
-      </div>
-    </div>
-
-    <h1 class="animate-fade-in-up text-balance text-6xl font-extrabold tracking-tight text-slate-900 sm:text-8xl">
-      Sua escola no <br> 
-      <span class="bg-gradient-to-r from-primary-600 via-blue-500 to-indigo-600 bg-clip-text text-transparent">
-        piloto automático.
-      </span>
-    </h1>
-
-    <p class="mt-8 animate-fade-in-up animation-delay-500 text-pretty text-lg font-medium text-slate-600 sm:text-xl/8 max-w-2xl mx-auto leading-relaxed italic">
-      "Otimize grades complexas em segundos. Deixe que nossa inteligência cuide dos conflitos enquanto você foca no que importa: o ensino."
-    </p>
-
-    <div class="mt-12 flex flex-col sm:flex-row items-center justify-center gap-5 animate-fade-in-up animation-delay-1000">
-      <button mat-flat-button 
-              color="primary"
-              class="!h-16 !px-10 !text-lg !font-bold !rounded-2xl !shadow-2xl !shadow-primary-200 hover:!scale-105 active:!scale-95 transition-all">
-        Começar Agora — Grátis
-      </button>
-      
-      <button mat-stroked-button 
-              class="!h-16 !px-10 !text-lg !font-bold !rounded-2xl !border-2 hover:!bg-slate-50 transition-all group">
-        <div class="flex items-center gap-2 text-slate-700">
-          <mat-icon class="material-symbols-outlined">play_circle</mat-icon>
-          Ver Demonstração
+      <div class="space-y-8 z-10 relative">
+        <div
+          class="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-medium text-primary-700 ring-1 ring-inset ring-primary-200 bg-primary-50/50">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-primary-600"></span>
+          </span>
+          Novo Algoritmo de IA para 2026 disponível
         </div>
-      </button>
-    </div>
 
-    <!-- <div class="mt-16 pt-8 border-t border-slate-100 animate-fade-in">
-      <p class="text-sm font-semibold text-slate-400 uppercase tracking-widest mb-6">Confiado por mais de 500 instituições</p>
-      <div class="flex flex-wrap justify-center gap-x-12 gap-y-6 opacity-40 grayscale contrast-125">
-        <span class="text-2xl font-black">EDU-CORP</span>
-        <span class="text-2xl font-black">SCHOOL-X</span>
-        <span class="text-2xl font-black">TECH-ACADEMY</span>
+        <h1 class="text-5xl md:text-6xl font-extrabold tracking-tight text-slate-900 leading-tight">
+          A grade perfeita existe. <br>
+          E ela fica pronta em <br>
+          <span class="
+                bg-gradient-to-r 
+                from-blue-500 
+                to-blue-900 
+                bg-[length:200%_200%] 
+                bg-clip-text 
+                text-transparent 
+                animate-gradient
+            ">
+            minutos.
+          </span>
+        </h1>
+
+        <p class="text-lg text-slate-600 leading-relaxed max-w-xl">
+          Otimize grades complexas em segundos. Deixe que nossa inteligência cuide dos conflitos enquanto você foca no
+          que importa: o ensino.
+        </p>
+
+        <div class="flex flex-wrap items-center gap-4">
+          <button
+            class="px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white rounded-xl font-semibold shadow-lg shadow-primary-200/50 transition-all hover:-translate-y-1 active:translate-y-0">
+            Começar Agora — Grátis
+          </button>
+
+          <button
+            class="px-8 py-4 bg-white text-slate-700 hover:bg-slate-50 border border-slate-200 rounded-xl font-semibold transition-all flex items-center gap-2 group">
+            <mat-icon class="text-primary-600 group-hover:scale-110 transition-transform">play_circle</mat-icon>
+            Ver Demonstração
+          </button>
+        </div>
+
+        <div class="pt-6 border-t border-slate-100">
+          <p class="text-sm text-slate-500">Resolvendo os problemas mais difíceis e complexos!</p>
+        </div>
       </div>
-    </div> -->
+
+      <div class="relative lg:ml-auto w-full">
+        <div
+          class="absolute -inset-4 bg-gradient-to-tr from-primary-100 to-blue-50 rounded-3xl blur-2xl opacity-60 -z-10">
+        </div>
+
+        <div
+          class="bg-slate-800 p-3 rounded-2xl shadow-2xl ring-1 ring-slate-900/10 transform hover:rotate-0 transition-transform duration-500 rotate-1">
+
+          <div class="bg-slate-900 rounded-t-xl px-4 py-3 flex items-center gap-2 border-b border-slate-700/50">
+            <div class="flex gap-1.5">
+              <div class="w-3 h-3 rounded-full bg-red-500"></div>
+              <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+              <div class="w-3 h-3 rounded-full bg-green-500"></div>
+            </div>
+            <div
+              class="ml-4 px-3 py-1 bg-slate-800 rounded-md text-xs text-slate-400 font-mono flex items-center gap-2">
+              <mat-icon class="!text-xs !w-3 !h-3 animate-spin">sync</mat-icon>
+              otimizando_grade_2026.xlsx
+            </div>
+          </div>
+
+          <div class="bg-white rounded-b-xl p-4 h-[400px] flex flex-col overflow-hidden relative">
+
+            <div class="grid grid-cols-5 gap-2 mb-2 text-center pb-2 border-b border-slate-100">
+              <div *ngFor="let day of days" class="text-xs font-bold text-slate-400 uppercase tracking-wider">
+                {{day}}
+              </div>
+            </div>
+
+            <div class="grid grid-cols-5 gap-2 flex-1 auto-rows-fr">
+              <div *ngFor="let cell of grid"
+                class="relative flex flex-col items-center justify-center p-2 rounded-lg border text-center transition-all duration-500 transform border-b-2"
+                [ngClass]="[
+                                    cell.colorClass,
+                                    cell.state === 'out' ? 'opacity-0 scale-75 blur-sm' : 'opacity-100 scale-100 blur-0',
+                                    cell.state === 'in' ? 'animate-bounce-short' : ''
+                                 ]">
+
+                <mat-icon *ngIf="cell.code === '---'" class="text-[16px] !w-4 !h-4 opacity-30">more_horiz</mat-icon>
+
+                <span *ngIf="cell.code !== '---'" class="text-xs font-bold">{{cell.code}}</span>
+                <span *ngIf="cell.code !== '---'" class="text-[9px] opacity-70 mt-0.5 hidden sm:block">Prof.
+                  Silva</span>
+
+                <div *ngIf="cell.state === 'in'"
+                  class="absolute -top-1 -right-1 w-2 h-2 bg-green-500 rounded-full animate-ping"></div>
+              </div>
+            </div>
+
+            <div
+              class="absolute bottom-4 right-4 bg-slate-900/90 backdrop-blur text-white text-xs px-3 py-1.5 rounded-full shadow-lg flex items-center gap-2 z-10">
+              <span class="relative flex h-2 w-2">
+                <span
+                  class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+              </span>
+              IA Buscando Solução Ótima...
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>

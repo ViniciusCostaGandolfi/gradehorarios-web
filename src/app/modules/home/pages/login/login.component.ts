@@ -45,4 +45,10 @@ export class LoginComponent {
         });
       }
     }
+
+
+    loginWithGoogle() {
+    console.log("Iniciar login com Google...");
+    // window.location.href = `${environment.GRADEHORARIOS_API}/oauth2/authorization/google`;
+    }
   }

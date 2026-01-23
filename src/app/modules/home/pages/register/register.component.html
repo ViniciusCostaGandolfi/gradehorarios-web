@@ -1,47 +1,48 @@
 <app-default-layout>
     <app-default-form-container>
-        <div class="flex flex-col justity-center text-center">
-            <div class=" justify-center font-bold	 mb-2 text- text-xl text-gray-800 sm:text-2xl ">
+        <div class="flex flex-col justify-center text-center">
+            <div class="justify-center font-bold mb-2 text-xl text-gray-800 sm:text-2xl">
                 Crie sua Conta
             </div>
-            <span class="justify-center text-sm text-center text-gray-500 flex-items-center ">
-                Ja tem uma conta ?
-                <a routerLink="/login" class="text-sm text-primary-500 underline hover:text-primary-700">
+            <span class="justify-center text-sm text-center text-gray-500 items-center">
+                Já tem uma conta?
+                <a mat-button routerLink="/login" class="text-sm text-primary-500 underline hover:text-primary-700">
                     entrar
                 </a>
             </span>
         </div>
 
-        <form [formGroup]="form"  (keydown.enter)="$event.preventDefault()" class="my-2">
-            <mat-form-field appearance="fill" class="w-full" >
+        <form [formGroup]="form" (keydown.enter)="$event.preventDefault()" class="my-2">
+            <mat-form-field appearance="fill" class="w-full">
                 <mat-label>Nome</mat-label>
-                <input class="w-full" matInput  type="text" formControlName="name" >
-                <mat-error *ngIf="form.controls.name.hasError('required')">
-                    Voce esqueceu de colocar um número para contato
+                <input class="w-full" matInput type="text" formControlName="name">
+                <mat-error *ngIf="form.controls['name'].hasError('required')">
+                    Você esqueceu de colocar seu nome
                 </mat-error>
             </mat-form-field>
+            
             <mat-form-field appearance="fill" class="w-full">
-                <mat-label>E-mail </mat-label>
-                <input class="w-full" matInput  type="email" formControlName="email" >
-                <mat-error *ngIf="form.controls.email.hasError('required')">
-                    Voce esqueceu de colocar um e-mail para contato
+                <mat-label>E-mail</mat-label>
+                <input class="w-full" matInput type="email" formControlName="email">
+                <mat-error *ngIf="form.controls['email'].hasError('required')">
+                    Você esqueceu de colocar um e-mail para contato
                 </mat-error>
-                <mat-error *ngIf="form.controls.email.hasError('email')">
+                <mat-error *ngIf="form.controls['email'].hasError('email')">
                     Coloque um email como seu_nome&#64;exemplo.com
                 </mat-error>
             </mat-form-field>
+
             <mat-form-field appearance="fill" class="w-full">
                 <mat-label>Senha</mat-label>
-                <input class="w-full" matInput  type="password" formControlName="password" >
-                <mat-error *ngIf="form.controls.password.hasError('required')">
-                    Voce esqueceu de colocar sua password!
+                <input class="w-full" matInput type="password" formControlName="password">
+                <mat-error *ngIf="form.controls['password'].hasError('required')">
+                    Você esqueceu de colocar sua senha!
                 </mat-error>
-            </mat-form-field>  
-            <ng-content>
-    
-            </ng-content>
+            </mat-form-field>
+            
+            <ng-content></ng-content>
         </form>
-    
+
         <div class="flex flex-col sm:flex-row">
             <app-spinner-button class="!w-full !text-xl" [isLoading]="isLoading" [type]="'button'"
                 (click)="onSubmit()">
@@ -49,6 +50,20 @@
             </app-spinner-button>
         </div>
 
+        <div class="relative flex py-5 items-center">
+            <div class="flex-grow border-t border-gray-300"></div>
+            <span class="flex-shrink-0 mx-4 text-gray-400 text-sm">Ou continue com</span>
+            <div class="flex-grow border-t border-gray-300"></div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row">
+            <button type="button" mat-stroked-button (click)="loginWithGoogle()"
+                class="!w-full !h-[50px] !text-lg !font-medium !text-gray-700 !border-gray-300 !bg-white hover:!bg-gray-50 flex items-center justify-center gap-3 shadow-sm transition-all duration-200">
+                
+                <mat-icon svgIcon="google-icon" class="scale-150 mr-1"></mat-icon>                
+                Cadastrar com Google
+            </button>
+        </div>
 
     </app-default-form-container>
 </app-default-layout>

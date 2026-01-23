@@ -10,14 +10,5 @@ import { gradeHorariosServices } from '../../../../../core/mocks/gradehorarios-s
 })
 export class HomePricingComponent {
     public gradeHorariosServices = gradeHorariosServices
-    public treeMonthFree = treeMonthFree
-    public creditDetails = [
-      { text: 'Cada crédito equivale a 1 rodada para criar horários.' },
-      { text: 'Sem limites: compre quantos créditos forem necessários.' },
-      { text: 'Validade ilimitada: seus créditos não expiram.' },
-      { text: 'Ideal para escolas pequenas e grandes.' },
-      { text: 'Ganhe 1 crédito grátis ao criar sua conta.' },
-      { text: 'Experimente sem custos com problemas menores.' }
-    ];
     
 }

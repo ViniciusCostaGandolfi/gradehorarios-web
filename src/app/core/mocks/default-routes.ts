@@ -1,25 +1,18 @@
 export const mockDefaultRoutes = [
     {
-        title: "Criador de Horários",
-        href: "/routing",
-        scrollTo: "#"
-
-    },
-    {
-        title: "Serviços",
-        href: "/",
+        title: "Funcionalidades",
+        href: "/", 
         scrollTo: "home-services-section"
     },
     {
-        title: "Créditos",
+        title: "Contato & Preço",
         href: "/",
         scrollTo: "home-pricing-section"
     },
     {
-        title: "Sobre Nós",
+        title: "Sobre",
         href: "/",
         scrollTo: "home-about-us-section"
-
     }
     
 ]

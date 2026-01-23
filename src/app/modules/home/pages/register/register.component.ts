@@ -59,6 +59,15 @@ export class RegisterComponent  {
       }
   }
 
+  loginWithGoogle() {
+    this.isLoading = true;
+    
+
+    console.log('Iniciar fluxo de login com Google');
+    
+    setTimeout(() => this.isLoading = false, 1000);
+  }
+
   formatPhone(value: string): void {
     if (!value) return;
   
