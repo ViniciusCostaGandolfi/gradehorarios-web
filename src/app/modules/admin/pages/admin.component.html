@@ -1,67 +1,139 @@
-<section class="bg-gray-50 my-2 sm:my-20">
-  <div class="mx-auto px-4 py-10 lg:flex lg:h-auto lg:items-center">
-    <div class="mx-auto max-w-6xl text-center">
+<section class="bg-gray-50 min-h-[calc(100vh-64px)] pb-12">
+  
+  <div class="bg-white shadow-sm border-b border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 flex flex-col md:flex-row items-center justify-between gap-8">
       
-      <h2 class="text-3xl font-extrabold sm:text-5xl text-gray-900">
-        Bem-vindo ao
-        <strong class="font-extrabold text-primary-700 block sm:inline">Grade Horários</strong>
-      </h2>
-
-      <div class="mt-12 flex flex-col justify-center">
-        <h3 class="text-3xl font-extrabold text-primary-700 mb-8">Como Funciona</h3>
+      <div class="text-center md:text-left max-w-2xl">
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight">
+          Olá, vamos organizar sua <span class="text-primary-600">Grade Horária?</span>
+        </h1>
+        <p class="mt-4 text-lg text-gray-500 leading-relaxed">
+          Siga nosso fluxo simples para gerar horários sem conflitos. Se tiver dúvidas no preenchimento da planilha, nossa equipe faz junto com você.
+        </p>
         
-        <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+          <button mat-flat-button color="primary" routerLink="/admin/instituicoes" class="!py-6 !px-8 !rounded-xl !text-lg shadow-lg shadow-primary-200 hover:scale-105 transition-transform">
+            <mat-icon class="mr-2">add_circle</mat-icon>
+            Começar Nova Grade
+          </button>
           
-          <div class="group p-4 rounded-lg hover:bg-white hover:shadow-lg transition-all duration-300 cursor-pointer text-gray-800 hover:text-accent-800" routerLink="/admin/instituicoes">
-            <div class="mb-3 mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary-100 text-primary-700 group-hover:bg-accent-100 group-hover:text-accent-800">
-              <mat-icon class="scale-125">school</mat-icon>
-            </div>
-            <h4 class="text-lg font-bold">1. Cadastrar Escola</h4>
-            <p class="text-sm text-gray-600">Cadastre as informações básicas da sua instituição de ensino.</p>
-          </div>
-
-          <div class="group p-4 rounded-lg hover:bg-white hover:shadow-lg transition-all duration-300 cursor-pointer text-gray-800 hover:text-accent-800" routerLink="/admin/instituicoes">
-            <div class="mb-3 mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary-100 text-primary-700 group-hover:bg-accent-100 group-hover:text-accent-800">
-              <mat-icon class="scale-125">file_download</mat-icon>
-            </div>
-            <h4 class="text-lg font-bold">2. Baixe o Modelo</h4>
-            <p class="text-sm text-gray-600">Faça o download da nossa planilha Excel padrão para preenchimento.</p>
-          </div>
-
-          <div class="group p-4 rounded-lg hover:bg-white hover:shadow-lg transition-all duration-300 cursor-pointer text-gray-800 hover:text-accent-800" routerLink="/admin/instituicoes">
-            <div class="mb-3 mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary-100 text-primary-700 group-hover:bg-accent-100 group-hover:text-accent-800">
-              <mat-icon class="scale-125">edit_note</mat-icon>
-            </div>
-            <h4 class="text-lg font-bold">3. Preencha os Dados</h4>
-            <p class="text-sm text-gray-600">Adicione suas Disciplinas, Turmas, Professores e Restrições no Excel.</p>
-          </div>
-
-          <div class="group p-4 rounded-lg hover:bg-white hover:shadow-lg transition-all duration-300 cursor-pointer text-gray-800 hover:text-accent-800" routerLink="/admin/instituicoes">
-            <div class="mb-3 mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary-100 text-primary-700 group-hover:bg-accent-100 group-hover:text-accent-800">
-              <mat-icon class="scale-125">play_arrow</mat-icon>
-            </div>
-            <h4 class="text-lg font-bold">4. Gerar Grade</h4>
-            <p class="text-sm text-gray-600">O sistema processará os dados e enviará a solução completa em PDF por e-mail.</p>
-          </div>
-
-          <a href="https://youtu.be/YIgjPOmVp3g" target="_blank" class="group p-4 rounded-lg hover:bg-white hover:shadow-lg transition-all duration-300 cursor-pointer text-gray-800 hover:text-red-600">
-            <div class="mb-3 mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-red-100 text-red-600">
-              <mat-icon class="scale-125">play_circle</mat-icon>
-            </div>
-            <h4 class="text-lg font-bold">5. Tutorial em Vídeo</h4>
-            <p class="text-sm text-gray-600">Tem dúvidas? Assista nosso passo a passo detalhado no YouTube.</p>
+          <a href="https://wa.me/5519981859845?text=Olá,%20preciso%20de%20ajuda%20para%20preencher%20minha%20planilha%20de%20horários." 
+             target="_blank"
+             mat-stroked-button 
+             class="!py-6 !px-8 !rounded-xl !text-lg !border-green-500 !text-green-700 hover:!bg-green-50 transition-colors">
+            <mat-icon class="mr-2">phone</mat-icon>
+            Chamar Consultor Agora
           </a>
-
-          <a href="https://wa.me/5519981859845?text=Olá,%20gostaria%20de%20tirar%20dúvidas%20sobre%20o%20Grade%20Horários" target="_blank" class="group p-4 rounded-lg hover:bg-white hover:shadow-lg transition-all duration-300 cursor-pointer text-gray-800 hover:text-green-600">
-            <div class="mb-3 mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100 text-green-600">
-              <mat-icon class="scale-125">chat</mat-icon> 
-            </div>
-            <h4 class="text-lg font-bold">6. Suporte WhatsApp</h4>
-            <p class="text-sm text-gray-600">Precisa de ajuda? Clique aqui e fale conosco diretamente.</p>
-          </a>
-
         </div>
+      </div>
+
+      <div class="hidden md:block opacity-90">
+         <img src="assets/images/question.webp" alt="Grade Horários" class="h-48 w-auto object-contain drop-shadow-xl hover:scale-110 transition-transform duration-500">
       </div>
     </div>
   </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12">
+    
+    <div class="text-center mb-10">
+      <h2 class="text-base font-semibold text-primary-600 tracking-wide uppercase">Passo a Passo</h2>
+      <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+        Do Excel ao Resultado em 4 Etapas
+      </p>
+    </div>
+
+    <div class="relative">
+      <div class="hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-gray-200 -z-10 transform -translate-y-1/2"></div>
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        
+        <div class="relative group bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer" routerLink="/admin/instituicoes">
+          <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-primary-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold shadow-md ring-4 ring-gray-50">1</div>
+          <div class="mt-4 text-center">
+            <div class="h-12 w-12 mx-auto bg-primary-50 text-primary-600 rounded-full flex items-center justify-center mb-4 group-hover:bg-primary-600 group-hover:text-white transition-colors">
+              <mat-icon>school</mat-icon>
+            </div>
+            <h3 class="text-lg font-bold text-gray-900">Cadastre a Escola</h3>
+            <p class="mt-2 text-sm text-gray-500">Crie o perfil da sua instituição para gerenciar múltiplos cenários.</p>
+          </div>
+        </div>
+
+        <div class="relative group bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer" routerLink="/admin/instituicoes">
+          <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-primary-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold shadow-md ring-4 ring-gray-50">2</div>
+          <div class="mt-4 text-center">
+            <div class="h-12 w-12 mx-auto bg-primary-50 text-primary-600 rounded-full flex items-center justify-center mb-4 group-hover:bg-primary-600 group-hover:text-white transition-colors">
+              <mat-icon>file_download</mat-icon>
+            </div>
+            <h3 class="text-lg font-bold text-gray-900">Baixe e Preencha</h3>
+            <p class="mt-2 text-sm text-gray-500">Download do modelo Excel. <strong>Precisa de ajuda?</strong> Nosso consultor preenche com você.</p>
+          </div>
+        </div>
+
+        <div class="relative group bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer" routerLink="/admin/instituicoes">
+          <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-primary-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold shadow-md ring-4 ring-gray-50">3</div>
+          <div class="mt-4 text-center">
+            <div class="h-12 w-12 mx-auto bg-primary-50 text-primary-600 rounded-full flex items-center justify-center mb-4 group-hover:bg-primary-600 group-hover:text-white transition-colors">
+              <mat-icon>cloud_upload</mat-icon>
+            </div>
+            <h3 class="text-lg font-bold text-gray-900">Suba o Arquivo</h3>
+            <p class="mt-2 text-sm text-gray-500">Envie a planilha preenchida. Nosso sistema valida os dados instantaneamente.</p>
+          </div>
+        </div>
+
+        <div class="relative group bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer" routerLink="/admin/instituicoes">
+          <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-green-600 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold shadow-md ring-4 ring-gray-50">4</div>
+          <div class="mt-4 text-center">
+            <div class="h-12 w-12 mx-auto bg-green-50 text-green-600 rounded-full flex items-center justify-center mb-4 group-hover:bg-green-600 group-hover:text-white transition-colors">
+              <mat-icon>check_circle</mat-icon>
+            </div>
+            <h3 class="text-lg font-bold text-gray-900">Grade Pronta!</h3>
+            <p class="mt-2 text-sm text-gray-500">Receba a solução otimizada em PDF e visualize online.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 grid grid-cols-1 md:grid-cols-2 gap-8">
+    
+    <a href="https://wa.me/5519981859845?text=Olá,%20gostaria%20de%20tirar%20dúvidas%20sobre%20o%20Grade%20Horários" 
+       target="_blank"
+       class="group relative overflow-hidden bg-gradient-to-br from-green-500 to-green-600 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+      <div class="relative z-10 flex items-start justify-between">
+        <div>
+          <h3 class="text-2xl font-bold text-white mb-2">Suporte Prioritário</h3>
+          <p class="text-green-100 max-w-xs">
+            Dúvidas na planilha? Conflitos complexos? Fale direto com um humano no WhatsApp.
+          </p>
+          <button class="mt-6 bg-white text-green-600 font-bold py-2 px-6 rounded-full text-sm group-hover:bg-green-50 transition-colors">
+            Iniciar Conversa
+          </button>
+        </div>
+        <mat-icon class="text-white !text-6xl opacity-80">whatsapp</mat-icon>
+      </div>
+      <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-white opacity-10 rounded-full group-hover:scale-150 transition-transform duration-500 ease-out"></div>
+    </a>
+
+    <a href="https://youtu.be/YIgjPOmVp3g" 
+       target="_blank"
+       class="group relative overflow-hidden bg-white border border-gray-200 rounded-2xl p-8 shadow-sm hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+      <div class="relative z-10 flex items-start justify-between">
+        <div>
+          <h3 class="text-2xl font-bold text-gray-800 mb-2">Tutorial em Vídeo</h3>
+          <p class="text-gray-500 max-w-xs">
+            Assista ao passo a passo detalhado de como preencher o modelo corretamente.
+          </p>
+          <div class="mt-6 flex items-center text-red-600 font-bold group-hover:underline">
+            <mat-icon class="mr-2">play_circle_filled</mat-icon>
+            Assistir Agora
+          </div>
+        </div>
+        <mat-icon class="text-red-500 !text-6xl opacity-80">smart_display</mat-icon>
+      </div>
+       <div class="absolute -top-10 -right-10 w-32 h-32 bg-red-50 rounded-full group-hover:scale-150 transition-transform duration-500 ease-out"></div>
+    </a>
+
+  </div>
+
 </section>
