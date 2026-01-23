@@ -71,4 +71,17 @@ export class AuthService {
     const url = `${this.apiUrl}/api/auth/reset_password`;
     return this.http.post(url, payload, { responseType: 'text' });
   }
+
+
+  loginWithGoogle(token: string): Observable<any> {
+    const url = `${this.apiUrl}/api/auth/google`;
+    return this.http.post<any>(url, { token }, { observe: 'response' }).pipe(
+      tap(response => {
+        const authToken = response.body?.token;
+        if (authToken) {
+          this.currentlyUserService.saveToken(authToken);
+        }
+      })
+    );
+  }
 }

@@ -55,12 +55,15 @@
             </div>
     
             <div class="flex flex-col sm:flex-row">
-                <button type="button" mat-stroked-button (click)="loginWithGoogle()"
-                    class="!w-full !h-[50px] !text-lg !font-medium !text-gray-700 !border-gray-300 !bg-white hover:!bg-gray-50 flex items-center justify-center gap-3 shadow-sm transition-all duration-200">
-                    
-                    <mat-icon svgIcon="google-icon" class="scale-150 mr-1"></mat-icon>                
-                    Entrar com Google
-                </button>
+                <asl-google-signin-button 
+                    type='standard' 
+                    size='large' 
+                    text='signin_with' 
+                    shape='rectangular' 
+                    theme='outline'
+                    class="w-full"
+                    >
+                </asl-google-signin-button>
             </div>
             </div>
             

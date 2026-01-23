@@ -5,6 +5,8 @@ import { AuthService } from '../../../../core/services/auth/auth.service';
 import { DialogErrorContentComponent } from '../../../../shared/dialog-error-content/dialog-error-content.component';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserCreation } from '../../../../core/interfaces/auth';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-register',
@@ -32,8 +34,33 @@ export class RegisterComponent  {
     private authService: AuthService,
     private router: Router,
     private dialog: MatDialog,
+    private snackbar: MatSnackBar,
+    private socialAuthService: SocialAuthService
 
     ) {}
+
+  ngOnInit() {
+        this.socialAuthService.authState.subscribe((user) => {
+      if (user && user.idToken) {
+        this.handleGoogleLogin(user.idToken);
+      }
+    });
+  }
+
+    handleGoogleLogin(token: string) {
+    this.isLoading = true;
+    this.authService.loginWithGoogle(token).subscribe({
+      next: () => {
+        this.snackbar.open('Login com Google realizado!', 'Fechar', { duration: 3000 });
+        this.router.navigate(['/admin']);
+        this.isLoading = false;
+      },
+      error: (error) => {
+        this.snackbar.open('Erro no login com Google.', 'Fechar', { duration: 3000 });
+        this.isLoading = false;
+      }
+    });
+  }
 
   
 

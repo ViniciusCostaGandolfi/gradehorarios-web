@@ -27,7 +27,7 @@ import { HomeGoFurtherComponent } from './pages/home/home-go-further/home-go-fur
 import { ForgotPasswordPageComponent } from './pages/forgot-password-page/forgot-password-page.component';
 import { ResetPasswordPageComponent } from './pages/reset-password-page/reset-password-page.component';
 import { MatCard } from "@angular/material/card";
-
+import { GoogleSigninButtonModule } from '@abacritt/angularx-social-login'; // Importar no decorator
 
 @NgModule({
   declarations: [
@@ -50,6 +50,7 @@ import { MatCard } from "@angular/material/card";
     MatDividerModule,
     MatGridListModule,
     MatSelectModule,
+    GoogleSigninButtonModule,
     RouterModule,
     MatInputModule,
     ReactiveFormsModule,

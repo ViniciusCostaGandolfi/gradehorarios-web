@@ -6,6 +6,7 @@ import { DialogErrorContentComponent } from '../../../../shared/dialog-error-con
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserLogin } from '../../../../core/interfaces/auth';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
 
 @Component({
   selector: 'app-login',
@@ -23,9 +24,32 @@ export class LoginComponent {
     constructor(
       private authService: AuthService,
       private router: Router,
-      private snackbar: MatSnackBar
+      private snackbar: MatSnackBar,
+      private socialAuthService: SocialAuthService 
+      ) {}
 
-    ) {}
+  ngOnInit() {
+    this.socialAuthService.authState.subscribe((user) => {
+      if (user && user.idToken) {
+        this.handleGoogleLogin(user.idToken);
+      }
+    });
+  }
+
+  handleGoogleLogin(token: string) {
+    this.isLoading = true;
+    this.authService.loginWithGoogle(token).subscribe({
+      next: () => {
+        this.snackbar.open('Login com Google realizado!', 'Fechar', { duration: 3000 });
+        this.router.navigate(['/admin']);
+        this.isLoading = false;
+      },
+      error: (error) => {
+        this.snackbar.open('Erro no login com Google.', 'Fechar', { duration: 3000 });
+        this.isLoading = false;
+      }
+    });
+  }
 
     onSubmit() {
       if (this.form.valid) {
@@ -46,9 +70,4 @@ export class LoginComponent {
       }
     }
 
-
-    loginWithGoogle() {
-    console.log("Iniciar login com Google...");
-    // window.location.href = `${environment.GRADEHORARIOS_API}/oauth2/authorization/google`;
-    }
   }
