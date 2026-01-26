@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, Inject, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -17,11 +17,16 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class AppComponent {
   title = 'Grade Horarios';
 
-  constructor(private matIconRegistry: MatIconRegistry,
-    private domSanitizer: DomSanitizer) {
+  constructor(
+    private matIconRegistry: MatIconRegistry,
+    private domSanitizer: DomSanitizer,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {
+    if (isPlatformBrowser(this.platformId)) {
       this.matIconRegistry.addSvgIcon(
-      'google-icon', // Nome que usaremos no HTML
-      this.domSanitizer.bypassSecurityTrustResourceUrl('assets/images/icons/google-icon.svg')
-    );
+        'google-icon',
+        this.domSanitizer.bypassSecurityTrustResourceUrl('assets/images/icons/google-icon.svg')
+      );
     }
+  }
 }

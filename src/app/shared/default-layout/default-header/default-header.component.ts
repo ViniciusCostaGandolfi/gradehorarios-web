@@ -9,7 +9,7 @@ import { ScrollService } from '../../../core/services/scroll-to/scroll.service';
 import { map, filter } from 'rxjs';
 import { ScrollYService } from '../../../core/services/scroll-y/scroll-y.service';
 import { mockDefaultRoutes, mockLoginRegister } from '../../../core/mocks/default-routes';
-import { MatDivider } from "@angular/material/divider";
+import { MatDividerModule } from "@angular/material/divider";
 
 @Component({
   selector: 'app-default-header',
@@ -21,7 +21,7 @@ import { MatDivider } from "@angular/material/divider";
     MatMenuModule,
     RouterModule,
     CommonModule,
-    MatDivider
+    MatDividerModule
   ],
   templateUrl: './default-header.component.html',
   styleUrl: './default-header.component.scss'
