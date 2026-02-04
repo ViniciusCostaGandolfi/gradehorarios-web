@@ -15,26 +15,26 @@ import { DefaultFormContainerComponent } from '../../../../shared/default-form-c
 import { DefaultLayoutComponent } from '../../../../shared/default-layout/default-layout.component';
 
 @Component({
-    selector: 'app-login',
-    templateUrl: './login.component.html',
-    styleUrl: './login.component.scss',
-    standalone: true,
-    imports: [DefaultLayoutComponent, DefaultFormContainerComponent, RouterLink, ReactiveFormsModule, MatFormField, MatLabel, MatInput, NgIf, MatError, SpinnerButtonComponent, GoogleSigninButtonModule]
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.scss',
+  standalone: true,
+  imports: [DefaultLayoutComponent, DefaultFormContainerComponent, RouterLink, ReactiveFormsModule, MatFormField, MatLabel, MatInput, NgIf, MatError, SpinnerButtonComponent, GoogleSigninButtonModule]
 })
 export class LoginComponent {
-    isLoading: boolean = false;
-    form = new FormGroup({
-      email: new FormControl<string>('', [Validators.email, Validators.required]),
-      password: new FormControl<string>('', [Validators.required])
+  isLoading: boolean = false;
+  form = new FormGroup({
+    email: new FormControl<string>('', [Validators.email, Validators.required]),
+    password: new FormControl<string>('', [Validators.required])
 
-    })
-    
-    constructor(
-      private authService: AuthService,
-      private router: Router,
-      private snackbar: MatSnackBar,
-      private socialAuthService: SocialAuthService 
-      ) {}
+  })
+
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private snackbar: MatSnackBar,
+    private socialAuthService: SocialAuthService
+  ) { }
 
   ngOnInit() {
     this.socialAuthService.authState.subscribe((user) => {
@@ -59,23 +59,23 @@ export class LoginComponent {
     });
   }
 
-    onSubmit() {
-      if (this.form.valid) {
-        this.isLoading = true;
-        this.authService.login(this.form.value as UserLogin).subscribe({
-          next: () => {
-            this.snackbar.open('Login realizado com sucesso!', 'Fechar', { duration: 3000 });
-            this.isLoading = false;
-            this.router.navigate(['/admin']);
-          },
-          error: (error) => {
-            console.error('Erro ao realizar login:', error);
-            const errorMessage = error?.error?.detail || 'Erro ao realizar login. Tente novamente.';
-            this.snackbar.open(errorMessage, 'Fechar', { duration: 8000 });
-            this.isLoading = false;
-          }
-        });
-      }
+  onSubmit() {
+    if (this.form.valid) {
+      this.isLoading = true;
+      this.authService.login(this.form.value as UserLogin).subscribe({
+        next: () => {
+          this.snackbar.open('Login realizado com sucesso!', 'Fechar', { duration: 3000 });
+          this.isLoading = false;
+          this.router.navigate(['/admin']);
+        },
+        error: (error) => {
+          console.error('Erro ao realizar login:', error);
+          const errorMessage = error?.error?.detail || 'Erro ao realizar login. Tente novamente.';
+          this.snackbar.open(errorMessage, 'Fechar', { duration: 8000 });
+          this.isLoading = false;
+        }
+      });
     }
-
   }
+
+}

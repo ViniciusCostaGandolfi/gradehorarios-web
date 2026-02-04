@@ -5,14 +5,13 @@ import { AuthService } from '../../../../core/services/auth/auth.service';
 import { DialogErrorContentComponent } from '../../../../shared/dialog-error-content/dialog-error-content.component';
 import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { UserCreation } from '../../../../core/interfaces/auth';
-import { SocialAuthService } from '@abacritt/angularx-social-login';
+import { GoogleSigninButtonModule, SocialAuthService } from '@abacritt/angularx-social-login';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatIcon } from '@angular/material/icon';
 import { SpinnerButtonComponent } from '../../../../shared/spinner-button/spinner-button.component';
-import { NgIf } from '@angular/common';
-import { MatInput } from '@angular/material/input';
+import { CommonModule, NgIf } from '@angular/common';
+import { MatInput, MatInputModule } from '@angular/material/input';
 import { MatFormField, MatLabel, MatError } from '@angular/material/form-field';
-import { MatAnchor, MatButton } from '@angular/material/button';
+import { MatAnchor } from '@angular/material/button';
 import { DefaultFormContainerComponent } from '../../../../shared/default-form-container/default-form-container.component';
 import { DefaultLayoutComponent } from '../../../../shared/default-layout/default-layout.component';
 
@@ -24,7 +23,7 @@ import { DefaultLayoutComponent } from '../../../../shared/default-layout/defaul
     templateUrl: './register.component.html',
     styleUrl: './register.component.scss',
     standalone: true,
-    imports: [DefaultLayoutComponent, DefaultFormContainerComponent, MatAnchor, RouterLink, ReactiveFormsModule, MatFormField, MatLabel, MatInput, NgIf, MatError, SpinnerButtonComponent, MatButton, MatIcon]
+    imports: [DefaultLayoutComponent, DefaultFormContainerComponent, CommonModule, RouterLink, ReactiveFormsModule, MatInputModule, SpinnerButtonComponent, GoogleSigninButtonModule]
 })
 export class RegisterComponent  {
 

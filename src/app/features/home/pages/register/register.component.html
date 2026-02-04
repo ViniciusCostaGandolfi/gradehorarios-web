@@ -20,7 +20,7 @@
                     Você esqueceu de colocar seu nome
                 </mat-error>
             </mat-form-field>
-            
+
             <mat-form-field appearance="fill" class="w-full">
                 <mat-label>E-mail</mat-label>
                 <input class="w-full" matInput type="email" formControlName="email">
@@ -39,13 +39,12 @@
                     Você esqueceu de colocar sua senha!
                 </mat-error>
             </mat-form-field>
-            
+
             <ng-content></ng-content>
         </form>
 
         <div class="flex flex-col sm:flex-row">
-            <app-spinner-button class="!w-full !text-xl" [isLoading]="isLoading" [type]="'button'"
-                (click)="onSubmit()">
+            <app-spinner-button class="!w-full !text-xl" [isLoading]="isLoading" [type]="'button'" (click)="onSubmit()">
                 Criar Conta
             </app-spinner-button>
         </div>
@@ -56,13 +55,10 @@
             <div class="flex-grow border-t border-gray-300"></div>
         </div>
 
-        <div class="flex flex-col sm:flex-row">
-            <button type="button" mat-stroked-button (click)="loginWithGoogle()"
-                class="!w-full !h-[50px] !text-lg !font-medium !text-gray-700 !border-gray-300 !bg-white hover:!bg-gray-50 flex items-center justify-center gap-3 shadow-sm transition-all duration-200">
-                
-                <mat-icon svgIcon="google-icon" class="scale-150 mr-1"></mat-icon>                
-                Cadastrar com Google
-            </button>
+        <div class="google-btn-container w-full overflow-hidden rounded-lg">
+            <asl-google-signin-button type='standard' size='large' text='signin_with' shape='rectangular'
+                theme='outline' class="!w-full">
+            </asl-google-signin-button>
         </div>
 
     </app-default-form-container>

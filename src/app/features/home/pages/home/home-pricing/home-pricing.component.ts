@@ -5,6 +5,7 @@ import { MatIconButton, MatButton, MatButtonModule } from '@angular/material/but
 import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
+import { RouterLink } from "@angular/router";
 
 
 @Component({
@@ -13,11 +14,12 @@ import { MatCardModule } from '@angular/material/card';
     styleUrl: './home-pricing.component.scss',
     standalone: true,
     imports: [
-                CommonModule,
-                MatIconModule,
-                MatButtonModule,
-                MatCardModule
-            ],
+    CommonModule,
+    MatIconModule,
+    MatButtonModule,
+    MatCardModule,
+    RouterLink
+],
 })
 export class HomePricingComponent {
     public gradeHorariosServices = gradeHorariosServices
