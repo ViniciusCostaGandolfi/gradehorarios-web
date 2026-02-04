@@ -9,7 +9,7 @@ import { ScrollService } from '../../../core/services/scroll-to/scroll.service';
 import { map, filter } from 'rxjs';
 import { ScrollYService } from '../../../core/services/scroll-y/scroll-y.service';
 import { mockDefaultRoutes, mockLoginRegister } from '../../../core/mocks/default-routes';
-import { MatDivider } from "@angular/material/divider";
+import { MatDividerModule } from "@angular/material/divider";
 
 @Component({
   selector: 'app-default-header',
@@ -21,7 +21,7 @@ import { MatDivider } from "@angular/material/divider";
     MatMenuModule,
     RouterModule,
     CommonModule,
-    MatDivider
+    MatDividerModule
   ],
   templateUrl: './default-header.component.html',
   styleUrl: './default-header.component.scss'
@@ -32,24 +32,22 @@ export class DefaultHeaderComponent implements OnInit {
   public mockLoginRegister = mockLoginRegister;
 
   public hasScrolled = false;
-  public isHome = true; // Nova propriedade para controlar a rota
+  public isHome = true;
 
   constructor(
     private scrollService: ScrollService, 
     public scrollYservice: ScrollYService,
-    private router: Router // Injeção do Router
+    private router: Router
   ) {}
 
   ngOnInit() {
-    // Monitora o Scroll
     this.scrollYservice.scrollY$
       .pipe(map(scrollY => scrollY > 50))
       .subscribe(hasScrolled => {
         this.hasScrolled = hasScrolled;
       });
 
-    // Monitora a Rota (URL)
-    this.checkUrl(); // Checa na inicialização
+    this.checkUrl();
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe(() => {
@@ -58,7 +56,6 @@ export class DefaultHeaderComponent implements OnInit {
   }
 
   private checkUrl() {
-    // Considera Home apenas se for a raiz exata
     this.isHome = this.router.url === '/' || this.router.url.startsWith('/#');
   }
 

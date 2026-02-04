@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { jwtDecode } from 'jwt-decode';
-
 
 export const KEY = 'GRADEHORARIOS_TOKEN';
 
@@ -8,43 +8,62 @@ export const KEY = 'GRADEHORARIOS_TOKEN';
   providedIn: 'root'
 })
 export class TokenService {
+  private readonly platformId = inject(PLATFORM_ID);
 
   saveToken(token: string): void {
-    localStorage.setItem(KEY, token)
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem(KEY, token);
+    }
   }
 
   deleteToken(): void {
-    localStorage.removeItem(KEY)
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.removeItem(KEY);
+    }
   }
 
   getToken(): string {
-    return localStorage.getItem(KEY) ?? ''
+    if (isPlatformBrowser(this.platformId)) {
+      return localStorage.getItem(KEY) ?? '';
+    }
+    // No servidor, sempre retorna vazio
+    return '';
   }
 
-
   getExp(): number {
-    try {
-      const { exp } = jwtDecode(this.getToken());
-      return exp as number
-    } catch {
-      return 0
-    }
+    const token = this.getToken();
+    // Se não tem token (ou se está no servidor), retorna 0 imediatamente
+    if (!token) return 0;
 
+    try {
+      const { exp } = jwtDecode<{ exp: number }>(token);
+      return exp || 0;
+    } catch {
+      return 0;
+    }
   }
   
   hasToken(): boolean {
-    if (this.hasExpired() && !!this.getToken()) {
-      this.deleteToken()
+    // Se estiver no servidor, retornamos false para evitar que o servidor 
+    // tente fazer chamadas autenticadas que dependem do localStorage
+    if (!isPlatformBrowser(this.platformId)) {
       return false;
     }
-    return !!this.getToken();
+
+    const token = this.getToken();
+    if (this.hasExpired() && !!token) {
+      this.deleteToken();
+      return false;
+    }
+    return !!token;
   }
 
-  hasExpired(): boolean | null {
+  hasExpired(): boolean {
+    // Se não tem token, tecnicamente não está expirado, apenas não existe
+    const exp = this.getExp();
+    if (exp === 0) return true;
+
     const currentTime = Math.floor(Date.now() / 1000);
-    return this.getExp() < currentTime
+    return exp < currentTime;
   }
-
 }
-
-

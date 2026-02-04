@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -8,8 +9,10 @@ export class IsScollUpService {
   private scrolledUp = new BehaviorSubject<boolean>(false);
   private lastScrollTop = 0;
 
-  constructor() {
-    window.addEventListener('scroll', this.detectScrollDirection.bind(this));
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+    if (isPlatformBrowser(this.platformId)) {
+      window.addEventListener('scroll', this.detectScrollDirection.bind(this));
+    }
   }
 
   get isScrolledUp(): boolean {
@@ -17,14 +20,12 @@ export class IsScollUpService {
   }
 
   private detectScrollDirection(): void {
-    let st = document.documentElement.scrollTop;
+    const st = document.documentElement.scrollTop;
     if (st < this.lastScrollTop) {
-      // Scrolled up
       this.scrolledUp.next(true);
     } else {
-      // Scrolled down
       this.scrolledUp.next(false);
     }
-    this.lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
+    this.lastScrollTop = st <= 0 ? 0 : st;
   }
 }

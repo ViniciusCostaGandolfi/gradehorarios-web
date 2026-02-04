@@ -47,7 +47,7 @@ export const homePersons = [
       id: 3,
       name: 'Vinicius Gandolfi',
       description: 'Desenvolvedor',
-      image: "assets/images/persons/vinicius.png",
+      image: "assets/images/persons/vinicius.jpeg",
       links: [
         
         {

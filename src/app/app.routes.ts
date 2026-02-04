@@ -1,20 +1,17 @@
 import { Routes } from '@angular/router';
 import { logedGuard } from './core/guards/loged/loged.guard';
 import { NotFoundComponent } from './shared/not-found/not-found.component';
+import { HOME_ROUTES } from './features/home/home-routing';
+import { ADMIN_ROUTES } from './features/admin/admin-routing';
 
 export const routes: Routes = [
     {
         path: '',
-        loadChildren: () => import('./modules/home/home.module').then(m => m.HomeModule),
-    },
-    
-    {
-        path: 'test',
-        redirectTo: 'routing'
+        children: HOME_ROUTES
     },
     {
         path: 'admin',
-        loadChildren: () => import('./modules/admin/admin.module').then(m => m.AdminModule),
+        children: ADMIN_ROUTES,
         canActivate: [logedGuard]
     },
     {
@@ -22,4 +19,3 @@ export const routes: Routes = [
         component: NotFoundComponent
     }
 ];
-
