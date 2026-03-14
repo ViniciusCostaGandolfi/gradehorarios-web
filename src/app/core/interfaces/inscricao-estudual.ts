@@ -18,10 +18,9 @@ export interface InscricaoEstadualBaseDto {
   email: string;
   telefone?: string;
   localizacao: string;
-  dependencia_administrativa: string;
-}
+} // Added closing brace here
 
-export interface InscricaoEstadualCreateDto extends InscricaoEstadualBaseDto {}
+export type IStateRegistration = Record<string, unknown>;
 
 export interface InscricaoEstadualDto extends InscricaoEstadualCreateDto {
   id: number;

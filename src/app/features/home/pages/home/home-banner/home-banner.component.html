@@ -78,36 +78,45 @@
           <div class="bg-white rounded-b-xl p-4 h-[400px] flex flex-col overflow-hidden relative">
 
             <div class="grid grid-cols-5 gap-2 mb-2 text-center pb-2 border-b border-slate-100">
-              <div *ngFor="let day of days" class="text-xs font-bold text-slate-400 uppercase tracking-wider">
-                {{day}}
-              </div>
+              @for (day of days; track day) {
+                <div class="text-xs font-bold text-slate-400 uppercase tracking-wider">
+                  {{day}}
+                </div>
+              }
             </div>
 
             <div class="grid grid-cols-5 gap-2 flex-1 auto-rows-fr">
-              <div *ngFor="let cell of grid"
-                class="relative flex flex-col items-center justify-center p-2 rounded-lg border text-center transition-all duration-500 transform border-b-2"
+              @for (cell of grid; track cell) {
+                <div
+                  class="relative flex flex-col items-center justify-center p-2 rounded-lg border text-center transition-all duration-500 transform border-b-2"
                 [ngClass]="[
                                     cell.colorClass,
                                     cell.state === 'out' ? 'opacity-0 scale-75 blur-sm' : 'opacity-100 scale-100 blur-0',
                                     cell.state === 'in' ? 'animate-bounce-short' : ''
                                  ]">
-
-                <mat-icon *ngIf="cell.code === '---'" class="text-[16px] !w-4 !h-4 opacity-30">more_horiz</mat-icon>
-
-                <span *ngIf="cell.code !== '---'" class="text-xs font-bold">{{cell.code}}</span>
-                <span *ngIf="cell.code !== '---'" class="text-[9px] opacity-70 mt-0.5 hidden sm:block">Prof.
-                  Silva</span>
-
-                <div *ngIf="cell.state === 'in'"
-                  class="absolute -top-1 -right-1 w-2 h-2 bg-green-500 rounded-full animate-ping"></div>
-              </div>
+                  @if (cell.code === '---') {
+                    <mat-icon class="text-[16px] !w-4 !h-4 opacity-30">more_horiz</mat-icon>
+                  }
+                  @if (cell.code !== '---') {
+                    <span class="text-xs font-bold">{{cell.code}}</span>
+                  }
+                  @if (cell.code !== '---') {
+                    <span class="text-[9px] opacity-70 mt-0.5 hidden sm:block">Prof.
+                    Silva</span>
+                  }
+                  @if (cell.state === 'in') {
+                    <div
+                    class="absolute -top-1 -right-1 w-2 h-2 bg-green-500 rounded-full animate-ping"></div>
+                  }
+                </div>
+              }
             </div>
 
             <div
               class="absolute bottom-4 right-4 bg-slate-900/90 backdrop-blur text-white text-xs px-3 py-1.5 rounded-full shadow-lg flex items-center gap-2 z-10">
               <span class="relative flex h-2 w-2">
                 <span
-                  class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                 <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
               </span>
               Buscando Solução Ótima...

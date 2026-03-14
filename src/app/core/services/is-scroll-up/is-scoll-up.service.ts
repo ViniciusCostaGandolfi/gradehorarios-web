@@ -1,5 +1,5 @@
-import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
@@ -8,8 +8,9 @@ import { BehaviorSubject } from 'rxjs';
 export class IsScollUpService {
   private scrolledUp = new BehaviorSubject<boolean>(false);
   private lastScrollTop = 0;
+  private platformId = inject(PLATFORM_ID);
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+  constructor() {
     if (isPlatformBrowser(this.platformId)) {
       window.addEventListener('scroll', this.detectScrollDirection.bind(this));
     }

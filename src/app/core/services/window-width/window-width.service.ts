@@ -1,7 +1,7 @@
-import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
-import { fromEvent, Observable, BehaviorSubject, of } from 'rxjs';
-import { map, distinctUntilChanged, startWith } from 'rxjs/operators';
-import { isPlatformBrowser } from '@angular/common';
+import { Injectable } from '@angular/core';
+import type { Observable } from 'rxjs';
+import { BehaviorSubject,fromEvent } from 'rxjs';
+import { distinctUntilChanged, map, startWith } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'

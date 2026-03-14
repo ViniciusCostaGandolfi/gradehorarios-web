@@ -1,16 +1,16 @@
-import { Injectable } from '@angular/core';
-import { environment } from '../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { SolutionDto } from '../../interfaces/solucao';
+import { inject, Injectable } from '@angular/core';
+import type { Observable } from 'rxjs';
+
+import { environment } from '../../../../environments/environment';
+import type { SolutionDto } from '../../interfaces/solucao';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SolucoesService {
-  private apiUrl: string = `${environment.GRADEHORARIOS_API}/api/institutions`;
-
-  constructor(private http: HttpClient) {}
+  private apiUrl = `${environment.GRADEHORARIOS_API}/api/institutions`;
+  private http = inject(HttpClient);
 
   getAll(): Observable<SolutionDto[]> {
     return this.http.get<SolutionDto[]>(`${this.apiUrl}/solutions`);
@@ -18,17 +18,17 @@ export class SolucoesService {
 
 
   get(instituicaoId: number, solucaoId: number): Observable<SolutionDto> {
-    return this.http.get<SolutionDto>(`${this.apiUrl}/${instituicaoId}/solutions/${solucaoId}`);
+    return this.http.get<SolutionDto>(`${this.apiUrl}/${instituicaoId.toString()}/solutions/${solucaoId.toString()}`);
   }
 
 
   create(instituicaoId: number, file: File): Observable<SolutionDto> {
-    let formData = new FormData()
+    const formData = new FormData()
     formData.append('file', file)
-    return this.http.post<SolutionDto>(`${this.apiUrl}/${instituicaoId}/solutions`, formData);
+    return this.http.post<SolutionDto>(`${this.apiUrl}/${instituicaoId.toString()}/solutions`, formData);
   }
 
-  delete(instituicaoId: number, solucaoId: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${instituicaoId}/solutions/${solucaoId}`);
+  delete(instituicaoId: number, solucaoId: number): Observable<unknown> {
+    return this.http.delete(`${this.apiUrl}/${instituicaoId.toString()}/solutions/${solucaoId.toString()}`);
   }
 }

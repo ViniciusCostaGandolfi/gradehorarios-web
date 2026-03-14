@@ -1,6 +1,7 @@
-import { HttpInterceptorFn } from '@angular/common/http';
-import { inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import type { HttpInterceptorFn } from '@angular/common/http';
+import { inject, PLATFORM_ID } from '@angular/core';
+
 import { TokenService } from '../services/jwt-token/token.service';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {

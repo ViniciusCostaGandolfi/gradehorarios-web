@@ -1,22 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import * as XLSX from 'xlsx'; // Importa a biblioteca para ler Excel
-
-import { InstituicoesService } from '../../../../core/services/instituicoes/instituicoes.service';
-import { InstituicaoDto } from '../../../../core/interfaces/instituicao';
-import { ColumnMode, SelectionType } from '@swimlane/ngx-datatable';
-import { SolucoesService } from '../../../../core/services/solucoes/solucoes.service';
-import { MatIcon } from '@angular/material/icon';
+import type { OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
-import { NgIf } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ColumnMode, SelectionType } from '@swimlane/ngx-datatable';
+
+import type { InstituicaoDto } from '../../../../core/interfaces/instituicao';
+// Importa a biblioteca para ler Excel
+import { InstituicoesService } from '../../../../core/services/instituicoes/instituicoes.service';
+import { SolucoesService } from '../../../../core/services/solucoes/solucoes.service';
+
 
 // Interface para estruturar os dados das abas do Excel
 interface SheetData {
   name: string;
-  rows: any[];
-  columns: { name: string, prop: string }[];
+  rows: Record<string, unknown>[];
+  columns: { name: string; prop: string }[];
 }
 
 @Component({
@@ -24,28 +25,28 @@ interface SheetData {
     templateUrl: './nova-solucao-page.component.html',
     styleUrls: ['./nova-solucao-page.component.scss'],
     standalone: true,
-    imports: [NgIf, MatProgressSpinner, MatButton, MatIcon]
+    imports: [MatProgressSpinner, MatButton, MatIcon]
 })
 export class NovaSolucaoPageComponent implements OnInit {
 
   instituicao: InstituicaoDto | null = null;
-  isLoading: boolean = true;
-  isProcessingFile: boolean = false;
-  isDragging: boolean = false;
+  isLoading = true;
+  isProcessingFile = false;
+  isDragging = false;
 
   uploadedFile: File | null = null;
   excelSheets: SheetData[] = [];
+   
+  excelData: Record<string, unknown>[] = [];
 
   ColumnMode = ColumnMode;
   SelectionType = SelectionType;
 
-  constructor(
-    private instituicoesService: InstituicoesService,
-    private activateRoute: ActivatedRoute,
-    private router: Router,
-    private snackBar: MatSnackBar,
-    private solucoesService: SolucoesService
-  ) { }
+  private instituicoesService = inject(InstituicoesService);
+  private activateRoute = inject(ActivatedRoute);
+  private router = inject(Router);
+  private snackBar = inject(MatSnackBar);
+  private solucoesService = inject(SolucoesService);
 
   ngOnInit(): void {
     const instituicaoIdStr = this.activateRoute.snapshot.paramMap.get('instituicaoId');
@@ -65,7 +66,7 @@ export class NovaSolucaoPageComponent implements OnInit {
         this.instituicao = response;
         this.isLoading = false;
       },
-      error: (err) => {
+      error: (err: unknown) => {
         console.error('Erro ao buscar instituição', err);
         this.snackBar.open("Ocorreu um erro ao buscar os dados da instituição.", "Fechar", {
           duration: 5000,
@@ -140,12 +141,12 @@ export class NovaSolucaoPageComponent implements OnInit {
           duration: 5000,
           panelClass: ['snackbar-success']
         });
-        this.router.navigate(['/admin/instituicoes/' + response.institutionId]);
+        void this.router.navigate([`/admin/instituicoes/${response.institutionId.toString()}`]);
       },
-      error: (err) => {
+      error: (err: { error?: { detail?: string } }) => {
         this.isProcessingFile = false;
         
-        const errorMessage = err.error?.detail || "Ocorreu um erro desconhecido ao validar o arquivo.";
+        const errorMessage = err.error?.detail ?? "Ocorreu um erro desconhecido ao validar o arquivo.";
         
         this.snackBar.open(errorMessage, "Fechar", {
           panelClass: ['snackbar-error']

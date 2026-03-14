@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+
 import { homePersons } from '../../../../../core/mocks/persons';
-import { MatButton, MatButtonModule } from '@angular/material/button';
-import { MatCard, MatCardModule } from '@angular/material/card';
-import { CommonModule, NgFor } from '@angular/common';
-import { MatIcon, MatIconModule } from '@angular/material/icon';
 
 @Component({
     selector: 'app-home-about-us',
@@ -11,11 +11,10 @@ import { MatIcon, MatIconModule } from '@angular/material/icon';
     styleUrl: './home-about-us.component.scss',
     standalone: true,
     imports: [
-            CommonModule,
-            MatIconModule,
-            MatButtonModule,
-            MatCardModule
-        ],
+    MatIconModule,
+    MatButtonModule,
+    MatCardModule
+],
 })
 export class HomeAboutUsComponent {
 

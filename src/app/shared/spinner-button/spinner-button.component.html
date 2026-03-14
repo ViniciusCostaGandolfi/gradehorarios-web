@@ -1,10 +1,8 @@
 <button mat-raised-button color="primary" type="submit" [class]="class" [disabled]="isLoading || disabled" (click)="handleClick($event)">
-    <ng-container *ngIf="!isLoading; else loading">
-      <ng-content></ng-content>
-    </ng-container>
-  
-    <ng-template #loading>
-      <mat-spinner diameter="20"></mat-spinner>
-    </ng-template>
+  @if (!isLoading) {
+    <ng-content></ng-content>
+  } @else {
+    <mat-spinner diameter="20"></mat-spinner>
+  }
+
 </button>
-  

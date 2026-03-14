@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { treeMonthFree } from '../../../../../core/mocks/thee-month-free';
-import { gradeHorariosServices } from '../../../../../core/mocks/gradehorarios-services';
-import { MatIconButton, MatButton, MatButtonModule } from '@angular/material/button';
-import { MatIcon, MatIconModule } from '@angular/material/icon';
-import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from "@angular/router";
+
+import { gradeHorariosServices } from '../../../../../core/mocks/gradehorarios-services';
 
 
 @Component({
@@ -14,7 +13,6 @@ import { RouterLink } from "@angular/router";
     styleUrl: './home-pricing.component.scss',
     standalone: true,
     imports: [
-    CommonModule,
     MatIconModule,
     MatButtonModule,
     MatCardModule,

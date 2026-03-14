@@ -1,37 +1,37 @@
-import { Component } from '@angular/core';
-import { InstituicoesService } from '../../../../core/services/instituicoes/instituicoes.service';
-import { Router } from '@angular/router';
-import { InstituicaoDto } from '../../../../core/interfaces/instituicao';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatTableDataSource, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow } from '@angular/material/table';
-import { MatDialog } from '@angular/material/dialog';
-import { CreateOrUpdateInstituicaoDialogComponent } from '../../components/create-or-update-instituicao-dialog/create-or-update-instituicao-dialog.component';
-import { MatCard, MatCardHeader, MatCardTitle, MatCardSubtitle, MatCardActions } from '@angular/material/card';
-import { MatIcon } from '@angular/material/icon';
+import type { OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatButton, MatIconButton } from '@angular/material/button';
+import { MatCard, MatCardActions,MatCardHeader, MatCardSubtitle, MatCardTitle } from '@angular/material/card';
+import { MatDialog } from '@angular/material/dialog';
+import { MatIcon } from '@angular/material/icon';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
-import { NgIf, NgFor } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatCell, MatCellDef, MatColumnDef, MatHeaderCell, MatHeaderCellDef, MatHeaderRow, MatHeaderRowDef, MatRow,MatRowDef, MatTable, MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
+
+import type { InstituicaoDto } from '../../../../core/interfaces/instituicao';
+import { InstituicoesService } from '../../../../core/services/instituicoes/instituicoes.service';
+import { CreateOrUpdateInstituicaoDialogComponent } from '../../components/create-or-update-instituicao-dialog/create-or-update-instituicao-dialog.component';
+
 
 @Component({
     selector: 'app-instituicoes-page',
     templateUrl: './instituicoes-page.component.html',
     styleUrl: './instituicoes-page.component.scss',
     standalone: true,
-    imports: [NgIf, MatProgressSpinner, MatButton, MatIcon, NgFor, MatCard, MatCardHeader, MatCardTitle, MatCardSubtitle, MatCardActions, MatIconButton, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow]
+    imports: [MatProgressSpinner, MatButton, MatIcon, MatCard, MatCardHeader, MatCardTitle, MatCardSubtitle, MatCardActions, MatIconButton, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow]
 })
-export class InstituicoesPageComponent {
+export class InstituicoesPageComponent implements OnInit {
 
   public dataSource = new MatTableDataSource<InstituicaoDto>();
   public displayedColumns: string[] = ['nome', 'codigo', 'acoes'];
   public instituicoes: InstituicaoDto[] = [];
-  public isLoading: boolean = true;
+  public isLoading = true;
 
-  constructor(
-    private instituicoesService: InstituicoesService,
-    private router: Router,
-    private snackBar: MatSnackBar,
-    private dialog: MatDialog
-  ) { }
+  private instituicoesService = inject(InstituicoesService);
+  private router = inject(Router);
+  private snackBar = inject(MatSnackBar);
+  private dialog = inject(MatDialog);
 
   ngOnInit(): void {
     this.carregarInstituicoes();
@@ -41,7 +41,7 @@ export class InstituicoesPageComponent {
     this.isLoading = true;
     this.instituicoesService.getAll().subscribe({
       next: (dados) => {
-        if (dados && dados.length > 0) {
+        if (dados.length > 0) {
           this.instituicoes = dados;
           this.dataSource.data = dados;
         } else {
@@ -53,7 +53,7 @@ export class InstituicoesPageComponent {
         }
         this.isLoading = false;
       },
-      error: (err) => {
+      error: (err: unknown) => {
         console.error('Erro ao buscar instituições', err);
         this.snackBar.open("Ocorreu um erro ao buscar as instituições.", "Fechar", {
           duration: 5000,
@@ -65,7 +65,7 @@ export class InstituicoesPageComponent {
   }
 
   public acessarInstituicao(instituicaoId: number): void {
-    this.router.navigate(['/admin/instituicoes', instituicaoId]);
+    void this.router.navigate(['/admin/instituicoes', instituicaoId]);
   }
 
   public openDialog(instituicaoData?: InstituicaoDto): void {
@@ -73,10 +73,10 @@ export class InstituicoesPageComponent {
         data: instituicaoData,
         height: "60%",
         width: "60%"
-      }).afterClosed().subscribe(resp => {
+      }).afterClosed().subscribe((resp: InstituicaoDto | undefined) => {
         if (resp) {
-          this.carregarInstituicoes()
+          this.carregarInstituicoes();
         }
-      })
+      });
   }
 }

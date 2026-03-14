@@ -1,111 +1,115 @@
-<div *ngIf="isLoading" class="flex justify-center items-center h-screen">
+@if (isLoading) {
+  <div class="flex justify-center items-center h-screen">
     <mat-spinner diameter="50"></mat-spinner>
-</div>
+  </div>
+}
 
-<div *ngIf="!isLoading && instituicao" class="p-4 sm:p-6 md:p-8 bg-gray-50 min-h-screen">
-
+@if (!isLoading && instituicao) {
+  <div class="p-4 sm:p-6 md:p-8 bg-gray-50 min-h-screen">
     <header
-        class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 pb-4 border-b border-gray-200">
-        <div>
-            <h1 class="text-3xl font-bold text-gray-800">{{ instituicao.name }}</h1>
-            <p class="text-md text-gray-500">Código da Instituição: {{ instituicao.code }}</p>
-        </div>
-        <button mat-flat-button color="primary" (click)="runNewSolution()" class="mt-4 sm:mt-0">
-            <mat-icon>play_arrow</mat-icon>
-            Rodar Novos Dados
-        </button>
+      class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 pb-4 border-b border-gray-200">
+      <div>
+        <h1 class="text-3xl font-bold text-gray-800">{{ instituicao.name }}</h1>
+        <p class="text-md text-gray-500">Código da Instituição: {{ instituicao.code }}</p>
+      </div>
+      <button mat-flat-button color="primary" (click)="runNewSolution()" class="mt-4 sm:mt-0">
+        <mat-icon>play_arrow</mat-icon>
+        Rodar Novos Dados
+      </button>
     </header>
-
     <main>
-        <h2 class="text-2xl font-semibold text-gray-700 mb-6">Histórico de Soluções</h2>
-
-        <ng-container *ngIf="instituicao.solutions && instituicao.solutions.length > 0; else noSolutions">
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-                <mat-card *ngFor="let solucao of instituicao.solutions"
-                    class="rounded-lg shadow-md transition-shadow duration-300"
-                    [ngClass]="{'hover:shadow-xl': !isSolutionRunning(solucao.solverStatus)}">
-
-                    <mat-card-header class="border-b border-gray-200 pb-3">
-                        <mat-card-title class="text-lg font-semibold text-gray-800">
-                            Arquivo: {{ solucao.modelName }}
-                        </mat-card-title>
-                        <mat-card-subtitle class="text-sm pt-1 flex flex-col md:flex-row md:items-center">
-                            <span class="text-gray-500">
-                                Criado em: {{ solucao.createdAt | date:'dd/MM/yyyy HH:mm' }}
-                            </span>
-                            <span class="md:ml-4 font-medium" [ngClass]="getStatusColorClass(solucao.solverStatus)">
-                                Status: {{ solucao.solverStatus || 'N/A' }}
-                            </span>
-
-                            <span *ngIf="isSolutionCompleted(solucao.solverStatus)"
-                                class="md:ml-4 text-xs text-gray-600">
-                                Duração: {{ formatDuration(solucao.durationMillis) }}
-                            </span>
-
-                            <span *ngIf="solucao.errorMessage" class="md:ml-4 text-xs text-red-500">
-                                Erro: {{ solucao.errorMessage }}
-                            </span>
-                            <span *ngIf="solucao.warningMessage" class="md:ml-4 text-xs text-yellow-500">
-                                Aviso: {{ solucao.warningMessage }}
-                            </span>
-                        </mat-card-subtitle>
-                    </mat-card-header>
-
-                    <mat-card-actions class="p-4 flex justify-end gap-2 flex-wrap">
-                        <a *ngIf="solucao.inputPath" mat-stroked-button color="primary"
-                            [href]="solucao.inputPath" target="_blank" matTooltip="Baixar PDF Professores">
-                            <mat-icon>download</mat-icon>
-                            Input
-                        </a>
-                        <a *ngIf="solucao.teacherOutputPath" mat-stroked-button color="primary"
-                            [href]="solucao.teacherOutputPath" target="_blank" matTooltip="Baixar PDF Professores">
-                            <mat-icon>picture_as_pdf</mat-icon>
-                            Prof.
-                        </a>
-
-                        <a *ngIf="solucao.classroomOutputPath" mat-stroked-button color="primary"
-                            [href]="solucao.classroomOutputPath" target="_blank" matTooltip="Baixar PDF Turmas">
-                            <mat-icon>picture_as_pdf</mat-icon>
-                            Turmas
-                        </a>
-
-                        <a mat-flat-button
-                            [routerLink]="'/admin/instituicoes/' + instituicao.id +'/solucoes/' + solucao.id"
-                            [color]="isSolutionCompleteSuccess(solucao.solverStatus) ? 'accent' : 'default'"
-                            [disabled]="!isSolutionCompleteSuccess(solucao.solverStatus) && !isSolutionRunning(solucao.solverStatus)"
-                            >
-
-                            <mat-icon>visibility</mat-icon>
-                            {{ isSolutionRunning(solucao.solverStatus) ? 'Processando...' : 'Ver Grade' }}
-                        </a>
-
-                        <a mat-stroked-button color="warn" (click)="deleteSolution(solucao.id)"
-                            [disabled]="isSolutionProcessing(solucao.solverStatus) || isSolutionCompleteSuccess(solucao.solverStatus)">
-                            <mat-icon>delete</mat-icon>
-                            Deletar
-                        </a>
-                    </mat-card-actions>
-                </mat-card>
-            </div>
-
-        </ng-container>
-
-        <ng-template #noSolutions>
-            <div class="text-center py-12 px-6 bg-white rounded-lg shadow-md">
-                <mat-icon class="scale-150 text-gray-400">info</mat-icon>
-                <p class="mt-4 text-lg text-gray-600">Nenhuma solução foi executada para esta instituição ainda.</p>
-                <p class="text-sm text-gray-500">Clique em "Rodar Novos Dados" para começar.</p>
-            </div>
-        </ng-template>
-
+      <h2 class="text-2xl font-semibold text-gray-700 mb-6">Histórico de Soluções</h2>
+      @if (instituicao.solutions && instituicao.solutions.length > 0) {
+        <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+          @for (solucao of instituicao.solutions; track solucao) {
+            <mat-card
+              class="rounded-lg shadow-md transition-shadow duration-300"
+              [ngClass]="{'hover:shadow-xl': !isSolutionRunning(solucao.solverStatus)}">
+              <mat-card-header class="border-b border-gray-200 pb-3">
+                <mat-card-title class="text-lg font-semibold text-gray-800">
+                  Arquivo: {{ solucao.modelName }}
+                </mat-card-title>
+                <mat-card-subtitle class="text-sm pt-1 flex flex-col md:flex-row md:items-center">
+                  <span class="text-gray-500">
+                    Criado em: {{ solucao.createdAt | date:'dd/MM/yyyy HH:mm' }}
+                  </span>
+                  <span class="md:ml-4 font-medium" [ngClass]="getStatusColorClass(solucao.solverStatus)">
+                    Status: {{ solucao.solverStatus || 'N/A' }}
+                  </span>
+                  @if (isSolutionCompleted(solucao.solverStatus)) {
+                    <span
+                      class="md:ml-4 text-xs text-gray-600">
+                      Duração: {{ formatDuration(solucao.durationMillis) }}
+                    </span>
+                  }
+                  @if (solucao.errorMessage) {
+                    <span class="md:ml-4 text-xs text-red-500">
+                      Erro: {{ solucao.errorMessage }}
+                    </span>
+                  }
+                  @if (solucao.warningMessage) {
+                    <span class="md:ml-4 text-xs text-yellow-500">
+                      Aviso: {{ solucao.warningMessage }}
+                    </span>
+                  }
+                </mat-card-subtitle>
+              </mat-card-header>
+              <mat-card-actions class="p-4 flex justify-end gap-2 flex-wrap">
+                @if (solucao.inputPath) {
+                  <a mat-stroked-button color="primary"
+                    [href]="solucao.inputPath" target="_blank" matTooltip="Baixar PDF Professores">
+                    <mat-icon>download</mat-icon>
+                    Input
+                  </a>
+                }
+                @if (solucao.teacherOutputPath) {
+                  <a mat-stroked-button color="primary"
+                    [href]="solucao.teacherOutputPath" target="_blank" matTooltip="Baixar PDF Professores">
+                    <mat-icon>picture_as_pdf</mat-icon>
+                    Prof.
+                  </a>
+                }
+                @if (solucao.classroomOutputPath) {
+                  <a mat-stroked-button color="primary"
+                    [href]="solucao.classroomOutputPath" target="_blank" matTooltip="Baixar PDF Turmas">
+                    <mat-icon>picture_as_pdf</mat-icon>
+                    Turmas
+                  </a>
+                }
+                <a mat-flat-button
+                  [routerLink]="'/admin/instituicoes/' + instituicao.id +'/solucoes/' + solucao.id"
+                  [color]="isSolutionCompleteSuccess(solucao.solverStatus) ? 'accent' : 'default'"
+                  [disabled]="!isSolutionCompleteSuccess(solucao.solverStatus) && !isSolutionRunning(solucao.solverStatus)"
+                  >
+                  <mat-icon>visibility</mat-icon>
+                  {{ isSolutionRunning(solucao.solverStatus) ? 'Processando...' : 'Ver Grade' }}
+                </a>
+                <a mat-stroked-button color="warn" (click)="deleteSolution(solucao.id)"
+                  [disabled]="isSolutionProcessing(solucao.solverStatus) || isSolutionCompleteSuccess(solucao.solverStatus)">
+                  <mat-icon>delete</mat-icon>
+                  Deletar
+                </a>
+              </mat-card-actions>
+            </mat-card>
+          }
+        </div>
+      } @else {
+        <div class="text-center py-12 px-6 bg-white rounded-lg shadow-md">
+          <mat-icon class="scale-150 text-gray-400">info</mat-icon>
+          <p class="mt-4 text-lg text-gray-600">Nenhuma solução foi executada para esta instituição ainda.</p>
+          <p class="text-sm text-gray-500">Clique em "Rodar Novos Dados" para começar.</p>
+        </div>
+      }
     </main>
-</div>
+  </div>
+}
 
-<div *ngIf="!isLoading && !instituicao" class="flex justify-center items-center h-screen">
+@if (!isLoading && !instituicao) {
+  <div class="flex justify-center items-center h-screen">
     <div class="text-center">
-        <mat-icon class="text-6xl text-red-400">error_outline</mat-icon>
-        <h2 class="mt-4 text-2xl font-bold text-gray-700">Instituição não encontrada</h2>
-        <p class="text-gray-500">Não foi possível carregar os dados. Verifique o ID e tente novamente.</p>
+      <mat-icon class="text-6xl text-red-400">error_outline</mat-icon>
+      <h2 class="mt-4 text-2xl font-bold text-gray-700">Instituição não encontrada</h2>
+      <p class="text-gray-500">Não foi possível carregar os dados. Verifique o ID e tente novamente.</p>
     </div>
-</div>
+  </div>
+}

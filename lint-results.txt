@@ -1,0 +1,245 @@
+
+Linting "gradehorarios-web"...
+
+/home/vinicius/Documents/grade-horarios/gradehorarios-web/src/app/app.component.ts
+  20:5  error  Prefer using the inject() function over constructor parameter injection. Use Angular's migration schematic to automatically refactor: ng generate @angular/core:inject  @angular-eslint/prefer-inject
+  21:5  error  Prefer using the inject() function over constructor parameter injection. Use Angular's migration schematic to automatically refactor: ng generate @angular/core:inject  @angular-eslint/prefer-inject
+  22:5  error  Prefer using the inject() function over constructor parameter injection. Use Angular's migration schematic to automatically refactor: ng generate @angular/core:inject  @angular-eslint/prefer-inject
+
+/home/vinicius/Documents/grade-horarios/gradehorarios-web/src/app/core/helpers/solution.ts
+   6:7   error  The case statement does not have a shared enum type with the switch predicate  @typescript-eslint/no-unsafe-enum-comparison
+   7:7   error  The case statement does not have a shared enum type with the switch predicate  @typescript-eslint/no-unsafe-enum-comparison
+   8:7   error  The case statement does not have a shared enum type with the switch predicate  @typescript-eslint/no-unsafe-enum-comparison
+   9:7   error  The case statement does not have a shared enum type with the switch predicate  @typescript-eslint/no-unsafe-enum-comparison
+  10:7   error  The case statement does not have a shared enum type with the switch predicate  @typescript-eslint/no-unsafe-enum-comparison
+  17:7   error  The case statement does not have a shared enum type with the switch predicate  @typescript-eslint/no-unsafe-enum-comparison
+  18:7   error  The case statement does not have a shared enum type with the switch predicate  @typescript-eslint/no-unsafe-enum-comparison
+  19:7   error  The case statement does not have a shared enum type with the switch predicate  @typescript-eslint/no-unsafe-enum-comparison
+  20:7   error  The case statement does not have a shared enum type with the switch predicate  @typescript-eslint/no-unsafe-enum-comparison
+  21:7   error  The case statement does not have a shared enum type with the switch predicate  @typescript-eslint/no-unsafe-enum-comparison
+  28:28  error  Unnecessary conditional, the types have no overlap                             @typescript-eslint/no-unnecessary-condition
+
+/home/vinicius/Documents/grade-horarios/gradehorarios-web/src/app/core/mocks/admin-routes.ts
+  54:8  error  Missing return type on function  @typescript-eslint/explicit-function-return-type
+
+/home/vinicius/Documents/grade-horarios/gradehorarios-web/src/app/core/services/auth/auth.service.ts
+  27:15  warning  Unsafe assignment of an `any` value                                     @typescript-eslint/no-unsafe-assignment
+  27:42  warning  Unsafe member access .token on an `any` value                           @typescript-eslint/no-unsafe-member-access
+  29:47  warning  Unsafe argument of type `any` assigned to a parameter of type `string`  @typescript-eslint/no-unsafe-argument
+  41:15  warning  Unsafe assignment of an `any` value                                     @typescript-eslint/no-unsafe-assignment
+  41:42  warning  Unsafe member access .token on an `any` value                           @typescript-eslint/no-unsafe-member-access
+  43:47  warning  Unsafe argument of type `any` assigned to a parameter of type `string`  @typescript-eslint/no-unsafe-argument
+  54:15  warning  Unsafe assignment of an `any` value                                     @typescript-eslint/no-unsafe-assignment
+  54:36  warning  Unsafe member access .body on an `any` value                            @typescript-eslint/no-unsafe-member-access
+  56:47  warning  Unsafe argument of type `any` assigned to a parameter of type `string`  @typescript-eslint/no-unsafe-argument
+  84:15  warning  Unsafe assignment of an `any` value                                     @typescript-eslint/no-unsafe-assignment
+  84:42  warning  Unsafe member access .token on an `any` value                           @typescript-eslint/no-unsafe-member-access
+  86:47  warning  Unsafe argument of type `any` assigned to a parameter of type `string`  @typescript-eslint/no-unsafe-argument
+
+/home/vinicius/Documents/grade-horarios/gradehorarios-web/src/app/core/services/currently-user/currently-user.service.ts
+  22:3  error  Missing return type on function  @typescript-eslint/explicit-function-return-type
+  28:3  error  Missing return type on function  @typescript-eslint/explicit-function-return-type
+  32:3  error  Missing return type on function  @typescript-eslint/explicit-function-return-type
+  37:3  error  Missing return type on function  @typescript-eslint/explicit-function-return-type
+  42:3  error  Missing return type on function  @typescript-eslint/explicit-function-return-type
+
+/home/vinicius/Documents/grade-horarios/gradehorarios-web/src/app/core/services/instituicoes/instituicoes.service.ts
+  22:64  warning  Invalid type "number" of template literal expression          @typescript-eslint/restrict-template-expressions
+  26:64  warning  Invalid type "number" of template literal expression          @typescript-eslint/restrict-template-expressions
+  35:61  warning  Invalid type "any" of template literal expression             @typescript-eslint/restrict-template-expressions
+  40:29  error    void is only valid as a return type or generic type argument  @typescript-eslint/no-invalid-void-type
+  40:53  warning  Invalid type "number" of template literal expression          @typescript-eslint/restrict-template-expressions
+
+/home/vinicius/Documents/grade-horarios/gradehorarios-web/src/app/core/services/solucoes/solucoes.service.ts
+  21:57  warning  Invalid type "number" of template literal expression          @typescript-eslint/restrict-template-expressions
+  21:84  warning  Invalid type "number" of template literal expression          @typescript-eslint/restrict-template-expressions
+  28:58  warning  Invalid type "number" of template literal expression          @typescript-eslint/restrict-template-expressions
+  32:29  error    void is only valid as a return type or generic type argument  @typescript-eslint/no-invalid-void-type
+  32:53  warning  Invalid type "number" of template literal expression          @typescript-eslint/restrict-template-expressions
+  32:80  warning  Invalid type "number" of template literal expression          @typescript-eslint/restrict-template-expressions
+
+/home/vinicius/Documents/grade-horarios/gradehorarios-web/src/app/core/services/validate-images/validate-images.service.ts
+  11:3   error  Useless constructor           @typescript-eslint/no-useless-constructor
+  38:23  error  Forbidden non-null assertion  @typescript-eslint/no-non-null-assertion
+
+/home/vinicius/Documents/grade-horarios/gradehorarios-web/src/app/features/admin/components/admin-layout/admin-layout.component.ts
+  25:5  error  Prefer using the inject() function over constructor parameter injection. Use Angular's migration schematic to automatically refactor: ng generate @angular/core:inject  @angular-eslint/prefer-inject
+  26:5  error  Prefer using the inject() function over constructor parameter injection. Use Angular's migration schematic to automatically refactor: ng generate @angular/core:inject  @angular-eslint/prefer-inject
+
+/home/vinicius/Documents/grade-horarios/gradehorarios-web/src/app/features/admin/components/admin-layout/admin-user-menu/admin-user-menu.component.ts
+  21:5  error    Prefer using the inject() function over constructor parameter injection. Use Angular's migration schematic to automatically refactor: ng generate @angular/core:inject  @angular-eslint/prefer-inject
+  22:5  error    Prefer using the inject() function over constructor parameter injection. Use Angular's migration schematic to automatically refactor: ng generate @angular/core:inject  @angular-eslint/prefer-inject
+  27:3  error    Missing return type on function                                                                                                                                         @typescript-eslint/explicit-function-return-type
+  28:5  warning  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator      @typescript-eslint/no-floating-promises
+  31:3  error    Missing return type on function                                                                                                                                         @typescript-eslint/explicit-function-return-type
+  33:5  warning  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator      @typescript-eslint/no-floating-promises
+
+/home/vinicius/Documents/grade-horarios/gradehorarios-web/src/app/features/admin/components/create-or-update-instituicao-dialog/create-or-update-instituicao-dialog.component.ts
+  35:5   error  Prefer using the inject() function over constructor parameter injection. Use Angular's migration schematic to automatically refactor: ng generate @angular/core:inject  @angular-eslint/prefer-inject
+  36:5   error  Prefer using the inject() function over constructor parameter injection. Use Angular's migration schematic to automatically refactor: ng generate @angular/core:inject  @angular-eslint/prefer-inject
+  37:5   error  Prefer using the inject() function over constructor parameter injection. Use Angular's migration schematic to automatically refactor: ng generate @angular/core:inject  @angular-eslint/prefer-inject
+  38:5   error  Prefer using the inject() function over constructor parameter injection. Use Angular's migration schematic to automatically refactor: ng generate @angular/core:inject  @angular-eslint/prefer-inject
+  44:24  error  Unnecessary conditional, value is always truthy                                                                                                                         @typescript-eslint/no-unnecessary-condition
+  46:9   error  Unnecessary conditional, value is always truthy                                                                                                                         @typescript-eslint/no-unnecessary-condition
+
+/home/vinicius/Documents/grade-horarios/gradehorarios-web/src/app/features/admin/components/custom-paginator/custom-paginator.ts
+  16:22  warning  Invalid type "number" of template literal expression  @typescript-eslint/restrict-template-expressions
+  21:15  warning  Invalid type "number" of template literal expression  @typescript-eslint/restrict-template-expressions
+  21:35  warning  Invalid type "number" of template literal expression  @typescript-eslint/restrict-template-expressions
+  21:50  warning  Invalid type "number" of template literal expression  @typescript-eslint/restrict-template-expressions
+
+/home/vinicius/Documents/grade-horarios/gradehorarios-web/src/app/features/admin/components/solution-result-dialog/solution-result-dialog.component.ts
+   60:5   error  Prefer using the inject() function over constructor parameter injection. Use Angular's migration schematic to automatically refactor: ng generate @angular/core:inject  @angular-eslint/prefer-inject
+   61:5   error  Prefer using the inject() function over constructor parameter injection. Use Angular's migration schematic to automatically refactor: ng generate @angular/core:inject  @angular-eslint/prefer-inject
+   62:5   error  Prefer using the inject() function over constructor parameter injection. Use Angular's migration schematic to automatically refactor: ng generate @angular/core:inject  @angular-eslint/prefer-inject
+   74:3   error  Missing return type on function                                                                                                                                         @typescript-eslint/explicit-function-return-type
+   77:40  error  Unnecessary conditional, value is always truthy                                                                                                                         @typescript-eslint/no-unnecessary-condition
+   78:42  error  Unnecessary conditional, value is always truthy                                                                                                                         @typescript-eslint/no-unnecessary-condition
+  101:3   error  Missing return type on function                                                                                                                                         @typescript-eslint/explicit-function-return-type
+  107:3   error  Missing return type on function                                                                                                                                         @typescript-eslint/explicit-function-return-type
+
+/home/vinicius/Documents/grade-horarios/gradehorarios-web/src/app/features/admin/pages/instituicao-page/instituicao-page.component.ts
+   43:5   error    Prefer using the inject() function over constructor parameter injection. Use Angular's migration schematic to automatically refactor: ng generate @angular/core:inject  @angular-eslint/prefer-inject
+   44:5   error    Prefer using the inject() function over constructor parameter injection. Use Angular's migration schematic to automatically refactor: ng generate @angular/core:inject  @angular-eslint/prefer-inject
+   45:5   error    Prefer using the inject() function over constructor parameter injection. Use Angular's migration schematic to automatically refactor: ng generate @angular/core:inject  @angular-eslint/prefer-inject
+   46:5   error    Prefer using the inject() function over constructor parameter injection. Use Angular's migration schematic to automatically refactor: ng generate @angular/core:inject  @angular-eslint/prefer-inject
+   47:5   error    Prefer using the inject() function over constructor parameter injection. Use Angular's migration schematic to automatically refactor: ng generate @angular/core:inject  @angular-eslint/prefer-inject
+   48:5   error    Prefer using the inject() function over constructor parameter injection. Use Angular's migration schematic to automatically refactor: ng generate @angular/core:inject  @angular-eslint/prefer-inject
+   66:26  error    Unnecessary conditional, expected left-hand side of `??` operator to be possibly null or undefined                                                                      @typescript-eslint/no-unnecessary-condition
+   68:36  error    Unnecessary conditional, value is always truthy                                                                                                                         @typescript-eslint/no-unnecessary-condition
+   68:52  error    Unnecessary optional chain on a non-nullish value                                                                                                                       @typescript-eslint/no-unnecessary-condition
+   88:7   warning  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator      @typescript-eslint/no-floating-promises
+  114:44  warning  Invalid type "number" of template literal expression                                                                                                                    @typescript-eslint/restrict-template-expressions
+  120:16  error    The two values in this comparison do not have a shared enum type                                                                                                        @typescript-eslint/no-unsafe-enum-comparison
+  120:40  error    The two values in this comparison do not have a shared enum type                                                                                                        @typescript-eslint/no-unsafe-enum-comparison
+  124:16  error    The two values in this comparison do not have a shared enum type                                                                                                        @typescript-eslint/no-unsafe-enum-comparison
+  124:40  error    The two values in this comparison do not have a shared enum type                                                                                                        @typescript-eslint/no-unsafe-enum-comparison
+  128:16  error    The two values in this comparison do not have a shared enum type                                                                                                        @typescript-eslint/no-unsafe-enum-comparison
+  142:13  error    Unnecessary conditional, value is `never`                                                                                                                               @typescript-eslint/no-unnecessary-condition
+  143:35  warning  Unsafe call of a(n) `error` type typed value                                                                                                                            @typescript-eslint/no-unsafe-call
+  151:27  error    Unnecessary conditional, the types have no overlap                                                                                                                      @typescript-eslint/no-unnecessary-condition
+  157:15  warning  Invalid type "number" of template literal expression                                                                                                                    @typescript-eslint/restrict-template-expressions
+  157:27  warning  Invalid type "number" of template literal expression                                                                                                                    @typescript-eslint/restrict-template-expressions
+  162:7   error    The case statement does not have a shared enum type with the switch predicate                                                                                           @typescript-eslint/no-unsafe-enum-comparison
+  163:7   error    The case statement does not have a shared enum type with the switch predicate                                                                                           @typescript-eslint/no-unsafe-enum-comparison
+  164:7   error    The case statement does not have a shared enum type with the switch predicate                                                                                           @typescript-eslint/no-unsafe-enum-comparison
+  165:7   error    The case statement does not have a shared enum type with the switch predicate                                                                                           @typescript-eslint/no-unsafe-enum-comparison
+  166:7   error    The case statement does not have a shared enum type with the switch predicate                                                                                           @typescript-eslint/no-unsafe-enum-comparison
+  173:7   error    The case statement does not have a shared enum type with the switch predicate                                                                                           @typescript-eslint/no-unsafe-enum-comparison
+  174:7   error    The case statement does not have a shared enum type with the switch predicate                                                                                           @typescript-eslint/no-unsafe-enum-comparison
+  175:7   error    The case statement does not have a shared enum type with the switch predicate                                                                                           @typescript-eslint/no-unsafe-enum-comparison
+  176:7   error    The case statement does not have a shared enum type with the switch predicate                                                                                           @typescript-eslint/no-unsafe-enum-comparison
+  177:7   error    The case statement does not have a shared enum type with the switch predicate                                                                                           @typescript-eslint/no-unsafe-enum-comparison
+  193:54  warning  Invalid type "number" of template literal expression                                                                                                                    @typescript-eslint/restrict-template-expressions
+  195:45  error    Forbidden non-null assertion                                                                                                                                            @typescript-eslint/no-non-null-assertion
+  195:45  error    Optional chain expressions can return undefined by design - using a non-null assertion is unsafe and wrong                                                              @typescript-eslint/no-non-null-asserted-optional-chain
+  205:31  warning  Unsafe assignment of an `any` value                                                                                                                                     @typescript-eslint/no-unsafe-assignment
+  205:50  warning  Unsafe member access .error on an `any` value                                                                                                                           @typescript-eslint/no-unsafe-member-access
+  205:64  error    Prefer using nullish coalescing operator (`??`) instead of a logical or (`||`), as it is a safer operator                                                               @typescript-eslint/prefer-nullish-coalescing
+  207:44  warning  Unsafe argument of type `any` assigned to a parameter of type `string`                                                                                                  @typescript-eslint/no-unsafe-argument
+
+/home/vinicius/Documents/grade-horarios/gradehorarios-web/src/app/features/admin/pages/instituicoes-page/instituicoes-page.component.ts
+  32:5   error    Prefer using the inject() function over constructor parameter injection. Use Angular's migration schematic to automatically refactor: ng generate @angular/core:inject  @angular-eslint/prefer-inject
+  33:5   error    Prefer using the inject() function over constructor parameter injection. Use Angular's migration schematic to automatically refactor: ng generate @angular/core:inject  @angular-eslint/prefer-inject
+  34:5   error    Prefer using the inject() function over constructor parameter injection. Use Angular's migration schematic to automatically refactor: ng generate @angular/core:inject  @angular-eslint/prefer-inject
+  35:5   error    Prefer using the inject() function over constructor parameter injection. Use Angular's migration schematic to automatically refactor: ng generate @angular/core:inject  @angular-eslint/prefer-inject
+  46:13  error    Unnecessary conditional, value is always truthy                                                                                                                         @typescript-eslint/no-unnecessary-condition
+  70:5   warning  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator      @typescript-eslint/no-floating-promises
+
+/home/vinicius/Documents/grade-horarios/gradehorarios-web/src/app/features/admin/pages/nova-solucao-page/nova-solucao-page.component.ts
+   19:9   error    Unexpected any. Specify a different type                                                                                                                                @typescript-eslint/no-explicit-any
+   47:5   error    Prefer using the inject() function over constructor parameter injection. Use Angular's migration schematic to automatically refactor: ng generate @angular/core:inject  @angular-eslint/prefer-inject
+   48:5   error    Prefer using the inject() function over constructor parameter injection. Use Angular's migration schematic to automatically refactor: ng generate @angular/core:inject  @angular-eslint/prefer-inject
+   49:5   error    Prefer using the inject() function over constructor parameter injection. Use Angular's migration schematic to automatically refactor: ng generate @angular/core:inject  @angular-eslint/prefer-inject
+   50:5   error    Prefer using the inject() function over constructor parameter injection. Use Angular's migration schematic to automatically refactor: ng generate @angular/core:inject  @angular-eslint/prefer-inject
+   51:5   error    Prefer using the inject() function over constructor parameter injection. Use Angular's migration schematic to automatically refactor: ng generate @angular/core:inject  @angular-eslint/prefer-inject
+  147:9   warning  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator      @typescript-eslint/no-floating-promises
+  147:31  error    Operands of '+' operations must be a number or string. Got `string` + `number`                                                                                          @typescript-eslint/restrict-plus-operands
+  152:15  warning  Unsafe assignment of an `any` value                                                                                                                                     @typescript-eslint/no-unsafe-assignment
+  152:34  warning  Unsafe member access .error on an `any` value                                                                                                                           @typescript-eslint/no-unsafe-member-access
+  152:48  error    Prefer using nullish coalescing operator (`??`) instead of a logical or (`||`), as it is a safer operator                                                               @typescript-eslint/prefer-nullish-coalescing
+  154:28  warning  Unsafe argument of type `any` assigned to a parameter of type `string`                                                                                                  @typescript-eslint/no-unsafe-argument
+
+/home/vinicius/Documents/grade-horarios/gradehorarios-web/src/app/features/admin/pages/solucao-page/solucao-page.component.ts
+   52:5   error    Prefer using the inject() function over constructor parameter injection. Use Angular's migration schematic to automatically refactor: ng generate @angular/core:inject  @angular-eslint/prefer-inject
+   53:5   error    Prefer using the inject() function over constructor parameter injection. Use Angular's migration schematic to automatically refactor: ng generate @angular/core:inject  @angular-eslint/prefer-inject
+   54:5   error    Prefer using the inject() function over constructor parameter injection. Use Angular's migration schematic to automatically refactor: ng generate @angular/core:inject  @angular-eslint/prefer-inject
+   55:5   error    Prefer using the inject() function over constructor parameter injection. Use Angular's migration schematic to automatically refactor: ng generate @angular/core:inject  @angular-eslint/prefer-inject
+   73:3   error    Missing return type on function                                                                                                                                         @typescript-eslint/explicit-function-return-type
+   92:3   error    Missing return type on function                                                                                                                                         @typescript-eslint/explicit-function-return-type
+   95:40  error    Unnecessary conditional, value is always truthy                                                                                                                         @typescript-eslint/no-unnecessary-condition
+   96:42  error    Unnecessary conditional, value is always truthy                                                                                                                         @typescript-eslint/no-unnecessary-condition
+  119:3   error    Missing return type on function                                                                                                                                         @typescript-eslint/explicit-function-return-type
+  125:3   error    Missing return type on function                                                                                                                                         @typescript-eslint/explicit-function-return-type
+  142:9   warning  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator      @typescript-eslint/no-floating-promises
+
+/home/vinicius/Documents/grade-horarios/gradehorarios-web/src/app/features/home/pages/forgot-password-page/forgot-password-page.component.ts
+  33:5   error    Prefer using the inject() function over constructor parameter injection. Use Angular's migration schematic to automatically refactor: ng generate @angular/core:inject  @angular-eslint/prefer-inject
+  34:5   error    Prefer using the inject() function over constructor parameter injection. Use Angular's migration schematic to automatically refactor: ng generate @angular/core:inject  @angular-eslint/prefer-inject
+  35:5   error    Prefer using the inject() function over constructor parameter injection. Use Angular's migration schematic to automatically refactor: ng generate @angular/core:inject  @angular-eslint/prefer-inject
+  46:19  error    Forbidden non-null assertion                                                                                                                                            @typescript-eslint/no-non-null-assertion
+  51:9   warning  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator      @typescript-eslint/no-floating-promises
+
+/home/vinicius/Documents/grade-horarios/gradehorarios-web/src/app/features/home/pages/register/register.component.ts
+  58:17  warning  Unsafe assignment of an `any` value            @typescript-eslint/no-unsafe-assignment
+  66:17  warning  Unsafe assignment of an `any` value            @typescript-eslint/no-unsafe-assignment
+  66:47  warning  Unsafe member access .error on an `any` value  @typescript-eslint/no-unsafe-member-access
+  69:15  warning  Unsafe assignment of an `any` value            @typescript-eslint/no-unsafe-assignment
+
+/home/vinicius/Documents/grade-horarios/gradehorarios-web/src/app/features/home/pages/reset-password-page/reset-password-page.component.ts
+  31:5   error    Prefer using the inject() function over constructor parameter injection. Use Angular's migration schematic to automatically refactor: ng generate @angular/core:inject  @angular-eslint/prefer-inject
+  32:5   error    Prefer using the inject() function over constructor parameter injection. Use Angular's migration schematic to automatically refactor: ng generate @angular/core:inject  @angular-eslint/prefer-inject
+  33:5   error    Prefer using the inject() function over constructor parameter injection. Use Angular's migration schematic to automatically refactor: ng generate @angular/core:inject  @angular-eslint/prefer-inject
+  34:5   error    Prefer using the inject() function over constructor parameter injection. Use Angular's migration schematic to automatically refactor: ng generate @angular/core:inject  @angular-eslint/prefer-inject
+  39:7   warning  Unsafe assignment of an `any` value                                                                                                                                     @typescript-eslint/no-unsafe-assignment
+  58:20  error    Forbidden non-null assertion                                                                                                                                            @typescript-eslint/no-non-null-assertion
+  64:9   warning  Promises must be awaited, end with a call to .catch, end with a call to .then with a rejection handler or be explicitly marked as ignored with the `void` operator      @typescript-eslint/no-floating-promises
+
+/home/vinicius/Documents/grade-horarios/gradehorarios-web/src/app/shared/can-delete-dialog/can-delete-dialog.component.ts
+  20:5  error  Prefer using the inject() function over constructor parameter injection. Use Angular's migration schematic to automatically refactor: ng generate @angular/core:inject  @angular-eslint/prefer-inject
+  21:5  error  Prefer using the inject() function over constructor parameter injection. Use Angular's migration schematic to automatically refactor: ng generate @angular/core:inject  @angular-eslint/prefer-inject
+
+/home/vinicius/Documents/grade-horarios/gradehorarios-web/src/app/shared/default-form-container/default-form-container.component.spec.ts
+  16:39  warning  Unsafe argument of type error typed assigned to a parameter of type `Type<DefaultFormComponent>`  @typescript-eslint/no-unsafe-argument
+  17:5   warning  Unsafe assignment of an error typed value                                                         @typescript-eslint/no-unsafe-assignment
+
+/home/vinicius/Documents/grade-horarios/gradehorarios-web/src/app/shared/default-layout/default-header/default-header.component.ts
+  41:5  error  Prefer using the inject() function over constructor parameter injection. Use Angular's migration schematic to automatically refactor: ng generate @angular/core:inject  @angular-eslint/prefer-inject
+  42:5  error  Prefer using the inject() function over constructor parameter injection. Use Angular's migration schematic to automatically refactor: ng generate @angular/core:inject  @angular-eslint/prefer-inject
+  43:5  error  Prefer using the inject() function over constructor parameter injection. Use Angular's migration schematic to automatically refactor: ng generate @angular/core:inject  @angular-eslint/prefer-inject
+  46:3  error  Missing return type on function                                                                                                                                         @typescript-eslint/explicit-function-return-type
+  61:3  error  Missing return type on function                                                                                                                                         @typescript-eslint/explicit-function-return-type
+  65:3  error  Missing return type on function                                                                                                                                         @typescript-eslint/explicit-function-return-type
+
+/home/vinicius/Documents/grade-horarios/gradehorarios-web/src/app/shared/dialog-error-content/dialog-error-content.component.ts
+  26:5  error  Prefer using the inject() function over constructor parameter injection. Use Angular's migration schematic to automatically refactor: ng generate @angular/core:inject  @angular-eslint/prefer-inject
+  27:5  error  Prefer using the inject() function over constructor parameter injection. Use Angular's migration schematic to automatically refactor: ng generate @angular/core:inject  @angular-eslint/prefer-inject
+
+/home/vinicius/Documents/grade-horarios/gradehorarios-web/src/app/shared/dialog-success/dialog-success.component.ts
+  24:5  error  Prefer using the inject() function over constructor parameter injection. Use Angular's migration schematic to automatically refactor: ng generate @angular/core:inject  @angular-eslint/prefer-inject
+  25:5  error  Prefer using the inject() function over constructor parameter injection. Use Angular's migration schematic to automatically refactor: ng generate @angular/core:inject  @angular-eslint/prefer-inject
+
+/home/vinicius/Documents/grade-horarios/gradehorarios-web/src/app/shared/google-btn/google-btn.component.ts
+  28:50  warning  Unsafe member access .accounts on an `any` value                                    @typescript-eslint/no-unsafe-member-access
+  34:5   warning  Unsafe call of a(n) `any` typed value                                               @typescript-eslint/no-unsafe-call
+  34:12  warning  Unsafe member access .accounts on an `any` value                                    @typescript-eslint/no-unsafe-member-access
+  41:5   warning  Unsafe call of a(n) `any` typed value                                               @typescript-eslint/no-unsafe-call
+  41:12  warning  Unsafe member access .accounts on an `any` value                                    @typescript-eslint/no-unsafe-member-access
+  49:19  warning  Unsafe member access .credential on an `any` value                                  @typescript-eslint/no-unsafe-member-access
+  50:31  warning  Unsafe argument of type `any` assigned to a parameter of type `string | undefined`  @typescript-eslint/no-unsafe-argument
+  50:40  warning  Unsafe member access .credential on an `any` value                                  @typescript-eslint/no-unsafe-member-access
+
+/home/vinicius/Documents/grade-horarios/gradehorarios-web/src/app/shared/not-found/not-found.component.ts
+  20:3  error  Missing return type on function  @typescript-eslint/explicit-function-return-type
+
+/home/vinicius/Documents/grade-horarios/gradehorarios-web/src/app/shared/spinner-button/spinner-button.component.ts
+  25:3  error  Missing return type on function  @typescript-eslint/explicit-function-return-type
+
+/home/vinicius/Documents/grade-horarios/gradehorarios-web/src/main.server.ts
+  6:22  error  Missing return type on function  @typescript-eslint/explicit-function-return-type
+
+/home/vinicius/Documents/grade-horarios/gradehorarios-web/src/main.ts
+  7:11  error  Prefer the safe `: unknown` for a `catch` callback variable  @typescript-eslint/use-unknown-in-catch-callback-variable
+
+✖ 180 problems (121 errors, 59 warnings)
+

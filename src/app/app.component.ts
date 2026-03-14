@@ -1,27 +1,26 @@
-import { Component, Inject, PLATFORM_ID } from '@angular/core';
-import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, inject, PLATFORM_ID } from '@angular/core';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
-    CommonModule, 
-    RouterOutlet,
-  ],
+    RouterOutlet
+],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
   title = 'Grade Horarios';
 
-  constructor(
-    private matIconRegistry: MatIconRegistry,
-    private domSanitizer: DomSanitizer,
-    @Inject(PLATFORM_ID) private platformId: Object
-  ) {
+  private matIconRegistry = inject(MatIconRegistry);
+  private domSanitizer = inject(DomSanitizer);
+  private platformId = inject(PLATFORM_ID);
+
+  constructor() {
     if (isPlatformBrowser(this.platformId)) {
       this.matIconRegistry.addSvgIcon(
         'google-icon',

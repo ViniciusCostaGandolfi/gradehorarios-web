@@ -1,41 +1,41 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from '../../../../core/services/auth/auth.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { SpinnerButtonComponent } from '../../../../shared/spinner-button/spinner-button.component';
-import { NgIf } from '@angular/common';
+import type { OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule,Validators } from '@angular/forms';
+import { MatError,MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
-import { MatFormField, MatLabel, MatError } from '@angular/material/form-field';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import type { Params } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { AuthService } from '../../../../core/services/auth/auth.service';
 import { DefaultFormContainerComponent } from '../../../../shared/default-form-container/default-form-container.component';
 import { DefaultLayoutComponent } from '../../../../shared/default-layout/default-layout.component';
+import { SpinnerButtonComponent } from '../../../../shared/spinner-button/spinner-button.component';
 
 @Component({
     selector: 'app-reset-password-page',
     templateUrl: './reset-password-page.component.html',
     styleUrls: ['./reset-password-page.component.scss'],
     standalone: true,
-    imports: [DefaultLayoutComponent, DefaultFormContainerComponent, ReactiveFormsModule, MatFormField, MatLabel, MatInput, NgIf, MatError, SpinnerButtonComponent]
+    imports: [DefaultLayoutComponent, DefaultFormContainerComponent, ReactiveFormsModule, MatFormField, MatLabel, MatInput, MatError, SpinnerButtonComponent]
 })
 export class ResetPasswordPageComponent implements OnInit {
-  isLoading: boolean = false;
-  token: string = '';
+  isLoading = false;
+  token = '';
 
   form = new FormGroup({
     password: new FormControl<string>('', [Validators.required, Validators.minLength(6)]),
     confirmPassword: new FormControl<string>('', [Validators.required]),
   });
 
-  constructor(
-    private route: ActivatedRoute,
-    private authService: AuthService,
-    private router: Router,
-    private snackbar: MatSnackBar
-  ) {}
+  private route = inject(ActivatedRoute);
+  private authService = inject(AuthService);
+  private router = inject(Router);
+  private snackbar = inject(MatSnackBar);
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      this.token = params['resetPasswordToken'];
+    this.route.params.subscribe((params: Params) => {
+      this.token = params['resetPasswordToken'] as string;
     });
   }
 
@@ -54,16 +54,16 @@ export class ResetPasswordPageComponent implements OnInit {
     
     const payload = {
       token: this.token,
-      newPassword: this.form.value.password as string
+      newPassword: this.form.value.password ?? ''
     };
 
     this.authService.resetPassword(payload).subscribe({
       next: () => {
         this.snackbar.open('Senha redefinida com sucesso!', 'Fechar', { duration: 3000 });
-        this.router.navigate(['/login']);
+        void this.router.navigate(['/login']);
         this.isLoading = false;
       },
-      error: (error) => {
+      error: (error: unknown) => {
         console.error('Erro ao redefinir password:', error);
         this.snackbar.open('Erro ao redefinir password. Tente novamente.', 'Fechar', { duration: 3000 });
         this.isLoading = false;

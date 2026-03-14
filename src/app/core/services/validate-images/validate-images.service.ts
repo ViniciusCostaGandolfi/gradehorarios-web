@@ -1,16 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Observable, from } from 'rxjs';
-import { map, mergeMap, toArray } from 'rxjs/operators';
+import { from,Observable } from 'rxjs';
+import { mergeMap, toArray } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ValidateImagesService {
 
-  constructor() { }
-
   hasValid(files: File[]): boolean {
-    for (let file of files) {
+    for (const file of files) {
       if (file.type !== 'image/png') {
         alert('Apenas imagens .png são aceitas.');
         return false;
@@ -34,10 +32,11 @@ export class ValidateImagesService {
     return new Observable<string>(observer => {
       const reader = new FileReader();
       reader.onload = e => {
-        observer.next(e.target!.result as string);
+        const result = e.target?.result;
+        if (result) observer.next(result as string);
         observer.complete();
       };
-      reader.onerror = error => observer.error(error);
+      reader.onerror = error => { observer.error(error); };
       reader.readAsDataURL(file);
     });
   }

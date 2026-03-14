@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
-import { WindowWidthService } from '../../../../core/services/window-width/window-width.service';
-import { AdminRoute } from '../../../../core/interfaces/admin-route';
-import { CurrentlyUserService } from '../../../../core/services/currently-user/currently-user.service';
-import { getRoutes } from '../../../../core/mocks/admin-routes';
-import { FooterComponent } from '../../../../shared/footer/footer.component';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+
+import type { AdminRoute } from '../../../../core/interfaces/admin-route';
+import { getRoutes } from '../../../../core/mocks/admin-routes';
+import { CurrentlyUserService } from '../../../../core/services/currently-user/currently-user.service';
+import { WindowWidthService } from '../../../../core/services/window-width/window-width.service';
+import { FooterComponent } from '../../../../shared/footer/footer.component';
 import { AdminHeaderComponent } from './admin-header/admin-header.component';
 
 
@@ -20,11 +21,10 @@ export class AdminLayoutComponent {
   public isMobile = false;
   public adminRoutes: AdminRoute[] = []
 
-  constructor(
-    private windowService: WindowWidthService,
-    private currentUserService: CurrentlyUserService
+  private windowService = inject(WindowWidthService);
+  private currentUserService = inject(CurrentlyUserService);
 
-    ) {
+  constructor() {
     this.windowService.isMobile().subscribe(isMobile => this.isMobile = isMobile);
     this.currentUserService.getUser().subscribe(tokenUsuario => {
         if (tokenUsuario) {

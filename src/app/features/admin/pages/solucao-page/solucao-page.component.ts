@@ -1,42 +1,44 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { DatePipe,NgClass } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { MatTableDataSource, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow, MatNoDataRow } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { SolutionDto } from '../../../../core/interfaces/solucao';
-import { SolucoesService } from '../../../../core/services/solucoes/solucoes.service';
-import { SolverResponseDto, TimetableDto } from '../../components/solution-result-dialog/solution-result-dialog.component';
-import { formatDuration, getStatusBadgeClass, getStatusLabel } from '../../../../core/helpers/solution';
-import { MatInput } from '@angular/material/input';
+import type { OnInit} from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
+import { MatAnchor, MatButton,MatIconButton } from '@angular/material/button';
 import { MatFormField, MatLabel, MatSuffix } from '@angular/material/form-field';
-import { MatTabGroup, MatTab, MatTabLabel } from '@angular/material/tabs';
-import { MatProgressSpinner } from '@angular/material/progress-spinner';
-import { NgIf, NgClass, NgFor, DatePipe } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
+import { MatInput } from '@angular/material/input';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import type { MatSort } from '@angular/material/sort';
+import { MatCell, MatCellDef, MatColumnDef, MatHeaderCell, MatHeaderCellDef, MatHeaderRow, MatHeaderRowDef, MatNoDataRow,MatRow, MatRowDef, MatTable, MatTableDataSource } from '@angular/material/table';
+import { MatTab, MatTabGroup, MatTabLabel } from '@angular/material/tabs';
 import { MatTooltip } from '@angular/material/tooltip';
-import { MatIconButton, MatAnchor, MatButton } from '@angular/material/button';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { formatDuration, getStatusBadgeClass, getStatusLabel } from '../../../../core/helpers/solution';
+import type { SolutionDto } from '../../../../core/interfaces/solucao';
+import { SolucoesService } from '../../../../core/services/solucoes/solucoes.service';
+import type { SolverResponseDto, TimetableDto } from '../../components/solution-result-dialog/solution-result-dialog.component';
 
 @Component({
     selector: 'app-solucao-page',
     templateUrl: './solucao-page.component.html',
     styleUrl: './solucao-page.component.scss',
     standalone: true,
-    imports: [MatIconButton, MatTooltip, MatIcon, NgIf, NgClass, MatAnchor, MatProgressSpinner, MatButton, MatTabGroup, MatTab, MatTabLabel, MatFormField, MatLabel, MatInput, MatSuffix, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, NgFor, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow, MatNoDataRow, MatPaginator, DatePipe]
+    imports: [MatIconButton, MatTooltip, MatIcon, NgClass, MatAnchor, MatProgressSpinner, MatButton, MatTabGroup, MatTab, MatTabLabel, MatFormField, MatLabel, MatInput, MatSuffix, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow, MatNoDataRow, MatPaginator, DatePipe]
 })
 export class SolucaoPageComponent implements OnInit {
-isLoading = true;
+  isLoading = true;
   hasError = false;
   solutionData: SolutionDto | null = null;
 
   dataSourceTeachers = new MatTableDataSource<TimetableDto>([]);
   dataSourceClassrooms = new MatTableDataSource<TimetableDto>([]);
 
-  getStatusLabel = getStatusLabel
+  getStatusLabel = getStatusLabel;
 
-  getStatusBadgeClass = getStatusBadgeClass
+  getStatusBadgeClass = getStatusBadgeClass;
 
-  formatDuration = formatDuration
+  formatDuration = formatDuration;
 
   displayedColumns = ['name', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
 
@@ -46,19 +48,14 @@ isLoading = true;
   @ViewChild('paginatorClassrooms') paginatorClassrooms!: MatPaginator;
   @ViewChild('sortClassrooms') sortClassrooms!: MatSort;
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private http: HttpClient,
-    private solucoesService: SolucoesService
-  ) {}
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private http = inject(HttpClient);
+  private solucoesService = inject(SolucoesService);
 
   ngOnInit(): void {
     const solutionId = this.route.snapshot.paramMap.get('solucaoId');
     const instituicaoId = this.route.snapshot.paramMap.get('instituicaoId');
-
-    console.log(solutionId, instituicaoId);
-
 
     if (solutionId) {
       this.loadSolutionData(Number(instituicaoId), Number(solutionId));
@@ -68,7 +65,7 @@ isLoading = true;
     }
   }
 
-  loadSolutionData(instituicaoId: number, solucaoId: number) {
+  loadSolutionData(instituicaoId: number, solucaoId: number): void {
     this.solucoesService.get(instituicaoId, solucaoId).subscribe({
       next: (solution) => {
         this.solutionData = solution;
@@ -79,7 +76,7 @@ isLoading = true;
           this.isLoading = false;
         }
       },
-      error: (err) => {
+      error: (err: unknown) => {
         console.error('Erro ao buscar solução', err);
         this.hasError = true;
         this.isLoading = false;
@@ -87,11 +84,11 @@ isLoading = true;
     });
   }
 
-  fetchJsonContent(url: string) {
+  fetchJsonContent(url: string): void {
     this.http.get<SolverResponseDto>(url).subscribe({
       next: (response) => {
-        this.dataSourceTeachers.data = response.teachers || [];
-        this.dataSourceClassrooms.data = response.classrooms || [];
+        this.dataSourceTeachers.data = response.teachers;
+        this.dataSourceClassrooms.data = response.classrooms;
         
         this.setupFilterPredicate(this.dataSourceTeachers);
         this.setupFilterPredicate(this.dataSourceClassrooms);
@@ -106,7 +103,7 @@ isLoading = true;
 
         this.isLoading = false;
       },
-      error: (err) => {
+      error: (err: unknown) => {
         console.error('Erro ao baixar JSON', err);
         this.hasError = true;
         this.isLoading = false;
@@ -114,13 +111,13 @@ isLoading = true;
     });
   }
 
-  applyFilter(event: Event, dataSource: MatTableDataSource<TimetableDto>) {
+  applyFilter(event: Event, dataSource: MatTableDataSource<TimetableDto>): void {
     const filterValue = (event.target as HTMLInputElement).value;
     dataSource.filter = filterValue.trim().toLowerCase();
     if (dataSource.paginator) dataSource.paginator.firstPage();
   }
 
-  setupFilterPredicate(dataSource: MatTableDataSource<TimetableDto>) {
+  setupFilterPredicate(dataSource: MatTableDataSource<TimetableDto>): void {
     dataSource.filterPredicate = (data: TimetableDto, filter: string) => {
       const fullString = [
         data.name,
@@ -137,7 +134,7 @@ isLoading = true;
 
   goBack(): void {
     if (this.solutionData?.institutionId) {
-        this.router.navigate(['/admin/instituicoes', this.solutionData.institutionId]);
+        void this.router.navigate(['/admin/instituicoes', this.solutionData.institutionId]);
     } else {
         window.history.back();
     }

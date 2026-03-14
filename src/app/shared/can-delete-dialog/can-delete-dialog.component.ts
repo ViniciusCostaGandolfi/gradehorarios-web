@@ -1,6 +1,7 @@
-import { Component, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MAT_DIALOG_DATA, MatDialogActions, MatDialogContent, MatDialogModule, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -15,12 +16,8 @@ import { RouterModule } from '@angular/router';
   styleUrl: './can-delete-dialog.component.scss'
 })
 export class CanDeleteDialogComponent {
-  constructor(
-    public dialogRef: MatDialogRef<CanDeleteDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { 
-      message: string,
-    }
-  ) {}
+  public dialogRef = inject(MatDialogRef<CanDeleteDialogComponent>);
+  public data: { message: string } = inject(MAT_DIALOG_DATA);
 
   onConfirm(): void {
     this.dialogRef.close(true);

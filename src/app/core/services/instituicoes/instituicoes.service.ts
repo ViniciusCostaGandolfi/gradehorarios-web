@@ -1,42 +1,42 @@
-import { Injectable } from '@angular/core';
-import { environment } from '../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { InstituicaoFullDto, InstituicaoCreateDto, InstituicaoDto, InstituicaoUpdateDto } from '../../interfaces/instituicao';
-import { Observable } from 'rxjs';
+import { inject, Injectable } from '@angular/core';
+import type { Observable } from 'rxjs';
+
+import { environment } from '../../../../environments/environment';
+import type { InstituicaoCreateDto, InstituicaoDto, InstituicaoFullDto, InstituicaoUpdateDto } from '../../interfaces/instituicao';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InstituicoesService {
 
-  private apiUrl: string = `${environment.GRADEHORARIOS_API}/api/institutions`;
-
-  constructor(private http: HttpClient) {}
+  private apiUrl = `${environment.GRADEHORARIOS_API}/api/institutions`;
+  private http = inject(HttpClient);
 
   getAll(): Observable<InstituicaoDto[]> {
-    return this.http.get<InstituicaoDto[]>(`${this.apiUrl}`);
+    return this.http.get<InstituicaoDto[]>(this.apiUrl);
   }
 
 
   getById(instituicaoId: number): Observable<InstituicaoFullDto> {
-    return this.http.get<InstituicaoFullDto>(`${this.apiUrl}/${instituicaoId}`);
+    return this.http.get<InstituicaoFullDto>(`${this.apiUrl}/${instituicaoId.toString()}`);
   }
 
   getByIdFull(instituicaoId: number): Observable<InstituicaoFullDto> {
-    return this.http.get<InstituicaoFullDto>(`${this.apiUrl}/${instituicaoId}`);
+    return this.http.get<InstituicaoFullDto>(`${this.apiUrl}/${instituicaoId.toString()}`);
   }
 
 
   create(InstituicaoDto: InstituicaoCreateDto): Observable<InstituicaoDto> {
-    return this.http.post<InstituicaoDto>(`${this.apiUrl}`, InstituicaoDto);
+    return this.http.post<InstituicaoDto>(this.apiUrl, InstituicaoDto);
   }
 
-  updateById(InstituicaoDto: InstituicaoUpdateDto): Observable<InstituicaoDto> {
-    return this.http.post<InstituicaoDto>(`${this.apiUrl}/${InstituicaoDto.id}}`, InstituicaoDto);
+  updateById(id: number, dto: InstituicaoUpdateDto): Observable<InstituicaoDto> {
+    return this.http.post<InstituicaoDto>(`${this.apiUrl}/${id.toString()}`, dto);
   }
 
 
-  deleteById(instituicaoId: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${instituicaoId}`);
+  deleteById(instituicaoId: number): Observable<unknown> {
+    return this.http.delete(`${this.apiUrl}/${instituicaoId.toString()}`);
   }
 }

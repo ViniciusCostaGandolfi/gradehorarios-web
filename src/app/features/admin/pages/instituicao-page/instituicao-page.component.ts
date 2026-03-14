@@ -1,31 +1,34 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap, Router, RouterLink } from '@angular/router';
+import { DatePipe,NgClass } from '@angular/common';
+import type { OnInit } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { MatAnchor,MatButton } from '@angular/material/button';
+import { MatCard, MatCardActions,MatCardHeader, MatCardSubtitle, MatCardTitle } from '@angular/material/card';
+import { MatDialog } from '@angular/material/dialog';
+import { MatIcon } from '@angular/material/icon';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTableDataSource } from '@angular/material/table';
-
-import { InstituicoesService } from '../../../../core/services/instituicoes/instituicoes.service';
-import { InstitutionResponseDto, SolutionDto, SolverStatus } from '../../../../core/interfaces/solucao';
-import { SolutionResultDialogComponent } from '../../components/solution-result-dialog/solution-result-dialog.component';
-import { MatDialog } from '@angular/material/dialog';
-import { CanDeleteDialogComponent } from '../../../../shared/can-delete-dialog/can-delete-dialog.component';
-import { SolucoesService } from '../../../../core/services/solucoes/solucoes.service';
 import { MatTooltip } from '@angular/material/tooltip';
-import { MatCard, MatCardHeader, MatCardTitle, MatCardSubtitle, MatCardActions } from '@angular/material/card';
-import { MatIcon } from '@angular/material/icon';
-import { MatButton, MatAnchor } from '@angular/material/button';
-import { MatProgressSpinner } from '@angular/material/progress-spinner';
-import { NgIf, NgFor, NgClass, DatePipe } from '@angular/common';
+import type { ParamMap } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+
+import type { InstitutionResponseDto, SolutionDto } from '../../../../core/interfaces/solucao';
+import { SolverStatus } from '../../../../core/interfaces/solucao';
+import { InstituicoesService } from '../../../../core/services/instituicoes/instituicoes.service';
+import { SolucoesService } from '../../../../core/services/solucoes/solucoes.service';
+import { CanDeleteDialogComponent } from '../../../../shared/can-delete-dialog/can-delete-dialog.component';
+import { SolutionResultDialogComponent } from '../../components/solution-result-dialog/solution-result-dialog.component';
 
 @Component({
     selector: 'app-instituicao-page',
     templateUrl: './instituicao-page.component.html',
     styleUrl: './instituicao-page.component.scss',
     standalone: true,
-    imports: [NgIf, MatProgressSpinner, MatButton, MatIcon, NgFor, MatCard, NgClass, MatCardHeader, MatCardTitle, MatCardSubtitle, MatCardActions, MatAnchor, MatTooltip, RouterLink, DatePipe]
+    imports: [MatProgressSpinner, MatButton, MatIcon, MatCard, NgClass, MatCardHeader, MatCardTitle, MatCardSubtitle, MatCardActions, MatAnchor, MatTooltip, RouterLink, DatePipe]
 })
 export class InstituicaoPageComponent implements OnInit {
   instituicao: InstitutionResponseDto | null = null;
-  isLoading: boolean = true;
+  isLoading = true;
   
   dataSource = new MatTableDataSource<SolutionDto>();
   
@@ -37,14 +40,12 @@ export class InstituicaoPageComponent implements OnInit {
     'outputPath'
   ];
 
-  constructor(
-    private instatuicoesService: InstituicoesService,
-    private activateRoute: ActivatedRoute,
-    private solucoesService: SolucoesService,
-    private router: Router,
-    private snackBar: MatSnackBar,
-    private dialog: MatDialog
-  ) {}
+  private instatuicoesService = inject(InstituicoesService);
+  private activateRoute = inject(ActivatedRoute);
+  private solucoesService = inject(SolucoesService);
+  private router = inject(Router);
+  private snackBar = inject(MatSnackBar);
+  private dialog = inject(MatDialog);
 
   ngOnInit(): void {
       this.activateRoute.paramMap.subscribe((params: ParamMap) => {
@@ -61,12 +62,12 @@ export class InstituicaoPageComponent implements OnInit {
               name: response.name,
               code: response.code,
               active: response.active,
-              solutions: response.solutions ?? []
+              solutions: response.solutions
             };
-            this.dataSource.data = this.instituicao?.solutions || [];
+            this.dataSource.data = this.instituicao.solutions;
             this.isLoading = false;
           },
-          error: (err) => {
+          error: (err: unknown) => {
             console.error('Erro ao buscar instituições', err);
             this.snackBar.open("Ocorreu um erro ao buscar as instituições.", "Fechar", {
               duration: 5000,
@@ -83,7 +84,7 @@ export class InstituicaoPageComponent implements OnInit {
 
   runNewSolution(): void {
     if (this.instituicao) {
-      this.router.navigate(['solucoes/nova'], { relativeTo: this.activateRoute });
+      void this.router.navigate(['solucoes/nova'], { relativeTo: this.activateRoute });
     }
   }
 
@@ -109,88 +110,82 @@ export class InstituicaoPageComponent implements OnInit {
       autoFocus: false,   
       data: {
         url: solution.outputPath,
-        title: `Grade Horária - Solução #${solution.id}`
+        title: `Grade Horária - Solução #${solution.id.toString()}`
       }
     });
   }
 
   isSolutionProcessing(status: SolverStatus): boolean {
-        return status === 'PENDING' || status === 'RUNNING';
+        return status === SolverStatus.PENDING || status === SolverStatus.RUNNING;
     }
 
     isSolutionCompleteSuccess(status: SolverStatus): boolean {
-        return status === 'OPTIMAL' || status === 'FEASIBLE';
+        return status === SolverStatus.OPTIMAL || status === SolverStatus.FEASIBLE;
     }
 
     isSolutionRunning(status: SolverStatus): boolean {
-        return status === 'RUNNING';
+        return status === SolverStatus.RUNNING;
     }
     
     isSolutionCompleted(status: SolverStatus): boolean {
-        return ['OPTIMAL', 'FEASIBLE', 'ERROR', 'INFEASIBLE', 'TIMEOUT'].includes(status);
+        return [SolverStatus.OPTIMAL, SolverStatus.FEASIBLE, SolverStatus.ERROR, SolverStatus.INFEASIBLE, SolverStatus.TIMEOUT].includes(status);
     }
 
 
-    formatDuration(duration: any): string {
-
-        if (typeof duration === 'number') {
-            const totalSeconds = duration / 1000;
-            return totalSeconds.toFixed(2) + 's';
-        }
-        if (duration && typeof duration.toMillis === 'function') {
-             const totalSeconds = duration.toMillis() / 1000;
-             return totalSeconds.toFixed(2) + 's';
-        }
-        return 'N/A';
+    formatDuration(duration: number): string {
+        const totalSeconds = duration / 1000;
+        return totalSeconds.toFixed(2) + 's';
     }
 
   
   formatTime(value: number | null): string {
-    if (value === null || value === undefined || isNaN(value) || value < 0) {
+    if (value == null || isNaN(value) || value < 0) {
       return '-';
     }
 
     const minutes = Math.floor(value / 60);
     const seconds = Math.floor(value % 60);
-    return `${minutes}m ${seconds}s`;
+    return `${minutes.toString()}m ${seconds.toString()}s`;
   }
 
   getStatusColorClass(status: SolverStatus): string {
     switch (status) {
-      case 'OPTIMAL': return 'text-green-600';
-      case 'FEASIBLE': return 'text-blue-600';
-      case 'INFEASIBLE': return 'text-red-600';
-      case 'ERROR': return 'text-red-800';
-      case 'RUNNING': return 'text-orange-500';
+      case SolverStatus.OPTIMAL: return 'text-green-600';
+      case SolverStatus.FEASIBLE: return 'text-blue-600';
+      case SolverStatus.INFEASIBLE: return 'text-red-600';
+      case SolverStatus.ERROR: return 'text-red-800';
+      case SolverStatus.RUNNING: return 'text-orange-500';
       default: return 'text-gray-600';
     }
   }
 
   getStatusBadgeClass(status: SolverStatus): string {
     switch (status) {
-      case 'OPTIMAL': return 'bg-green-100 text-green-800';
-      case 'FEASIBLE': return 'bg-blue-100 text-blue-800';
-      case 'INFEASIBLE': return 'bg-red-100 text-red-800';
-      case 'ERROR': return 'bg-red-200 text-red-900';
-      case 'RUNNING': return 'bg-orange-100 text-orange-800';
+      case SolverStatus.OPTIMAL: return 'bg-green-100 text-green-800';
+      case SolverStatus.FEASIBLE: return 'bg-blue-100 text-blue-800';
+      case SolverStatus.INFEASIBLE: return 'bg-red-100 text-red-800';
+      case SolverStatus.ERROR: return 'bg-red-200 text-red-900';
+      case SolverStatus.RUNNING: return 'bg-orange-100 text-orange-800';
       default: return 'bg-gray-100 text-gray-800';
     }
   }
 
 
   deleteSolution(solutionId: number): void {
-        
+        if (!this.instituicao) return;
+        const instituicaoId = this.instituicao.id;
+
         const dialogRef = this.dialog.open(CanDeleteDialogComponent, {
             data: { 
                 message: 'Tem certeza que deseja deletar permanentemente esta solução? Esta ação não pode ser desfeita.'
             }
         });
 
-        dialogRef.afterClosed().subscribe(result => {
+        dialogRef.afterClosed().subscribe((result: boolean) => {
             if (result) {
-                console.log(`Deletando solução ID: ${solutionId}`);
+                console.log(`Deletando solução ID: ${solutionId.toString()}`);
 
-                this.solucoesService.delete(this.instituicao?.id as number, solutionId).subscribe({
+                this.solucoesService.delete(instituicaoId, solutionId).subscribe({
                     next: () => {
                         this.snackBar.open("Solução deletada com sucesso! ✅", "Fechar", {
                         duration: 5000,
@@ -199,8 +194,8 @@ export class InstituicaoPageComponent implements OnInit {
 
                       this.ngOnInit();
                     },
-                    error: (err) => {
-                        const errorMessage = err.error?.detail || "Ocorreu um erro desconhecido ao deletar.";
+                    error: (err: { error?: { detail?: string } }) => {
+                        const errorMessage = err.error?.detail ?? "Ocorreu um erro desconhecido ao deletar.";
                         
                         this.snackBar.open(errorMessage, "Fechar", {
                           panelClass: ['snackbar-error']

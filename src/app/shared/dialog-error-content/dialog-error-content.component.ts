@@ -1,11 +1,12 @@
-import { Component, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import {
+  MatDialogRef} from '@angular/material/dialog';
 import { 
-  MatDialogRef, 
   MAT_DIALOG_DATA,
   MatDialogActions,
+  MatDialogContent, 
   MatDialogTitle,
-  MatDialogContent,
 } from '@angular/material/dialog';
 
 @Component({
@@ -21,14 +22,10 @@ import {
   styleUrl: './dialog-error-content.component.scss'
 })
 export class DialogErrorContentComponent {
-  constructor(
-    public dialogRef: MatDialogRef<DialogErrorContentComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { message: string }
-  ) {}
+  public dialogRef = inject(MatDialogRef<DialogErrorContentComponent>);
+  public data: { message: string } = inject(MAT_DIALOG_DATA);
 
   onClose(): void {
     this.dialogRef.close();
   }
-
-
 }

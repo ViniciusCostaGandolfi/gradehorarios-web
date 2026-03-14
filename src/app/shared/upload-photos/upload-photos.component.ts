@@ -14,13 +14,13 @@ export class UploadPhotosComponent {
   public images: File[] | null = null
   public imagesUrl: string[] | null = null
 
-  @Input() isMultiple: boolean = false;
+  @Input() isMultiple = false;
 
   @Output() selectImages = new EventEmitter<File[] | null>();
 
   onMultipleFilesSelected(event: Event): void {
     const element = event.currentTarget as HTMLInputElement;
-    let fileList: FileList | null = element.files;
+    const fileList: FileList | null = element.files;
 
     if (fileList) {
       const validFiles = Array.from(fileList).filter(file => this.isValidImage(file));

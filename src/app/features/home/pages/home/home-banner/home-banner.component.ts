@@ -1,7 +1,7 @@
-import { Component, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
-import { CommonModule, isPlatformBrowser} from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import type { OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, PLATFORM_ID } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-
 
 interface GridCell {
   subject: string;
@@ -11,21 +11,20 @@ interface GridCell {
 }
 
 @Component({
-    selector: 'app-home-banner',
-    templateUrl: './home-banner.component.html',
-    styleUrls: ['./home-banner.component.scss'],
-    standalone: true,
-    imports: [
-        CommonModule,
-        MatIconModule
-    ],
+  selector: 'app-home-banner',
+  templateUrl: './home-banner.component.html',
+  styleUrls: ['./home-banner.component.scss'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    MatIconModule
+  ],
 })
 export class HomeBannerComponent implements OnInit, OnDestroy {
-  
   days = ['SEG', 'TER', 'QUA', 'QUI', 'SEX'];
   periods = [1, 2, 3, 4, 5];
   grid: GridCell[] = [];
-  private intervalId: any;
+  private intervalId: ReturnType<typeof setInterval> | undefined;
 
   private subjectsPool = [
     { code: 'MAT', name: 'Matemática', color: 'bg-blue-100 text-blue-700 border-blue-200' },
@@ -38,22 +37,23 @@ export class HomeBannerComponent implements OnInit, OnDestroy {
     { code: '---', name: 'Vago', color: 'bg-slate-100 text-slate-400 border-slate-200 border-dashed' }
   ];
 
-  constructor(
-    @Inject(PLATFORM_ID) private platformId: Object,
-  ) {}
+  isLogged = false;
+  private platformId = inject(PLATFORM_ID);
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.initGrid();
     if (isPlatformBrowser(this.platformId)) {
       this.startSimulation();
     }
   }
 
-  ngOnDestroy() {
-    if (this.intervalId) clearInterval(this.intervalId);
+  ngOnDestroy(): void {
+    if (this.intervalId !== undefined) {
+      clearInterval(this.intervalId);
+    }
   }
 
-  private initGrid() {
+  private initGrid(): void {
     this.grid = Array(25).fill(null).map(() => this.getRandomSubject('stable'));
   }
 
@@ -67,17 +67,17 @@ export class HomeBannerComponent implements OnInit, OnDestroy {
     };
   }
 
-  private startSimulation() {
+  private startSimulation(): void {
     this.intervalId = setInterval(() => {
       this.optimizeStep();
     }, 1500);
   }
 
-  private optimizeStep() {
+  private optimizeStep(): void {
     const numberOfChanges = Math.floor(Math.random() * 3) + 3;
     const indicesToUpdate = new Set<number>();
-    
-    while(indicesToUpdate.size < numberOfChanges) {
+
+    while (indicesToUpdate.size < numberOfChanges) {
       indicesToUpdate.add(Math.floor(Math.random() * 25));
     }
 
@@ -93,7 +93,7 @@ export class HomeBannerComponent implements OnInit, OnDestroy {
 
     setTimeout(() => {
       indicesToUpdate.forEach(index => {
-        if(this.grid[index]) this.grid[index].state = 'stable';
+        this.grid[index].state = 'stable';
       });
     }, 1000);
   }

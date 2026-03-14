@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+
 import { gradeHorariosServices } from '../../../../../core/mocks/gradehorarios-services';
-import { MatButton, MatButtonModule } from '@angular/material/button';
-import { MatIcon, MatIconModule } from '@angular/material/icon';
-import { MatCard, MatCardModule } from '@angular/material/card';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
     selector: 'app-home-go-further',
@@ -11,11 +12,10 @@ import { CommonModule } from '@angular/common';
     styleUrl: './home-go-further.component.scss',
     standalone: true,
     imports: [
-                CommonModule,
-                MatIconModule,
-                MatButtonModule,
-                MatCardModule
-            ],
+    MatIconModule,
+    MatButtonModule,
+    MatCardModule
+],
 })
 export class HomeGoFurtherComponent {
 

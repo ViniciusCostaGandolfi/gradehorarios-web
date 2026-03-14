@@ -1,19 +1,21 @@
-import { Component, Inject, OnInit, ViewChild } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { HttpClient } from '@angular/common/http';
-import { MatTableDataSource, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow, MatNoDataRow } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { SolutionDto } from '../../../../core/interfaces/solucao';
-import { MatInput } from '@angular/material/input';
+import type { OnInit} from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
+import { MatAnchor,MatButton, MatIconButton } from '@angular/material/button';
+import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatFormField, MatLabel, MatSuffix } from '@angular/material/form-field';
-import { MatTooltip } from '@angular/material/tooltip';
-import { MatTabGroup, MatTab, MatTabLabel } from '@angular/material/tabs';
-import { MatProgressSpinner } from '@angular/material/progress-spinner';
-import { NgIf, NgFor } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
-import { MatIconButton, MatButton, MatAnchor } from '@angular/material/button';
+import { MatInput } from '@angular/material/input';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import type { MatSort } from '@angular/material/sort';
+import { MatCell, MatCellDef, MatColumnDef, MatHeaderCell, MatHeaderCellDef, MatHeaderRow, MatHeaderRowDef, MatNoDataRow,MatRow, MatRowDef, MatTable, MatTableDataSource } from '@angular/material/table';
+import { MatTab, MatTabGroup, MatTabLabel } from '@angular/material/tabs';
 import { MatToolbar } from '@angular/material/toolbar';
+import { MatTooltip } from '@angular/material/tooltip';
+
+import type { SolutionDto } from '../../../../core/interfaces/solucao';
 
 // Interface exata do seu DTO Java
 export interface TimetableDto {
@@ -37,7 +39,7 @@ export interface SolverResponseDto {
     templateUrl: './solution-result-dialog.component.html',
     styleUrls: ['./solution-result-dialog.component.scss'],
     standalone: true,
-    imports: [MatToolbar, MatIconButton, MatIcon, NgIf, MatProgressSpinner, MatButton, MatTabGroup, MatTab, MatTabLabel, MatAnchor, MatTooltip, MatFormField, MatLabel, MatInput, MatSuffix, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, NgFor, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow, MatNoDataRow, MatPaginator]
+    imports: [MatToolbar, MatIconButton, MatIcon, MatProgressSpinner, MatButton, MatTabGroup, MatTab, MatTabLabel, MatAnchor, MatTooltip, MatFormField, MatLabel, MatInput, MatSuffix, MatTable, MatColumnDef, MatHeaderCellDef, MatHeaderCell, MatCellDef, MatCell, MatHeaderRowDef, MatHeaderRow, MatRowDef, MatRow, MatNoDataRow, MatPaginator]
 })
 export class SolutionResultDialogComponent implements OnInit {
   isLoading = true;
@@ -54,11 +56,9 @@ export class SolutionResultDialogComponent implements OnInit {
   @ViewChild('paginatorClassrooms') paginatorClassrooms!: MatPaginator;
   @ViewChild('sortClassrooms') sortClassrooms!: MatSort;
 
-  constructor(
-    public dialogRef: MatDialogRef<SolutionResultDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: SolutionDto,
-    private http: HttpClient
-  ) {}
+  public dialogRef = inject(MatDialogRef<SolutionResultDialogComponent>);
+  public data: SolutionDto = inject(MAT_DIALOG_DATA);
+  private http = inject(HttpClient);
 
   ngOnInit(): void {
     if (this.data.outputPath) {
@@ -69,11 +69,11 @@ export class SolutionResultDialogComponent implements OnInit {
     }
   }
 
-  fetchJsonContent(url: string) {
+  fetchJsonContent(url: string): void {
     this.http.get<SolverResponseDto>(url).subscribe({
       next: (response) => {
-        this.dataSourceTeachers.data = response.teachers || [];
-        this.dataSourceClassrooms.data = response.classrooms || [];
+        this.dataSourceTeachers.data = response.teachers;
+        this.dataSourceClassrooms.data = response.classrooms;
         
         this.setupFilterPredicate(this.dataSourceTeachers);
         this.setupFilterPredicate(this.dataSourceClassrooms);
@@ -88,7 +88,7 @@ export class SolutionResultDialogComponent implements OnInit {
 
         this.isLoading = false;
       },
-      error: (err) => {
+      error: (err: unknown) => {
         console.error('Erro ao baixar JSON', err);
         this.hasError = true;
         this.isLoading = false;
@@ -96,13 +96,13 @@ export class SolutionResultDialogComponent implements OnInit {
     });
   }
 
-  applyFilter(event: Event, dataSource: MatTableDataSource<TimetableDto>) {
+  applyFilter(event: Event, dataSource: MatTableDataSource<TimetableDto>): void {
     const filterValue = (event.target as HTMLInputElement).value;
     dataSource.filter = filterValue.trim().toLowerCase();
     if (dataSource.paginator) dataSource.paginator.firstPage();
   }
 
-  setupFilterPredicate(dataSource: MatTableDataSource<TimetableDto>) {
+  setupFilterPredicate(dataSource: MatTableDataSource<TimetableDto>): void {
     dataSource.filterPredicate = (data: TimetableDto, filter: string) => {
       const fullString = [
         data.name,

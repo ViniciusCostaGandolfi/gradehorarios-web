@@ -1,8 +1,8 @@
-import { Component, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MAT_DIALOG_DATA, MatDialogActions, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
+import { MatDialogRef} from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogActions, MatDialogContent, MatDialogTitle } from '@angular/material/dialog';
 import { RouterModule } from '@angular/router';
-import { DialogErrorContentComponent } from '../dialog-error-content/dialog-error-content.component';
 
 @Component({
   selector: 'app-dialog-success',
@@ -18,17 +18,10 @@ import { DialogErrorContentComponent } from '../dialog-error-content/dialog-erro
   styleUrl: './dialog-success.component.scss'
 })
 export class DialogSuccessComponent {
-  constructor(
-    public dialogRef: MatDialogRef<DialogErrorContentComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { 
-      message: string,
-      link: string,
-    }
-  ) {}
+  public dialogRef = inject(MatDialogRef<DialogSuccessComponent>);
+  public data: { message: string; link: string } = inject(MAT_DIALOG_DATA);
 
   onClose(): void {
     this.dialogRef.close();
   }
-
-
 }

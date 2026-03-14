@@ -1,4 +1,5 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import type { ComponentFixture} from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
 import { ResetPasswordPageComponent } from './reset-password-page.component';
 

@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, Input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
@@ -8,16 +8,15 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   imports: [
     MatButtonModule,
-    RouterModule,
-    CommonModule
-  ],
+    RouterModule
+],
   templateUrl: './no-data-content.component.html',
   styleUrl: './no-data-content.component.scss'
 })
 export class NoDataContentComponent {
 
-  @Input() text: string = 'dados'
-  @Input() link: string = '/admin'
+  @Input() text = 'dados'
+  @Input() link = '/admin'
 
 
 }

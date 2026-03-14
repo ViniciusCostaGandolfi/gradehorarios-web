@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
+import { RouterModule } from '@angular/router';
+
 import { FooterComponent } from '../../shared/footer/footer.component';
 
 @Component({
@@ -16,7 +17,7 @@ import { FooterComponent } from '../../shared/footer/footer.component';
 })
 export class NotFoundComponent {
 
-  back() {
+  back(): void {
     window.history.back();
   }
 
